@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import { useRoutine } from "@/hooks/useRoutine";
 import { WelcomeScreen } from "@/components/WelcomeScreen";
 import { StepIndicator } from "@/components/StepIndicator";
@@ -16,9 +17,17 @@ import { AdBanner } from "@/components/AdBanner";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
+import type { PersonalTask } from "@/types/routine";
 
 export default function Home() {
   const t = useTranslations();
+
+  const defaultTasks: PersonalTask[] = useMemo(() => [
+    { id: "1", title: t("steps.step5.defaultTasks.stretch"), completed: false, category: "exercise" },
+    { id: "2", title: t("steps.step5.defaultTasks.water"), completed: false, category: "health" },
+    { id: "3", title: t("steps.step5.defaultTasks.priority"), completed: false, category: "personal" },
+  ], [t]);
+
   const {
     progress,
     intention,
@@ -33,7 +42,7 @@ export default function Home() {
     toggleTask,
     addTask,
     resetRoutine,
-  } = useRoutine();
+  } = useRoutine({ defaultTasks });
 
   if (!isLoaded) {
     return (

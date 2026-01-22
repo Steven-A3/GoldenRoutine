@@ -39,7 +39,11 @@ function setStorageItem<T>(key: string, value: T): void {
   }
 }
 
-export function useRoutine() {
+interface UseRoutineOptions {
+  defaultTasks: PersonalTask[];
+}
+
+export function useRoutine({ defaultTasks }: UseRoutineOptions) {
   const [progress, setProgress] = useState<RoutineProgress>({
     currentStep: 1,
     completedSteps: [],
@@ -59,11 +63,7 @@ export function useRoutine() {
     gratitude: [],
   });
 
-  const [tasks, setTasks] = useState<PersonalTask[]>([
-    { id: "1", title: "아침 스트레칭 5분", completed: false, category: "exercise" },
-    { id: "2", title: "물 한 잔 마시기", completed: false, category: "health" },
-    { id: "3", title: "오늘의 중요 과업 1가지", completed: false, category: "personal" },
-  ]);
+  const [tasks, setTasks] = useState<PersonalTask[]>(defaultTasks);
 
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -164,12 +164,8 @@ export function useRoutine() {
     });
     setIntention({ feeling: "", goal: "", affirmation: "" });
     setJournal({ date: getTodayKey(), content: "", gratitude: [] });
-    setTasks([
-      { id: "1", title: "아침 스트레칭 5분", completed: false, category: "exercise" },
-      { id: "2", title: "물 한 잔 마시기", completed: false, category: "health" },
-      { id: "3", title: "오늘의 중요 과업 1가지", completed: false, category: "personal" },
-    ]);
-  }, []);
+    setTasks(defaultTasks);
+  }, [defaultTasks]);
 
   return {
     progress,
