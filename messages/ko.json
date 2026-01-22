@@ -154,7 +154,13 @@
         "skip": "오늘은 건너뛰기"
       },
       "skipMessage": "시장 확인을 건너뛰면 불안을 줄이고 집중력을 높일 수 있습니다. 좋은 선택입니다!",
-      "completeRoutine": "루틴 완료하기"
+      "completeRoutine": "루틴 완료하기",
+      "widgets": {
+        "majorIndices": "주요 지수",
+        "topCrypto": "주요 암호화폐",
+        "exchangeRates": "환율",
+        "latestNews": "최신 뉴스"
+      }
     }
   },
   "completion": {

@@ -154,7 +154,13 @@
         "skip": "今日はスキップ"
       },
       "skipMessage": "マーケットチェックをスキップすると不安が減り、集中力が高まります。良い選択です！",
-      "completeRoutine": "ルーティン完了"
+      "completeRoutine": "Complete Routine",
+      "widgets": {
+        "majorIndices": "Major Indices",
+        "topCrypto": "Top Cryptocurrencies",
+        "exchangeRates": "Exchange Rates",
+        "latestNews": "Latest Headlines"
+      }
     }
   },
   "completion": {

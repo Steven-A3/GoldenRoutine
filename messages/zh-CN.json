@@ -154,7 +154,13 @@
         "skip": "今天跳过"
       },
       "skipMessage": "跳过市场查看可以减少焦虑，提高专注力。好选择！",
-      "completeRoutine": "完成习惯"
+      "completeRoutine": "Complete Routine",
+      "widgets": {
+        "majorIndices": "Major Indices",
+        "topCrypto": "Top Cryptocurrencies",
+        "exchangeRates": "Exchange Rates",
+        "latestNews": "Latest Headlines"
+      }
     }
   },
   "completion": {
