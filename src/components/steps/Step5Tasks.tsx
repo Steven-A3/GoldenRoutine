@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Dumbbell, Heart, Briefcase, Plus, Check, Trash2 } from "lucide-react";
+import { Dumbbell, Heart, Briefcase, Plus, Check } from "lucide-react";
+import { useTranslations } from "next-intl";
 import type { PersonalTask } from "@/types/routine";
 
 interface Step5Props {
@@ -13,24 +14,16 @@ interface Step5Props {
 }
 
 const CATEGORY_INFO = {
-  exercise: { icon: Dumbbell, color: "text-green-500", bg: "bg-green-100", label: "운동" },
-  health: { icon: Heart, color: "text-rose-500", bg: "bg-rose-100", label: "건강" },
-  personal: { icon: Briefcase, color: "text-blue-500", bg: "bg-blue-100", label: "개인" },
+  exercise: { icon: Dumbbell, color: "text-green-500", bg: "bg-green-100" },
+  health: { icon: Heart, color: "text-rose-500", bg: "bg-rose-100" },
+  personal: { icon: Briefcase, color: "text-blue-500", bg: "bg-blue-100" },
 };
 
-const SUGGESTED_TASKS = [
-  { title: "5분 명상하기", category: "health" as const },
-  { title: "스트레칭 10분", category: "exercise" as const },
-  { title: "건강한 아침 식사", category: "health" as const },
-  { title: "오늘의 핵심 업무 정리", category: "personal" as const },
-  { title: "30분 조깅", category: "exercise" as const },
-  { title: "비타민 챙기기", category: "health" as const },
-];
-
 export function Step5Tasks({ tasks, onToggle, onAdd, onComplete }: Step5Props) {
+  const t = useTranslations("steps.step5");
+  const tc = useTranslations("common");
   const [newTask, setNewTask] = useState("");
   const [newCategory, setNewCategory] = useState<PersonalTask["category"]>("personal");
-  const [showSuggestions, setShowSuggestions] = useState(false);
 
   const completedCount = tasks.filter((t) => t.completed).length;
   const progress = tasks.length > 0 ? (completedCount / tasks.length) * 100 : 0;
@@ -40,10 +33,6 @@ export function Step5Tasks({ tasks, onToggle, onAdd, onComplete }: Step5Props) {
       onAdd(newTask.trim(), newCategory);
       setNewTask("");
     }
-  };
-
-  const handleAddSuggested = (task: typeof SUGGESTED_TASKS[0]) => {
-    onAdd(task.title, task.category);
   };
 
   return (
@@ -60,15 +49,17 @@ export function Step5Tasks({ tasks, onToggle, onAdd, onComplete }: Step5Props) {
         >
           🏃
         </motion.div>
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">개인 과업 우선 처리</h2>
-        <p className="text-gray-600">Personal Tasks First</p>
+        <h2 className="text-2xl font-bold text-gray-800 mb-2">{t("title")}</h2>
+        <p className="text-gray-600">{t("subtitle")}</p>
       </div>
 
       {/* Progress Bar */}
       <div className="glass rounded-2xl p-4 max-w-md w-full mx-auto mb-4">
         <div className="flex justify-between text-sm mb-2">
-          <span className="text-gray-600">오늘의 진행률</span>
-          <span className="font-semibold text-green-600">{completedCount}/{tasks.length} 완료</span>
+          <span className="text-gray-600">{t("progress", { completed: completedCount, total: tasks.length })}</span>
+          {completedCount === tasks.length && tasks.length > 0 && (
+            <span className="font-semibold text-green-600">{t("allComplete")}</span>
+          )}
         </div>
         <div className="h-3 bg-gray-200 rounded-full overflow-hidden">
           <motion.div
@@ -82,8 +73,6 @@ export function Step5Tasks({ tasks, onToggle, onAdd, onComplete }: Step5Props) {
 
       {/* Task List */}
       <div className="glass rounded-2xl p-4 max-w-md w-full mx-auto mb-4">
-        <h3 className="font-semibold text-gray-800 mb-3">오늘의 과업</h3>
-
         <div className="space-y-2 mb-4">
           <AnimatePresence>
             {tasks.map((task) => {
@@ -140,7 +129,7 @@ export function Step5Tasks({ tasks, onToggle, onAdd, onComplete }: Step5Props) {
                   }`}
                 >
                   <Icon className="w-3 h-3" />
-                  {info.label}
+                  {t(`categories.${cat}`)}
                 </button>
               );
             })}
@@ -152,7 +141,7 @@ export function Step5Tasks({ tasks, onToggle, onAdd, onComplete }: Step5Props) {
               value={newTask}
               onChange={(e) => setNewTask(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleAddTask()}
-              placeholder="새로운 과업 추가..."
+              placeholder={t("addTaskPlaceholder")}
               className="flex-1 p-3 rounded-xl bg-white/50 border-none focus:ring-2 focus:ring-green-300 text-sm"
             />
             <button
@@ -166,42 +155,6 @@ export function Step5Tasks({ tasks, onToggle, onAdd, onComplete }: Step5Props) {
         </div>
       </div>
 
-      {/* Suggested Tasks */}
-      <div className="glass rounded-2xl p-4 max-w-md w-full mx-auto mb-6">
-        <button
-          onClick={() => setShowSuggestions(!showSuggestions)}
-          className="flex items-center justify-between w-full text-left"
-        >
-          <h3 className="font-semibold text-gray-800">추천 과업</h3>
-          <span className="text-golden-600 text-sm">{showSuggestions ? "닫기" : "보기"}</span>
-        </button>
-
-        <AnimatePresence>
-          {showSuggestions && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              className="mt-3 flex flex-wrap gap-2"
-            >
-              {SUGGESTED_TASKS.map((task, index) => {
-                const info = CATEGORY_INFO[task.category];
-                return (
-                  <button
-                    key={index}
-                    onClick={() => handleAddSuggested(task)}
-                    className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-xs ${info.bg} ${info.color} hover:opacity-80 transition-opacity`}
-                  >
-                    <Plus className="w-3 h-3" />
-                    {task.title}
-                  </button>
-                );
-              })}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-
       <div className="flex-1" />
 
       <div className="max-w-md w-full mx-auto">
@@ -211,13 +164,13 @@ export function Step5Tasks({ tasks, onToggle, onAdd, onComplete }: Step5Props) {
           onClick={onComplete}
           className="w-full py-4 rounded-full font-semibold shadow-lg bg-gradient-to-r from-green-400 to-emerald-500 text-white"
         >
-          다음 단계로 →
+          {tc("next")} →
         </motion.button>
         <button
           onClick={onComplete}
           className="w-full mt-3 text-gray-400 text-sm underline"
         >
-          건너뛰기
+          {tc("skip")}
         </button>
       </div>
     </motion.div>

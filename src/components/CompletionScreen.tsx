@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Sparkles, RotateCcw, Share2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import type { DailyIntention, JournalEntry, PersonalTask } from "@/types/routine";
 
 interface CompletionScreenProps {
@@ -21,30 +22,28 @@ export function CompletionScreen({
   completedAt,
   onReset,
 }: CompletionScreenProps) {
+  const t = useTranslations("completion");
   const completedTasks = tasks.filter((t) => t.completed).length;
 
   const getDuration = () => {
-    if (!startedAt || !completedAt) return "알 수 없음";
+    if (!startedAt || !completedAt) return "N/A";
     const start = new Date(startedAt);
     const end = new Date(completedAt);
     const diffMs = end.getTime() - start.getTime();
     const diffMins = Math.round(diffMs / 60000);
-    if (diffMins < 60) return `${diffMins}분`;
-    const hours = Math.floor(diffMins / 60);
-    const mins = diffMins % 60;
-    return `${hours}시간 ${mins}분`;
+    return `${diffMins} ${t("minutes")}`;
   };
 
   const handleShare = async () => {
     const text = `
-🌅 Morning Golden Time 완료!
+🌅 Morning Golden Time Complete!
 
-✨ 오늘의 기분: ${intention.feeling || "미설정"}
-🎯 오늘의 목표: ${intention.goal || "미설정"}
-💪 완료한 과업: ${completedTasks}/${tasks.length}개
-⏱️ 소요 시간: ${getDuration()}
+✨ Feeling: ${intention.feeling || "Not set"}
+🎯 Goal: ${intention.goal || "Not set"}
+💪 Tasks: ${completedTasks}/${tasks.length}
+⏱️ Duration: ${getDuration()}
 
-#MorningGoldenTime #골든루틴 #아침루틴
+#MorningGoldenTime #GoldenRoutine
     `.trim();
 
     if (navigator.share) {
@@ -55,7 +54,6 @@ export function CompletionScreen({
       }
     } else {
       navigator.clipboard.writeText(text);
-      alert("클립보드에 복사되었습니다!");
     }
   };
 
@@ -95,7 +93,7 @@ export function CompletionScreen({
         transition={{ delay: 0.4 }}
         className="text-3xl font-bold text-gray-800 text-center mb-2"
       >
-        골든 루틴 완료!
+        {t("title")}
       </motion.h1>
 
       <motion.p
@@ -104,7 +102,7 @@ export function CompletionScreen({
         transition={{ delay: 0.5 }}
         className="text-gray-600 text-center mb-8"
       >
-        오늘도 황금빛 아침을 시작하셨습니다
+        {t("subtitle")}
       </motion.p>
 
       <motion.div
@@ -113,14 +111,14 @@ export function CompletionScreen({
         transition={{ delay: 0.6 }}
         className="glass rounded-2xl p-6 w-full max-w-md mb-6"
       >
-        <h2 className="font-semibold text-gray-800 mb-4">오늘의 요약</h2>
+        <h2 className="font-semibold text-gray-800 mb-4">{t("summary.title")}</h2>
 
         <div className="space-y-4">
           {intention.feeling && (
             <div className="flex items-start gap-3">
               <span className="text-xl">💛</span>
               <div>
-                <div className="text-xs text-gray-500">오늘의 기분</div>
+                <div className="text-xs text-gray-500">{t("summary.feeling")}</div>
                 <div className="font-medium text-gray-800">{intention.feeling}</div>
               </div>
             </div>
@@ -130,7 +128,7 @@ export function CompletionScreen({
             <div className="flex items-start gap-3">
               <span className="text-xl">🎯</span>
               <div>
-                <div className="text-xs text-gray-500">오늘의 목표</div>
+                <div className="text-xs text-gray-500">{t("summary.goal")}</div>
                 <div className="font-medium text-gray-800">{intention.goal}</div>
               </div>
             </div>
@@ -140,7 +138,7 @@ export function CompletionScreen({
             <div className="flex items-start gap-3">
               <span className="text-xl">✨</span>
               <div>
-                <div className="text-xs text-gray-500">확언</div>
+                <div className="text-xs text-gray-500">{t("summary.affirmation")}</div>
                 <div className="font-medium text-gray-800 italic">&quot;{intention.affirmation}&quot;</div>
               </div>
             </div>
@@ -149,15 +147,15 @@ export function CompletionScreen({
           <div className="flex items-start gap-3">
             <span className="text-xl">💪</span>
             <div>
-              <div className="text-xs text-gray-500">완료한 과업</div>
-              <div className="font-medium text-gray-800">{completedTasks}/{tasks.length}개</div>
+              <div className="text-xs text-gray-500">{t("summary.tasksCompleted")}</div>
+              <div className="font-medium text-gray-800">{completedTasks}/{tasks.length}</div>
             </div>
           </div>
 
           <div className="flex items-start gap-3">
             <span className="text-xl">⏱️</span>
             <div>
-              <div className="text-xs text-gray-500">소요 시간</div>
+              <div className="text-xs text-gray-500">{t("duration")}</div>
               <div className="font-medium text-gray-800">{getDuration()}</div>
             </div>
           </div>
@@ -166,7 +164,7 @@ export function CompletionScreen({
             <div className="flex items-start gap-3">
               <span className="text-xl">💖</span>
               <div>
-                <div className="text-xs text-gray-500">감사한 것들</div>
+                <div className="text-xs text-gray-500">{t("summary.gratitude")}</div>
                 <ul className="text-sm text-gray-700">
                   {journal.gratitude.map((item, i) => (
                     <li key={i}>• {item}</li>
@@ -181,6 +179,18 @@ export function CompletionScreen({
       <motion.div
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.7 }}
+        className="glass rounded-2xl p-4 w-full max-w-md mb-6"
+      >
+        <p className="text-center text-gray-600 italic">
+          &quot;{t("quote")}&quot;
+        </p>
+        <p className="text-center text-sm text-gray-400 mt-1">- {t("quoteAuthor")}</p>
+      </motion.div>
+
+      <motion.div
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.8 }}
         className="w-full max-w-md space-y-3"
       >
@@ -189,7 +199,7 @@ export function CompletionScreen({
           className="w-full py-4 rounded-full font-semibold shadow-lg bg-gradient-to-r from-golden-400 to-golden-500 text-white flex items-center justify-center gap-2"
         >
           <Share2 className="w-5 h-5" />
-          공유하기
+          {t("shareButton")}
         </button>
 
         <button
@@ -197,18 +207,9 @@ export function CompletionScreen({
           className="w-full py-3 rounded-full font-medium text-gray-600 flex items-center justify-center gap-2 hover:bg-white/50 transition-colors"
         >
           <RotateCcw className="w-4 h-4" />
-          다시 시작하기
+          {t("resetButton")}
         </button>
       </motion.div>
-
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-        className="mt-8 text-sm text-gray-500 text-center"
-      >
-        내일 아침에 다시 만나요! 🌅
-      </motion.p>
     </motion.div>
   );
 }

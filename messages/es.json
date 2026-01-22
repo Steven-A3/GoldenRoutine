@@ -1,0 +1,195 @@
+{
+  "app": {
+    "name": "Morning Golden Time",
+    "tagline": "Transforma tu mañana en momentos dorados",
+    "duration": "Aproximadamente 10-15 minutos",
+    "dailyRecommended": "Recomendado diariamente"
+  },
+  "greeting": {
+    "dawn": "Un nuevo amanecer te espera",
+    "morning": "Buenos días",
+    "afternoon": "Mantén tu rutina",
+    "evening": "Prepárate para mañana"
+  },
+  "welcome": {
+    "title": "¿Qué es la Rutina Dorada?",
+    "description": "Una rutina matutina que protege los estados creativos de ondas {theta} y {alpha} de tu cerebro, previene la adicción a la dopamina y te ayuda a lograr tanto riqueza como abundancia mental.",
+    "theta": "theta",
+    "alpha": "alfa",
+    "startButton": "Comenzar Rutina Dorada"
+  },
+  "progress": {
+    "completed": "{count}/6 completados",
+    "stepsCompleted": "{count} pasos completados"
+  },
+  "steps": {
+    "step1": {
+      "title": "Desintoxicación Digital",
+      "subtitle": "Protección del Estado Theta",
+      "description": "Protege los estados creativos de ondas theta y alfa de tu cerebro evitando la estimulación digital justo después de despertar.",
+      "fact": "El 70-80% de las personas revisan su teléfono dentro de los 10 minutos de despertar, lo que cambia el cerebro al estado beta reactivo.",
+      "commitTitle": "Mi Compromiso",
+      "commitText": "No revisaré mi teléfono durante los próximos 30 minutos",
+      "timer": "Temporizador de Desintoxicación Digital",
+      "timerRunning": "¡Excelente! Sigue así...",
+      "timerComplete": "¡Excelente! ¡Protegiste tu estado theta!"
+    },
+    "step2": {
+      "title": "Establecer Intenciones",
+      "subtitle": "Intenciones y Afirmaciones",
+      "description": "Antes del café o las noticias, establece tu propósito para el día. Las afirmaciones trabajan en tu subconsciente para guiar tu cerebro hacia tus metas.",
+      "feelingLabel": "¿Cómo quiero sentirme hoy?",
+      "feelingPlaceholder": "Ej: Tranquilo y enfocado",
+      "goalLabel": "¿Cuál es mi objetivo principal para hoy?",
+      "goalPlaceholder": "Ej: Completar la propuesta del proyecto",
+      "affirmationLabel": "Afirmación de Hoy",
+      "affirmationPlaceholder": "Ej: Atraigo energía positiva y oportunidades",
+      "suggestedAffirmations": "Afirmaciones Sugeridas",
+      "affirmations": {
+        "1": "Espero que cosas buenas sucedan hoy",
+        "2": "Estoy agradecido por este nuevo día",
+        "3": "Tengo el poder de crear cambios",
+        "4": "Hoy elijo la felicidad",
+        "5": "Me estoy convirtiendo en la mejor versión de mí mismo"
+      }
+    },
+    "step3": {
+      "title": "Luz y Estado de Ánimo",
+      "subtitle": "Sincronizando Luz y Ánimo",
+      "description": "La luz solar ayuda a producir serotonina y regula la melatonina. Planifica tu exposición a la luz natural para el día.",
+      "weatherTitle": "Clima de Hoy",
+      "loadingWeather": "Cargando clima...",
+      "locationError": "No se puede obtener la ubicación",
+      "feelsLike": "Sensación térmica {temp}",
+      "humidity": "Humedad",
+      "uvIndex": "Índice UV",
+      "sunlightPlan": "Plan de Exposición Solar",
+      "sunlightPlaceholder": "Ej: Caminata de 20 minutos al mediodía",
+      "suggestions": {
+        "sunny": "¡Gran día para actividades al aire libre! Intenta obtener 20-30 minutos de sol matutino.",
+        "cloudy": "Incluso en días nublados, la luz exterior es beneficiosa. Considera dar un paseo.",
+        "rainy": "El ejercicio interior o la terapia de luz pueden ayudar en días lluviosos.",
+        "default": "Planifica algo de tiempo cerca de ventanas o al aire libre hoy."
+      }
+    },
+    "step4": {
+      "title": "Ritual Interior",
+      "subtitle": "Ritualizando el Yo",
+      "description": "Los horóscopos proporcionan confort psicológico durante tiempos inciertos. Conecta esto con el diario o la meditación.",
+      "keywordTitle": "Palabra Clave de Hoy",
+      "zodiacSelect": "Selecciona tu signo zodiacal (opcional)",
+      "gratitudeTitle": "Diario de Gratitud",
+      "gratitudePlaceholder": "Estoy agradecido por...",
+      "gratitudeAdd": "Agregar",
+      "journalTitle": "Reflexión de Hoy",
+      "journalPlaceholder": "Escribe cualquier pensamiento que venga a tu mente esta mañana...",
+      "keywords": {
+        "challenge": "Desafío",
+        "growth": "Crecimiento",
+        "rest": "Descanso",
+        "focus": "Enfoque",
+        "creativity": "Creatividad",
+        "patience": "Paciencia",
+        "communication": "Comunicación",
+        "gratitude": "Gratitud",
+        "courage": "Coraje",
+        "wisdom": "Sabiduría",
+        "balance": "Equilibrio",
+        "passion": "Pasión"
+      },
+      "horoscopes": {
+        "1": "Hoy es un gran día para comenzar nuevos desafíos. No tengas miedo.",
+        "2": "La paciencia traerá buenos resultados. Confía en el proceso.",
+        "3": "La comunicación con otros puede traerte suerte.",
+        "4": "Tómate un tiempo hoy para enfocarte en ti mismo.",
+        "5": "Pueden llegar buenas noticias inesperadas.",
+        "6": "Comenzar el día con gratitud trae más abundancia."
+      }
+    },
+    "step5": {
+      "title": "Tareas Personales",
+      "subtitle": "Tareas Personales Primero",
+      "description": "Completa las tareas personales antes de que comience el trabajo. Los logros matutinos crean impulso positivo para todo el día.",
+      "defaultTasks": {
+        "stretch": "Estiramiento matutino de 5 minutos",
+        "water": "Beber un vaso de agua",
+        "priority": "Identificar una tarea importante"
+      },
+      "addTask": "Agregar Tarea",
+      "addTaskPlaceholder": "Nueva tarea...",
+      "categories": {
+        "exercise": "Ejercicio",
+        "health": "Salud",
+        "personal": "Personal"
+      },
+      "allComplete": "¡Todas las tareas completadas!",
+      "progress": "{completed}/{total} tareas hechas"
+    },
+    "step6": {
+      "title": "Revisión del Mercado",
+      "subtitle": "Revisión Estratégica del Mercado",
+      "description": "Revisa noticias y mercados al final, después de establecer estabilidad emocional a través de tu rutina.",
+      "warningTitle": "Antes de Revisar",
+      "warningText": "Revisar frecuentemente el portafolio puede causar estrés y reacciones emocionales a la volatilidad a corto plazo, potencialmente perjudicando los rendimientos. Los inversores que revisan con menos frecuencia suelen tener mejor desempeño.",
+      "principles": {
+        "title": "Principios de Visualización Consciente",
+        "1": "Observaré, no reaccionaré emocionalmente",
+        "2": "Las fluctuaciones a corto plazo no definen el éxito a largo plazo",
+        "3": "He construido estabilidad emocional a través de mi rutina"
+      },
+      "checkOptions": {
+        "title": "¿Qué te gustaría revisar?",
+        "stocks": "Mercados de Valores",
+        "crypto": "Criptomonedas",
+        "news": "Titulares de Noticias",
+        "forex": "Forex/Divisas",
+        "skip": "Omitir por hoy"
+      },
+      "skipMessage": "Omitir la revisión del mercado puede reducir la ansiedad y mejorar el enfoque. ¡Gran elección!",
+      "completeRoutine": "Completar Rutina"
+    }
+  },
+  "completion": {
+    "title": "¡Rutina Dorada Completada!",
+    "subtitle": "Te has preparado para un día exitoso",
+    "duration": "Duración de la Rutina",
+    "minutes": "minutos",
+    "summary": {
+      "title": "Resumen de Hoy",
+      "feeling": "Sentimiento de Hoy",
+      "goal": "Meta de Hoy",
+      "affirmation": "Afirmación de Hoy",
+      "gratitude": "Elementos de Gratitud",
+      "tasksCompleted": "Tareas Completadas"
+    },
+    "quote": "La forma en que comienzas tu día determina qué tan bien lo vives.",
+    "quoteAuthor": "Robin Sharma",
+    "resetButton": "Iniciar Nueva Rutina",
+    "shareButton": "Compartir Progreso"
+  },
+  "common": {
+    "next": "Siguiente Paso",
+    "skip": "Omitir",
+    "back": "Atrás",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "loading": "Cargando...",
+    "error": "Ocurrió un error",
+    "retry": "Reintentar"
+  },
+  "zodiac": {
+    "aries": "Aries",
+    "taurus": "Tauro",
+    "gemini": "Géminis",
+    "cancer": "Cáncer",
+    "leo": "Leo",
+    "virgo": "Virgo",
+    "libra": "Libra",
+    "scorpio": "Escorpio",
+    "sagittarius": "Sagitario",
+    "capricorn": "Capricornio",
+    "aquarius": "Acuario",
+    "pisces": "Piscis"
+  }
+}

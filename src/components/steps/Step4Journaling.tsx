@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Star, PenLine, Heart } from "lucide-react";
+import { useTranslations } from "next-intl";
 import type { JournalEntry } from "@/types/routine";
 
 interface Step4Props {
@@ -11,36 +12,22 @@ interface Step4Props {
   onComplete: () => void;
 }
 
-const ZODIAC_SIGNS = [
-  { sign: "양자리", dates: "3/21-4/19", emoji: "♈" },
-  { sign: "황소자리", dates: "4/20-5/20", emoji: "♉" },
-  { sign: "쌍둥이자리", dates: "5/21-6/20", emoji: "♊" },
-  { sign: "게자리", dates: "6/21-7/22", emoji: "♋" },
-  { sign: "사자자리", dates: "7/23-8/22", emoji: "♌" },
-  { sign: "처녀자리", dates: "8/23-9/22", emoji: "♍" },
-  { sign: "천칭자리", dates: "9/23-10/22", emoji: "♎" },
-  { sign: "전갈자리", dates: "10/23-11/21", emoji: "♏" },
-  { sign: "궁수자리", dates: "11/22-12/21", emoji: "♐" },
-  { sign: "염소자리", dates: "12/22-1/19", emoji: "♑" },
-  { sign: "물병자리", dates: "1/20-2/18", emoji: "♒" },
-  { sign: "물고기자리", dates: "2/19-3/20", emoji: "♓" },
-];
+const ZODIAC_KEYS = [
+  "aries", "taurus", "gemini", "cancer", "leo", "virgo",
+  "libra", "scorpio", "sagittarius", "capricorn", "aquarius", "pisces"
+] as const;
 
-const DAILY_KEYWORDS = [
-  "도전", "성장", "휴식", "집중", "창의성", "인내",
-  "소통", "감사", "용기", "지혜", "균형", "열정",
-];
+const ZODIAC_EMOJIS = ["♈", "♉", "♊", "♋", "♌", "♍", "♎", "♏", "♐", "♑", "♒", "♓"];
 
-const HOROSCOPE_MESSAGES = [
-  "오늘은 새로운 도전을 시작하기 좋은 날입니다. 두려워하지 마세요.",
-  "인내심을 가지고 기다리면 좋은 결과가 올 것입니다.",
-  "주변 사람들과의 소통이 행운을 가져다 줄 수 있습니다.",
-  "오늘 하루는 자기 자신에게 집중하는 시간을 가져보세요.",
-  "예상치 못한 좋은 소식이 찾아올 수 있습니다.",
-  "감사하는 마음으로 하루를 시작하면 더 많은 것이 찾아옵니다.",
-];
+const KEYWORD_KEYS = [
+  "challenge", "growth", "rest", "focus", "creativity", "patience",
+  "communication", "gratitude", "courage", "wisdom", "balance", "passion"
+] as const;
 
 export function Step4Journaling({ journal, onUpdate, onComplete }: Step4Props) {
+  const t = useTranslations("steps.step4");
+  const tc = useTranslations("common");
+  const tz = useTranslations("zodiac");
   const [selectedSign, setSelectedSign] = useState<string | null>(null);
   const [todayKeyword, setTodayKeyword] = useState("");
   const [horoscopeMessage, setHoroscopeMessage] = useState("");
@@ -48,9 +35,10 @@ export function Step4Journaling({ journal, onUpdate, onComplete }: Step4Props) {
 
   useEffect(() => {
     const today = new Date().getDate();
-    setTodayKeyword(DAILY_KEYWORDS[today % DAILY_KEYWORDS.length]);
-    setHoroscopeMessage(HOROSCOPE_MESSAGES[today % HOROSCOPE_MESSAGES.length]);
-  }, []);
+    const keywordKey = KEYWORD_KEYS[today % KEYWORD_KEYS.length];
+    setTodayKeyword(t(`keywords.${keywordKey}`));
+    setHoroscopeMessage(t(`horoscopes.${(today % 6) + 1}`));
+  }, [t]);
 
   const addGratitude = () => {
     if (gratitudeInput.trim()) {
@@ -77,15 +65,15 @@ export function Step4Journaling({ journal, onUpdate, onComplete }: Step4Props) {
         >
           📝
         </motion.div>
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">내면 의식화</h2>
-        <p className="text-gray-600">Ritualizing the Self</p>
+        <h2 className="text-2xl font-bold text-gray-800 mb-2">{t("title")}</h2>
+        <p className="text-gray-600">{t("subtitle")}</p>
       </div>
 
       {/* Horoscope Section */}
       <div className="glass rounded-2xl p-6 max-w-md w-full mx-auto mb-4">
         <div className="flex items-center gap-2 mb-4">
           <Star className="w-5 h-5 text-golden-500" />
-          <h3 className="font-semibold text-gray-800">오늘의 키워드</h3>
+          <h3 className="font-semibold text-gray-800">{t("keywordTitle")}</h3>
         </div>
 
         <motion.div
@@ -99,16 +87,16 @@ export function Step4Journaling({ journal, onUpdate, onComplete }: Step4Props) {
 
         {!selectedSign && (
           <div>
-            <p className="text-xs text-gray-500 mb-2">나의 별자리 선택 (선택사항)</p>
+            <p className="text-xs text-gray-500 mb-2">{t("zodiacSelect")}</p>
             <div className="grid grid-cols-4 gap-1">
-              {ZODIAC_SIGNS.map((z) => (
+              {ZODIAC_KEYS.map((key, idx) => (
                 <button
-                  key={z.sign}
-                  onClick={() => setSelectedSign(z.sign)}
+                  key={key}
+                  onClick={() => setSelectedSign(key)}
                   className="p-2 rounded-lg bg-white/50 hover:bg-golden-100 transition-colors text-center"
                 >
-                  <div className="text-lg">{z.emoji}</div>
-                  <div className="text-xs text-gray-600">{z.sign}</div>
+                  <div className="text-lg">{ZODIAC_EMOJIS[idx]}</div>
+                  <div className="text-xs text-gray-600">{tz(key)}</div>
                 </button>
               ))}
             </div>
@@ -118,7 +106,7 @@ export function Step4Journaling({ journal, onUpdate, onComplete }: Step4Props) {
         {selectedSign && (
           <div className="text-center">
             <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-golden-100 text-golden-700 text-sm">
-              {ZODIAC_SIGNS.find(z => z.sign === selectedSign)?.emoji} {selectedSign}
+              {ZODIAC_EMOJIS[ZODIAC_KEYS.indexOf(selectedSign as typeof ZODIAC_KEYS[number])]} {tz(selectedSign as typeof ZODIAC_KEYS[number])}
               <button
                 onClick={() => setSelectedSign(null)}
                 className="ml-1 text-golden-500 hover:text-golden-700"
@@ -134,7 +122,7 @@ export function Step4Journaling({ journal, onUpdate, onComplete }: Step4Props) {
       <div className="glass rounded-2xl p-6 max-w-md w-full mx-auto mb-4">
         <div className="flex items-center gap-2 mb-4">
           <Heart className="w-5 h-5 text-rose-500" />
-          <h3 className="font-semibold text-gray-800">감사 일기</h3>
+          <h3 className="font-semibold text-gray-800">{t("gratitudeTitle")}</h3>
         </div>
 
         <div className="flex gap-2 mb-3">
@@ -143,14 +131,14 @@ export function Step4Journaling({ journal, onUpdate, onComplete }: Step4Props) {
             value={gratitudeInput}
             onChange={(e) => setGratitudeInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && addGratitude()}
-            placeholder="오늘 감사한 것은..."
+            placeholder={t("gratitudePlaceholder")}
             className="flex-1 p-3 rounded-xl bg-white/50 border-none focus:ring-2 focus:ring-rose-300 text-sm"
           />
           <button
             onClick={addGratitude}
             className="px-4 py-2 rounded-xl bg-rose-400 text-white font-medium hover:bg-rose-500 transition-colors"
           >
-            추가
+            {t("gratitudeAdd")}
           </button>
         </div>
 
@@ -181,13 +169,13 @@ export function Step4Journaling({ journal, onUpdate, onComplete }: Step4Props) {
       <div className="glass rounded-2xl p-6 max-w-md w-full mx-auto mb-6">
         <div className="flex items-center gap-2 mb-4">
           <PenLine className="w-5 h-5 text-pink-500" />
-          <h3 className="font-semibold text-gray-800">오늘의 한 줄</h3>
+          <h3 className="font-semibold text-gray-800">{t("journalTitle")}</h3>
         </div>
 
         <textarea
           value={journal.content}
           onChange={(e) => onUpdate({ content: e.target.value })}
-          placeholder="오늘 아침 떠오르는 생각을 자유롭게 적어보세요..."
+          placeholder={t("journalPlaceholder")}
           className="w-full p-3 rounded-xl bg-white/50 border-none focus:ring-2 focus:ring-pink-300 resize-none text-sm"
           rows={3}
         />
@@ -202,13 +190,13 @@ export function Step4Journaling({ journal, onUpdate, onComplete }: Step4Props) {
           onClick={onComplete}
           className="w-full py-4 rounded-full font-semibold shadow-lg bg-gradient-to-r from-pink-400 to-rose-500 text-white"
         >
-          다음 단계로 →
+          {tc("next")} →
         </motion.button>
         <button
           onClick={onComplete}
           className="w-full mt-3 text-gray-400 text-sm underline"
         >
-          건너뛰기
+          {tc("skip")}
         </button>
       </div>
     </motion.div>
