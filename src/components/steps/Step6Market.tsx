@@ -21,25 +21,32 @@ type MarketView = "menu" | "stocks" | "crypto" | "news" | "forex";
 function MiniChart({ data, color, height = 60 }: { data: ChartDataPoint[]; color: string; height?: number }) {
   if (!data || data.length === 0) return null;
 
-  const minValue = Math.min(...data.map(d => d.value));
-  const maxValue = Math.max(...data.map(d => d.value));
+  const values = data.map(d => d.value);
+  const minValue = Math.min(...values);
+  const maxValue = Math.max(...values);
+  const range = maxValue - minValue;
   const isPositive = data[data.length - 1]?.value >= data[0]?.value;
+
+  // Add padding to domain for better visualization
+  const padding = range * 0.1 || minValue * 0.005;
+  const domainMin = minValue - padding;
+  const domainMax = maxValue + padding;
 
   return (
     <ResponsiveContainer width="100%" height={height}>
-      <AreaChart data={data} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
+      <AreaChart data={data} margin={{ top: 2, right: 2, left: 2, bottom: 2 }}>
         <defs>
           <linearGradient id={`gradient-${color}`} x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor={isPositive ? "#10B981" : "#EF4444"} stopOpacity={0.3} />
             <stop offset="100%" stopColor={isPositive ? "#10B981" : "#EF4444"} stopOpacity={0} />
           </linearGradient>
         </defs>
-        <YAxis domain={[minValue * 0.999, maxValue * 1.001]} hide />
+        <YAxis domain={[domainMin, domainMax]} hide />
         <Area
           type="monotone"
           dataKey="value"
           stroke={isPositive ? "#10B981" : "#EF4444"}
-          strokeWidth={2}
+          strokeWidth={1.5}
           fill={`url(#gradient-${color})`}
           isAnimationActive={false}
         />
@@ -52,8 +59,24 @@ function MiniChart({ data, color, height = 60 }: { data: ChartDataPoint[]; color
 function FullChart({ data, color }: { data: ChartDataPoint[]; color: string }) {
   if (!data || data.length === 0) return null;
 
+  const values = data.map(d => d.value);
+  const minValue = Math.min(...values);
+  const maxValue = Math.max(...values);
+  const range = maxValue - minValue;
   const isPositive = data[data.length - 1]?.value >= data[0]?.value;
   const chartColor = isPositive ? "#10B981" : "#EF4444";
+
+  // Add padding to domain for better visualization
+  const padding = range * 0.15 || minValue * 0.01;
+  const domainMin = minValue - padding;
+  const domainMax = maxValue + padding;
+
+  // Format price based on magnitude
+  const formatPrice = (val: number): string => {
+    if (val >= 1000) return `$${val.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    if (val >= 1) return `$${val.toFixed(2)}`;
+    return `$${val.toFixed(4)}`;
+  };
 
   return (
     <div className="h-40 w-full">
@@ -72,7 +95,7 @@ function FullChart({ data, color }: { data: ChartDataPoint[]; color: string }) {
             axisLine={false}
             interval="preserveStartEnd"
           />
-          <YAxis hide domain={['auto', 'auto']} />
+          <YAxis hide domain={[domainMin, domainMax]} />
           <Tooltip
             contentStyle={{
               backgroundColor: 'rgba(255,255,255,0.95)',
@@ -80,7 +103,7 @@ function FullChart({ data, color }: { data: ChartDataPoint[]; color: string }) {
               borderRadius: '8px',
               boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
             }}
-            formatter={(value) => [`$${Number(value).toLocaleString()}`, 'Price']}
+            formatter={(value) => [formatPrice(Number(value)), 'Price']}
           />
           <Area
             type="monotone"
@@ -135,18 +158,40 @@ function LiveIndicator({ lastUpdated }: { lastUpdated: Date | null }) {
   );
 }
 
+function ErrorDisplay({ message, onRetry }: { message: string; onRetry?: () => void }) {
+  return (
+    <div className="flex flex-col items-center justify-center py-8 text-center">
+      <AlertTriangle className="w-8 h-8 text-amber-500 mb-2" />
+      <p className="text-sm text-gray-600 mb-3">{message}</p>
+      {onRetry && (
+        <button
+          onClick={onRetry}
+          className="flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-700 rounded-lg text-sm hover:bg-blue-200 transition-colors"
+        >
+          <RefreshCw className="w-4 h-4" />
+          Retry
+        </button>
+      )}
+    </div>
+  );
+}
+
 function StocksWidget({
   stocks,
   loading,
   lastUpdated,
   selectedStock,
-  onSelectStock
+  onSelectStock,
+  error,
+  onRetry
 }: {
   stocks: StockData[];
   loading: boolean;
   lastUpdated: Date | null;
   selectedStock: StockData | null;
   onSelectStock: (stock: StockData | null) => void;
+  error: string | null;
+  onRetry: () => void;
 }) {
   const t = useTranslations("steps.step6");
 
@@ -156,6 +201,10 @@ function StocksWidget({
         <RefreshCw className="w-6 h-6 text-blue-500 animate-spin" />
       </div>
     );
+  }
+
+  if (error && stocks.length === 0) {
+    return <ErrorDisplay message={error} onRetry={onRetry} />;
   }
 
   return (
@@ -234,13 +283,17 @@ function CryptoWidget({
   loading,
   lastUpdated,
   selectedCrypto,
-  onSelectCrypto
+  onSelectCrypto,
+  error,
+  onRetry
 }: {
   crypto: CryptoData[];
   loading: boolean;
   lastUpdated: Date | null;
   selectedCrypto: CryptoData | null;
   onSelectCrypto: (crypto: CryptoData | null) => void;
+  error: string | null;
+  onRetry: () => void;
 }) {
   const t = useTranslations("steps.step6");
 
@@ -250,6 +303,10 @@ function CryptoWidget({
         <RefreshCw className="w-6 h-6 text-orange-500 animate-spin" />
       </div>
     );
+  }
+
+  if (error && crypto.length === 0) {
+    return <ErrorDisplay message={error} onRetry={onRetry} />;
   }
 
   return (
@@ -352,13 +409,17 @@ function ForexWidget({
   loading,
   lastUpdated,
   selectedPair,
-  onSelectPair
+  onSelectPair,
+  error,
+  onRetry
 }: {
   forex: ForexData[];
   loading: boolean;
   lastUpdated: Date | null;
   selectedPair: ForexData | null;
   onSelectPair: (pair: ForexData | null) => void;
+  error: string | null;
+  onRetry: () => void;
 }) {
   const t = useTranslations("steps.step6");
 
@@ -368,6 +429,10 @@ function ForexWidget({
         <RefreshCw className="w-6 h-6 text-green-500 animate-spin" />
       </div>
     );
+  }
+
+  if (error && forex.length === 0) {
+    return <ErrorDisplay message={error} onRetry={onRetry} />;
   }
 
   return (
@@ -432,7 +497,7 @@ function ForexWidget({
   );
 }
 
-function NewsWidget({ news, loading }: { news: NewsItem[]; loading: boolean }) {
+function NewsWidget({ news, loading, error, onRetry }: { news: NewsItem[]; loading: boolean; error: string | null; onRetry: () => void }) {
   const t = useTranslations("steps.step6");
 
   if (loading && news.length === 0) {
@@ -441,6 +506,10 @@ function NewsWidget({ news, loading }: { news: NewsItem[]; loading: boolean }) {
         <RefreshCw className="w-6 h-6 text-purple-500 animate-spin" />
       </div>
     );
+  }
+
+  if (error && news.length === 0) {
+    return <ErrorDisplay message={error} onRetry={onRetry} />;
   }
 
   const getSentimentColor = (sentiment?: string) => {
@@ -503,6 +572,7 @@ export function Step6Market({ onComplete }: Step6Props) {
     stocks, crypto, forex, news,
     lastUpdated,
     loading,
+    error,
     fetchStocks, fetchCrypto, fetchForex, fetchNews,
     startAutoRefresh, stopAutoRefresh
   } = useMarket(15000); // Refresh every 15 seconds
@@ -571,6 +641,8 @@ export function Step6Market({ onComplete }: Step6Props) {
             lastUpdated={lastUpdated}
             selectedStock={selectedStock}
             onSelectStock={setSelectedStock}
+            error={error.stocks}
+            onRetry={fetchStocks}
           />
         );
       case "crypto":
@@ -581,6 +653,8 @@ export function Step6Market({ onComplete }: Step6Props) {
             lastUpdated={lastUpdated}
             selectedCrypto={selectedCrypto}
             onSelectCrypto={setSelectedCrypto}
+            error={error.crypto}
+            onRetry={fetchCrypto}
           />
         );
       case "forex":
@@ -591,10 +665,19 @@ export function Step6Market({ onComplete }: Step6Props) {
             lastUpdated={lastUpdated}
             selectedPair={selectedForex}
             onSelectPair={setSelectedForex}
+            error={error.forex}
+            onRetry={fetchForex}
           />
         );
       case "news":
-        return <NewsWidget news={news} loading={loading.news} />;
+        return (
+          <NewsWidget
+            news={news}
+            loading={loading.news}
+            error={error.news}
+            onRetry={fetchNews}
+          />
+        );
       default:
         return null;
     }
