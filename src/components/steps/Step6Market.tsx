@@ -21,25 +21,32 @@ type MarketView = "menu" | "stocks" | "crypto" | "news" | "forex";
 function MiniChart({ data, color, height = 60 }: { data: ChartDataPoint[]; color: string; height?: number }) {
   if (!data || data.length === 0) return null;
 
-  const minValue = Math.min(...data.map(d => d.value));
-  const maxValue = Math.max(...data.map(d => d.value));
+  const values = data.map(d => d.value);
+  const minValue = Math.min(...values);
+  const maxValue = Math.max(...values);
+  const range = maxValue - minValue;
   const isPositive = data[data.length - 1]?.value >= data[0]?.value;
+
+  // Add padding to domain for better visualization
+  const padding = range * 0.1 || minValue * 0.005;
+  const domainMin = minValue - padding;
+  const domainMax = maxValue + padding;
 
   return (
     <ResponsiveContainer width="100%" height={height}>
-      <AreaChart data={data} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
+      <AreaChart data={data} margin={{ top: 2, right: 2, left: 2, bottom: 2 }}>
         <defs>
           <linearGradient id={`gradient-${color}`} x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor={isPositive ? "#10B981" : "#EF4444"} stopOpacity={0.3} />
             <stop offset="100%" stopColor={isPositive ? "#10B981" : "#EF4444"} stopOpacity={0} />
           </linearGradient>
         </defs>
-        <YAxis domain={[minValue * 0.999, maxValue * 1.001]} hide />
+        <YAxis domain={[domainMin, domainMax]} hide />
         <Area
           type="monotone"
           dataKey="value"
           stroke={isPositive ? "#10B981" : "#EF4444"}
-          strokeWidth={2}
+          strokeWidth={1.5}
           fill={`url(#gradient-${color})`}
           isAnimationActive={false}
         />
@@ -52,8 +59,24 @@ function MiniChart({ data, color, height = 60 }: { data: ChartDataPoint[]; color
 function FullChart({ data, color }: { data: ChartDataPoint[]; color: string }) {
   if (!data || data.length === 0) return null;
 
+  const values = data.map(d => d.value);
+  const minValue = Math.min(...values);
+  const maxValue = Math.max(...values);
+  const range = maxValue - minValue;
   const isPositive = data[data.length - 1]?.value >= data[0]?.value;
   const chartColor = isPositive ? "#10B981" : "#EF4444";
+
+  // Add padding to domain for better visualization
+  const padding = range * 0.15 || minValue * 0.01;
+  const domainMin = minValue - padding;
+  const domainMax = maxValue + padding;
+
+  // Format price based on magnitude
+  const formatPrice = (val: number): string => {
+    if (val >= 1000) return `$${val.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    if (val >= 1) return `$${val.toFixed(2)}`;
+    return `$${val.toFixed(4)}`;
+  };
 
   return (
     <div className="h-40 w-full">
@@ -72,7 +95,7 @@ function FullChart({ data, color }: { data: ChartDataPoint[]; color: string }) {
             axisLine={false}
             interval="preserveStartEnd"
           />
-          <YAxis hide domain={['auto', 'auto']} />
+          <YAxis hide domain={[domainMin, domainMax]} />
           <Tooltip
             contentStyle={{
               backgroundColor: 'rgba(255,255,255,0.95)',
@@ -80,7 +103,7 @@ function FullChart({ data, color }: { data: ChartDataPoint[]; color: string }) {
               borderRadius: '8px',
               boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
             }}
-            formatter={(value) => [`$${Number(value).toLocaleString()}`, 'Price']}
+            formatter={(value) => [formatPrice(Number(value)), 'Price']}
           />
           <Area
             type="monotone"

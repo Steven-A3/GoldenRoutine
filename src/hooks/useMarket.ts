@@ -71,38 +71,62 @@ interface MarketState {
   };
 }
 
-// Generate realistic chart data with trend
-function generateChartData(basePrice: number, points: number = 24, volatility: number = 0.02): ChartDataPoint[] {
+// Generate realistic chart data centered around current price
+function generateChartData(currentPrice: number, points: number = 24, volatility: number = 0.015): ChartDataPoint[] {
   const data: ChartDataPoint[] = [];
-  let price = basePrice * (1 - volatility * 2);
   const now = new Date();
 
-  for (let i = points; i >= 0; i--) {
-    const time = new Date(now.getTime() - i * 60 * 60 * 1000);
-    const change = (Math.random() - 0.45) * volatility * price;
-    price = Math.max(price + change, basePrice * 0.9);
-    data.push({
-      time: time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      value: Number(price.toFixed(2))
-    });
+  // Work backwards from current price to create realistic historical data
+  // Generate a random trend direction (slightly biased by current change if known)
+  const trendBias = (Math.random() - 0.5) * 0.3; // Small random trend
+
+  // Calculate prices going backward from current
+  const prices: number[] = [currentPrice];
+  for (let i = 1; i <= points; i++) {
+    // Random walk with mean reversion tendency
+    const randomChange = (Math.random() - 0.5) * 2 * volatility * currentPrice;
+    const trendChange = trendBias * volatility * currentPrice * (i / points);
+    const prevPrice = prices[0];
+    // Going backward: subtract the change (so forward movement would add it)
+    const newPrice = prevPrice - randomChange - trendChange;
+    // Keep within reasonable bounds (±5% of current price)
+    const boundedPrice = Math.max(
+      currentPrice * 0.95,
+      Math.min(currentPrice * 1.05, newPrice)
+    );
+    prices.unshift(boundedPrice);
   }
 
-  // Ensure last point is close to current price
-  if (data.length > 0) {
-    data[data.length - 1].value = basePrice;
+  // Create chart data points with timestamps
+  for (let i = 0; i <= points; i++) {
+    const time = new Date(now.getTime() - (points - i) * 60 * 60 * 1000);
+    const decimals = currentPrice >= 100 ? 2 : currentPrice >= 1 ? 2 : 4;
+    data.push({
+      time: time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      value: Number(prices[i].toFixed(decimals))
+    });
   }
 
   return data;
 }
 
-// Convert sparkline array to chart data
-function sparklineToChartData(sparkline: number[]): ChartDataPoint[] {
+// Convert sparkline array to chart data with proper precision
+function sparklineToChartData(sparkline: number[], currentPrice?: number): ChartDataPoint[] {
   const now = new Date();
-  return sparkline.map((value, index) => ({
+  const decimals = (currentPrice ?? sparkline[0]) >= 100 ? 2 : (currentPrice ?? sparkline[0]) >= 1 ? 2 : 6;
+
+  const data = sparkline.map((value, index) => ({
     time: new Date(now.getTime() - (sparkline.length - index) * 60 * 60 * 1000)
       .toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-    value: Number(value.toFixed(2))
+    value: Number(value.toFixed(decimals))
   }));
+
+  // Ensure the last point matches current price if provided
+  if (currentPrice !== undefined && data.length > 0) {
+    data[data.length - 1].value = Number(currentPrice.toFixed(decimals));
+  }
+
+  return data;
 }
 
 export function useMarket(refreshInterval: number = 30000) {
@@ -250,7 +274,9 @@ export function useMarket(refreshInterval: number = 30000) {
           marketCap: coin.market_cap,
           image: coin.image,
           sparkline,
-          chartData: sparkline.length > 0 ? sparklineToChartData(sparkline) : generateChartData(coin.current_price, 24, 0.03)
+          chartData: sparkline.length > 0
+            ? sparklineToChartData(sparkline, coin.current_price)
+            : generateChartData(coin.current_price, 24, 0.025)
         };
       });
 
