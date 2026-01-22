@@ -42,6 +42,14 @@
       "feelingPlaceholder": "Ej: Tranquilo y enfocado",
       "goalLabel": "¿Cuál es mi objetivo principal para hoy?",
       "goalPlaceholder": "Ej: Completar la propuesta del proyecto",
+      "suggestedGoals": "Objetivos Sugeridos",
+      "goals": {
+        "1": "Completar una tarea importante",
+        "2": "Trabajar enfocado por 2 horas",
+        "3": "Tener una conversación significativa",
+        "4": "Aprender algo nuevo",
+        "5": "Cuidar mi salud"
+      },
       "affirmationLabel": "Afirmación de Hoy",
       "affirmationPlaceholder": "Ej: Atraigo energía positiva y oportunidades",
       "suggestedAffirmations": "Afirmaciones Sugeridas",

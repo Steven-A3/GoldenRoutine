@@ -42,6 +42,14 @@
       "feelingPlaceholder": "e.g., Calm and focused",
       "goalLabel": "What is my core goal for today?",
       "goalPlaceholder": "e.g., Complete the project proposal",
+      "suggestedGoals": "Suggested Goals",
+      "goals": {
+        "1": "Complete one important task",
+        "2": "Focus on deep work for 2 hours",
+        "3": "Have a meaningful conversation",
+        "4": "Learn something new",
+        "5": "Take care of my health"
+      },
       "affirmationLabel": "Today's Affirmation",
       "affirmationPlaceholder": "e.g., I attract positive energy and opportunities",
       "suggestedAffirmations": "Suggested Affirmations",
