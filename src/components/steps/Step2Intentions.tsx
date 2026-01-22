@@ -25,6 +25,7 @@ export function Step2Intentions({ intention, onUpdate, onComplete }: Step2Props)
   const t = useTranslations("steps.step2");
   const tc = useTranslations("common");
   const [showAffirmations, setShowAffirmations] = useState(false);
+  const [showGoals, setShowGoals] = useState(false);
 
   const affirmations = [
     t("affirmations.1"),
@@ -32,6 +33,14 @@ export function Step2Intentions({ intention, onUpdate, onComplete }: Step2Props)
     t("affirmations.3"),
     t("affirmations.4"),
     t("affirmations.5"),
+  ];
+
+  const goals = [
+    t("goals.1"),
+    t("goals.2"),
+    t("goals.3"),
+    t("goals.4"),
+    t("goals.5"),
   ];
 
   const isComplete = intention.feeling && intention.goal;
@@ -80,10 +89,37 @@ export function Step2Intentions({ intention, onUpdate, onComplete }: Step2Props)
       </div>
 
       <div className="glass rounded-2xl p-6 max-w-md w-full mx-auto mb-6">
-        <div className="flex items-center gap-2 mb-4">
-          <Target className="w-5 h-5 text-orange-500" />
-          <h3 className="font-semibold text-gray-800">{t("goalLabel")}</h3>
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2">
+            <Target className="w-5 h-5 text-orange-500" />
+            <h3 className="font-semibold text-gray-800">{t("goalLabel")}</h3>
+          </div>
+          <button
+            onClick={() => setShowGoals(!showGoals)}
+            className="text-sm text-golden-600 underline"
+          >
+            {showGoals ? tc("cancel") : t("suggestedGoals")}
+          </button>
         </div>
+
+        {showGoals && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            className="mb-4 flex flex-wrap gap-2"
+          >
+            {goals.map((g, idx) => (
+              <button
+                key={idx}
+                onClick={() => onUpdate({ goal: g })}
+                className="text-xs px-3 py-1.5 rounded-full bg-orange-100 text-orange-700 hover:bg-orange-200 transition-colors"
+              >
+                {g}
+              </button>
+            ))}
+          </motion.div>
+        )}
+
         <textarea
           value={intention.goal}
           onChange={(e) => onUpdate({ goal: e.target.value })}
