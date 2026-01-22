@@ -1,7 +1,7 @@
 {
   "name": "Morning Golden Time",
   "short_name": "Golden Time",
-  "description": "당신의 아침을 황금빛으로 물들이는 골든 루틴 앱",
+  "description": "Transform your morning into golden moments with the Golden Routine app",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#FFFBEB",
@@ -58,7 +58,7 @@
     }
   ],
   "categories": ["lifestyle", "health", "productivity"],
-  "lang": "ko-KR",
+  "lang": "en",
   "dir": "ltr",
   "screenshots": [
     {
