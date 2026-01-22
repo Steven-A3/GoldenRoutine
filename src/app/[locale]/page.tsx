@@ -142,13 +142,16 @@ export default function Home() {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -20 }}
           transition={{ duration: 0.3 }}
+          className="relative z-10"
         >
           {renderCurrentStep()}
         </motion.div>
       </AnimatePresence>
 
-      <div className="fixed bottom-0 left-0 right-0 safe-bottom">
-        <AdBanner slot="morning-golden-time-footer" format="horizontal" className="max-w-md mx-auto" />
+      <div className="fixed bottom-0 left-0 right-0 safe-bottom z-40 pointer-events-none">
+        <div className="pointer-events-auto">
+          <AdBanner slot="morning-golden-time-footer" format="horizontal" className="max-w-md mx-auto" />
+        </div>
       </div>
     </main>
   );

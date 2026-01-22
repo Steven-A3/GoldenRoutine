@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 
 export interface StockData {
   symbol: string;
@@ -58,9 +58,6 @@ const MOCK_STOCKS: StockData[] = [
   { symbol: "DIA", name: "Dow Jones", price: 423.89, change: 3.12, changePercent: 0.74 },
   { symbol: "IWM", name: "Russell 2000", price: 198.45, change: -0.89, changePercent: -0.45 },
 ];
-
-// Major forex pairs (will be fetched from API)
-const FOREX_PAIRS = ["USD/EUR", "USD/JPY", "USD/GBP", "USD/KRW"];
 
 export function useMarket() {
   const [state, setState] = useState<MarketState>({
