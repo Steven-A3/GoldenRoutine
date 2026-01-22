@@ -1,0 +1,195 @@
+{
+  "app": {
+    "name": "Morning Golden Time",
+    "tagline": "Transform your morning into golden moments",
+    "duration": "About 10-15 minutes",
+    "dailyRecommended": "Recommended daily"
+  },
+  "greeting": {
+    "dawn": "A new dawn awaits",
+    "morning": "Good morning",
+    "afternoon": "Keep your routine going",
+    "evening": "Prepare for tomorrow"
+  },
+  "welcome": {
+    "title": "What is Golden Routine?",
+    "description": "A morning routine that protects your brain's creative {theta} and {alpha} states, prevents dopamine addiction, and helps you achieve both wealth and mental abundance.",
+    "theta": "Theta waves",
+    "alpha": "Alpha waves",
+    "startButton": "Start Golden Routine"
+  },
+  "progress": {
+    "completed": "{count}/6 completed",
+    "stepsCompleted": "{count} steps completed"
+  },
+  "steps": {
+    "step1": {
+      "title": "Digital Detox",
+      "subtitle": "Theta State Protection",
+      "description": "Protect your brain's creative theta and alpha wave states by avoiding digital stimulation right after waking up.",
+      "fact": "70-80% of people check their phone within 10 minutes of waking up, which shifts the brain into reactive beta state.",
+      "commitTitle": "My Commitment",
+      "commitText": "I will not check my phone for the next 30 minutes",
+      "timer": "Digital Detox Timer",
+      "timerRunning": "Great job! Keep going...",
+      "timerComplete": "Excellent! You protected your theta state!"
+    },
+    "step2": {
+      "title": "Set Intentions",
+      "subtitle": "Setting Intentions & Affirmations",
+      "description": "Before coffee or news, set your purpose for the day. Affirmations work on your subconscious to guide your brain toward your goals.",
+      "feelingLabel": "How do I want to feel today?",
+      "feelingPlaceholder": "e.g., Calm and focused",
+      "goalLabel": "What is my core goal for today?",
+      "goalPlaceholder": "e.g., Complete the project proposal",
+      "affirmationLabel": "Today's Affirmation",
+      "affirmationPlaceholder": "e.g., I attract positive energy and opportunities",
+      "suggestedAffirmations": "Suggested Affirmations",
+      "affirmations": {
+        "1": "I expect good things to happen today",
+        "2": "I am grateful for this new day",
+        "3": "I have the power to create change",
+        "4": "Today, I choose happiness",
+        "5": "I am becoming the best version of myself"
+      }
+    },
+    "step3": {
+      "title": "Light & Mood",
+      "subtitle": "Syncing Light & Mood",
+      "description": "Sunlight helps produce serotonin and regulates melatonin. Plan your natural light exposure for the day.",
+      "weatherTitle": "Today's Weather",
+      "loadingWeather": "Loading weather...",
+      "locationError": "Unable to get location",
+      "feelsLike": "Feels like {temp}",
+      "humidity": "Humidity",
+      "uvIndex": "UV Index",
+      "sunlightPlan": "Sunlight Exposure Plan",
+      "sunlightPlaceholder": "e.g., 20-minute walk at lunch",
+      "suggestions": {
+        "sunny": "Great day for outdoor activities! Try to get 20-30 minutes of morning sunlight.",
+        "cloudy": "Even on cloudy days, outdoor light is beneficial. Consider a walk.",
+        "rainy": "Indoor exercise or light therapy can help on rainy days.",
+        "default": "Plan some time near windows or outdoors today."
+      }
+    },
+    "step4": {
+      "title": "Inner Ritual",
+      "subtitle": "Ritualizing the Self",
+      "description": "Horoscopes provide psychological comfort during uncertain times. Connect this with journaling or meditation.",
+      "keywordTitle": "Today's Keyword",
+      "zodiacSelect": "Select your zodiac sign (optional)",
+      "gratitudeTitle": "Gratitude Journal",
+      "gratitudePlaceholder": "I'm grateful for...",
+      "gratitudeAdd": "Add",
+      "journalTitle": "Today's Reflection",
+      "journalPlaceholder": "Write down any thoughts that come to mind this morning...",
+      "keywords": {
+        "challenge": "Challenge",
+        "growth": "Growth",
+        "rest": "Rest",
+        "focus": "Focus",
+        "creativity": "Creativity",
+        "patience": "Patience",
+        "communication": "Communication",
+        "gratitude": "Gratitude",
+        "courage": "Courage",
+        "wisdom": "Wisdom",
+        "balance": "Balance",
+        "passion": "Passion"
+      },
+      "horoscopes": {
+        "1": "Today is a great day to start new challenges. Don't be afraid.",
+        "2": "Patience will bring good results. Trust the process.",
+        "3": "Communication with others may bring you luck.",
+        "4": "Take some time today to focus on yourself.",
+        "5": "Unexpected good news may come your way.",
+        "6": "Starting the day with gratitude brings more abundance."
+      }
+    },
+    "step5": {
+      "title": "Personal Tasks",
+      "subtitle": "Personal Tasks First",
+      "description": "Complete personal tasks before work begins. Morning accomplishments create positive momentum for the entire day.",
+      "defaultTasks": {
+        "stretch": "5-minute morning stretch",
+        "water": "Drink a glass of water",
+        "priority": "Identify one important task"
+      },
+      "addTask": "Add Task",
+      "addTaskPlaceholder": "New task...",
+      "categories": {
+        "exercise": "Exercise",
+        "health": "Health",
+        "personal": "Personal"
+      },
+      "allComplete": "All tasks completed!",
+      "progress": "{completed}/{total} tasks done"
+    },
+    "step6": {
+      "title": "Market Check",
+      "subtitle": "Strategic Market Check",
+      "description": "Check news and markets last, after establishing emotional stability through your routine.",
+      "warningTitle": "Before You Check",
+      "warningText": "Frequent portfolio checking can cause stress and emotional reactions to short-term volatility, potentially hurting returns. Investors who check less frequently often perform better.",
+      "principles": {
+        "title": "Mindful Viewing Principles",
+        "1": "I will observe, not react emotionally",
+        "2": "Short-term fluctuations don't define long-term success",
+        "3": "I've built emotional stability through my routine"
+      },
+      "checkOptions": {
+        "title": "What would you like to check?",
+        "stocks": "Stock Markets",
+        "crypto": "Cryptocurrency",
+        "news": "News Headlines",
+        "forex": "Forex/Currency",
+        "skip": "Skip for today"
+      },
+      "skipMessage": "Skipping market check can reduce anxiety and improve focus. Great choice!",
+      "completeRoutine": "Complete Routine"
+    }
+  },
+  "completion": {
+    "title": "Golden Routine Complete!",
+    "subtitle": "You've set yourself up for a successful day",
+    "duration": "Routine Duration",
+    "minutes": "minutes",
+    "summary": {
+      "title": "Today's Summary",
+      "feeling": "Today's Feeling",
+      "goal": "Today's Goal",
+      "affirmation": "Today's Affirmation",
+      "gratitude": "Gratitude Items",
+      "tasksCompleted": "Tasks Completed"
+    },
+    "quote": "The way you start your day determines how well you live your day.",
+    "quoteAuthor": "Robin Sharma",
+    "resetButton": "Start New Routine",
+    "shareButton": "Share Progress"
+  },
+  "common": {
+    "next": "Next Step",
+    "skip": "Skip",
+    "back": "Back",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "retry": "Retry"
+  },
+  "zodiac": {
+    "aries": "Aries",
+    "taurus": "Taurus",
+    "gemini": "Gemini",
+    "cancer": "Cancer",
+    "leo": "Leo",
+    "virgo": "Virgo",
+    "libra": "Libra",
+    "scorpio": "Scorpio",
+    "sagittarius": "Sagittarius",
+    "capricorn": "Capricorn",
+    "aquarius": "Aquarius",
+    "pisces": "Pisces"
+  }
+}

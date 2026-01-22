@@ -13,9 +13,12 @@ import {
   Step6Market,
 } from "@/components/steps";
 import { AdBanner } from "@/components/AdBanner";
+import { LanguageSelector } from "@/components/LanguageSelector";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 export default function Home() {
+  const t = useTranslations();
   const {
     progress,
     intention,
@@ -107,10 +110,13 @@ export default function Home() {
       <header className="sticky top-0 z-50 glass safe-top">
         <div className="max-w-md mx-auto px-4">
           <div className="flex items-center justify-between py-2">
-            <h1 className="text-lg font-bold text-golden-600">Morning Golden Time</h1>
-            <span className="text-xs text-gray-500">
-              {progress.completedSteps.length}/6 완료
-            </span>
+            <h1 className="text-lg font-bold text-golden-600">{t("app.name")}</h1>
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-gray-500">
+                {t("progress.completed", { count: progress.completedSteps.length })}
+              </span>
+              <LanguageSelector />
+            </div>
           </div>
           <StepIndicator
             currentStep={progress.currentStep}

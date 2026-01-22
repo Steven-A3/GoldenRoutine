@@ -1,7 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ROUTINE_STEPS } from "@/types/routine";
+import { useTranslations } from "next-intl";
+
+const STEP_ICONS = ["🔇", "🎯", "☀️", "📝", "🏃", "📈"];
+const STEP_IDS = [1, 2, 3, 4, 5, 6];
 
 interface StepIndicatorProps {
   currentStep: number;
@@ -10,19 +13,21 @@ interface StepIndicatorProps {
 }
 
 export function StepIndicator({ currentStep, completedSteps, onStepClick }: StepIndicatorProps) {
+  const t = useTranslations("steps");
+
   return (
     <div className="flex items-center justify-center gap-2 py-4">
-      {ROUTINE_STEPS.map((step, index) => {
-        const isCompleted = completedSteps.includes(step.id);
-        const isCurrent = currentStep === step.id;
-        const isAccessible = isCompleted || step.id <= Math.max(...completedSteps, 0) + 1;
+      {STEP_IDS.map((stepId, index) => {
+        const isCompleted = completedSteps.includes(stepId);
+        const isCurrent = currentStep === stepId;
+        const isAccessible = isCompleted || stepId <= Math.max(...completedSteps, 0) + 1;
 
         return (
           <motion.button
-            key={step.id}
+            key={stepId}
             whileHover={isAccessible ? { scale: 1.1 } : {}}
             whileTap={isAccessible ? { scale: 0.95 } : {}}
-            onClick={() => isAccessible && onStepClick(step.id)}
+            onClick={() => isAccessible && onStepClick(stepId)}
             disabled={!isAccessible}
             className={`
               relative flex items-center justify-center transition-all duration-300
@@ -36,9 +41,9 @@ export function StepIndicator({ currentStep, completedSteps, onStepClick }: Step
               }
               ${isAccessible ? "cursor-pointer" : "cursor-not-allowed opacity-50"}
             `}
-            title={step.title}
+            title={t(`step${stepId}.title`)}
           >
-            <span className="text-sm">{step.icon}</span>
+            <span className="text-sm">{STEP_ICONS[index]}</span>
 
             {isCurrent && (
               <motion.div

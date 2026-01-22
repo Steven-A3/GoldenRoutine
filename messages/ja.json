@@ -1,0 +1,195 @@
+{
+  "app": {
+    "name": "Morning Golden Time",
+    "tagline": "朝をゴールデンタイムに変える",
+    "duration": "約10-15分",
+    "dailyRecommended": "毎朝推奨"
+  },
+  "greeting": {
+    "dawn": "新しい夜明けが待っています",
+    "morning": "おはようございます",
+    "afternoon": "午後もルーティンを続けましょう",
+    "evening": "明日の朝に備えましょう"
+  },
+  "welcome": {
+    "title": "ゴールデンルーティンとは？",
+    "description": "脳の創造的な{theta}と{alpha}状態を守り、ドーパミン中毒を防ぎ、富と精神的な豊かさを両立させる朝のルーティンです。",
+    "theta": "シータ波",
+    "alpha": "アルファ波",
+    "startButton": "ゴールデンルーティンを始める"
+  },
+  "progress": {
+    "completed": "{count}/6 完了",
+    "stepsCompleted": "{count}ステップ完了"
+  },
+  "steps": {
+    "step1": {
+      "title": "デジタルデトックス",
+      "subtitle": "シータ状態の保護",
+      "description": "起床直後のデジタル刺激を避けて、脳の創造的なシータ波とアルファ波の状態を守りましょう。",
+      "fact": "70-80%の人が起床後10分以内にスマホをチェックし、脳を反応的なベータ状態に切り替えてしまいます。",
+      "commitTitle": "私の決意",
+      "commitText": "これから30分間スマホをチェックしません",
+      "timer": "デジタルデトックスタイマー",
+      "timerRunning": "よくできています！続けましょう...",
+      "timerComplete": "素晴らしい！シータ状態を守りました！"
+    },
+    "step2": {
+      "title": "意図の設定",
+      "subtitle": "意図とアファメーション",
+      "description": "コーヒーやニュースの前に、今日の目的を設定しましょう。アファメーションは潜在意識に働きかけ、目標に向かって行動するよう導きます。",
+      "feelingLabel": "今日どんな気分で過ごしたいですか？",
+      "feelingPlaceholder": "例：穏やかで集中している",
+      "goalLabel": "今日の核心目標は何ですか？",
+      "goalPlaceholder": "例：プロジェクト提案書を完成させる",
+      "affirmationLabel": "今日のアファメーション",
+      "affirmationPlaceholder": "例：私はポジティブなエネルギーと機会を引き寄せる",
+      "suggestedAffirmations": "おすすめのアファメーション",
+      "affirmations": {
+        "1": "今日は良いことが起こると期待している",
+        "2": "新しい一日に感謝します",
+        "3": "私には変化を生み出す力がある",
+        "4": "今日、私は幸せを選ぶ",
+        "5": "私は最高の自分になりつつある"
+      }
+    },
+    "step3": {
+      "title": "光と気分",
+      "subtitle": "光と気分の同期",
+      "description": "日光はセロトニンの生成を助け、メラトニンを調整します。今日の自然光を浴びる計画を立てましょう。",
+      "weatherTitle": "今日の天気",
+      "loadingWeather": "天気を読み込み中...",
+      "locationError": "位置情報を取得できません",
+      "feelsLike": "体感 {temp}",
+      "humidity": "湿度",
+      "uvIndex": "UV指数",
+      "sunlightPlan": "日光浴の計画",
+      "sunlightPlaceholder": "例：昼休みに20分散歩",
+      "suggestions": {
+        "sunny": "屋外活動に最適な日です！朝に20-30分日光を浴びましょう。",
+        "cloudy": "曇りの日でも屋外の光は有益です。散歩を検討しましょう。",
+        "rainy": "雨の日は室内運動やライトセラピーが助けになります。",
+        "default": "今日は窓際や屋外で過ごす時間を作りましょう。"
+      }
+    },
+    "step4": {
+      "title": "内面の儀式",
+      "subtitle": "自己の儀式化",
+      "description": "占いは不確実な時期に心理的な安心感を与えます。これをジャーナリングや瞑想と結びつけましょう。",
+      "keywordTitle": "今日のキーワード",
+      "zodiacSelect": "星座を選択（任意）",
+      "gratitudeTitle": "感謝日記",
+      "gratitudePlaceholder": "感謝していること...",
+      "gratitudeAdd": "追加",
+      "journalTitle": "今日の一言",
+      "journalPlaceholder": "今朝浮かんだ思いを自由に書いてください...",
+      "keywords": {
+        "challenge": "挑戦",
+        "growth": "成長",
+        "rest": "休息",
+        "focus": "集中",
+        "creativity": "創造性",
+        "patience": "忍耐",
+        "communication": "コミュニケーション",
+        "gratitude": "感謝",
+        "courage": "勇気",
+        "wisdom": "知恵",
+        "balance": "バランス",
+        "passion": "情熱"
+      },
+      "horoscopes": {
+        "1": "今日は新しい挑戦を始めるのに良い日です。恐れないでください。",
+        "2": "忍耐強く待てば良い結果が訪れます。",
+        "3": "周りの人とのコミュニケーションが幸運をもたらすかもしれません。",
+        "4": "今日は自分自身に集中する時間を取りましょう。",
+        "5": "予期しない良いニュースが届くかもしれません。",
+        "6": "感謝の気持ちで一日を始めると、より多くのものが訪れます。"
+      }
+    },
+    "step5": {
+      "title": "個人タスク",
+      "subtitle": "個人タスク優先",
+      "description": "仕事が始まる前に個人的なタスクを完了しましょう。朝の達成感は一日中ポジティブな影響を与えます。",
+      "defaultTasks": {
+        "stretch": "5分間の朝ストレッチ",
+        "water": "コップ1杯の水を飲む",
+        "priority": "重要なタスクを1つ特定する"
+      },
+      "addTask": "タスクを追加",
+      "addTaskPlaceholder": "新しいタスク...",
+      "categories": {
+        "exercise": "運動",
+        "health": "健康",
+        "personal": "個人"
+      },
+      "allComplete": "すべてのタスク完了！",
+      "progress": "{completed}/{total} 完了"
+    },
+    "step6": {
+      "title": "マーケットチェック",
+      "subtitle": "戦略的マーケットチェック",
+      "description": "ルーティンで感情的な安定を確保した後、最後にニュースとマーケットを確認しましょう。",
+      "warningTitle": "確認する前に",
+      "warningText": "頻繁なポートフォリオチェックはストレスを引き起こし、短期的な変動に感情的に反応させ、リターンを損なう可能性があります。チェック頻度が少ない投資家の方がパフォーマンスが良いという研究結果があります。",
+      "principles": {
+        "title": "マインドフルな確認の原則",
+        "1": "私は観察するだけで、感情的に反応しない",
+        "2": "短期的な変動は長期的な成功を決定しない",
+        "3": "ルーティンを通じて感情的な安定を確保した"
+      },
+      "checkOptions": {
+        "title": "何を確認しますか？",
+        "stocks": "株式市場",
+        "crypto": "暗号通貨",
+        "news": "ニュースヘッドライン",
+        "forex": "外国為替",
+        "skip": "今日はスキップ"
+      },
+      "skipMessage": "マーケットチェックをスキップすると不安が減り、集中力が高まります。良い選択です！",
+      "completeRoutine": "ルーティン完了"
+    }
+  },
+  "completion": {
+    "title": "ゴールデンルーティン完了！",
+    "subtitle": "成功する一日の準備が整いました",
+    "duration": "ルーティン所要時間",
+    "minutes": "分",
+    "summary": {
+      "title": "今日のまとめ",
+      "feeling": "今日の気分",
+      "goal": "今日の目標",
+      "affirmation": "今日のアファメーション",
+      "gratitude": "感謝項目",
+      "tasksCompleted": "完了したタスク"
+    },
+    "quote": "朝の始め方が、一日の過ごし方を決める。",
+    "quoteAuthor": "ロビン・シャルマ",
+    "resetButton": "新しいルーティンを始める",
+    "shareButton": "進捗を共有"
+  },
+  "common": {
+    "next": "次のステップ",
+    "skip": "スキップ",
+    "back": "戻る",
+    "save": "保存",
+    "cancel": "キャンセル",
+    "confirm": "確認",
+    "loading": "読み込み中...",
+    "error": "エラーが発生しました",
+    "retry": "再試行"
+  },
+  "zodiac": {
+    "aries": "牡羊座",
+    "taurus": "牡牛座",
+    "gemini": "双子座",
+    "cancer": "蟹座",
+    "leo": "獅子座",
+    "virgo": "乙女座",
+    "libra": "天秤座",
+    "scorpio": "蠍座",
+    "sagittarius": "射手座",
+    "capricorn": "山羊座",
+    "aquarius": "水瓶座",
+    "pisces": "魚座"
+  }
+}

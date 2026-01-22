@@ -1,0 +1,195 @@
+{
+  "app": {
+    "name": "Morning Golden Time",
+    "tagline": "당신의 아침을 황금빛으로 물들이는 골든 루틴",
+    "duration": "약 10-15분 소요",
+    "dailyRecommended": "매일 아침 권장"
+  },
+  "greeting": {
+    "dawn": "새벽이 밝아옵니다",
+    "morning": "좋은 아침이에요",
+    "afternoon": "오후에도 루틴을",
+    "evening": "내일 아침을 준비해요"
+  },
+  "welcome": {
+    "title": "골든 루틴이란?",
+    "description": "뇌가 가장 창의적인 {theta}와 {alpha} 상태를 보호하고, 도파민 중독을 예방하며, 부와 정신적 풍요를 모두 잡는 아침 루틴입니다.",
+    "theta": "세타파",
+    "alpha": "알파파",
+    "startButton": "골든 루틴 시작하기"
+  },
+  "progress": {
+    "completed": "{count}/6 완료",
+    "stepsCompleted": "{count}단계 완료"
+  },
+  "steps": {
+    "step1": {
+      "title": "디지털 디톡스",
+      "subtitle": "세타파 보호",
+      "description": "기상 직후 스마트폰의 알림, 이메일, 뉴스 확인을 차단하여 뇌의 창의적인 세타파와 알파파 상태를 보호합니다.",
+      "fact": "70-80%의 사람들이 기상 10분 내에 폰을 확인하는데, 이는 뇌를 반응적인 베타 상태로 전환시킵니다.",
+      "commitTitle": "나의 다짐",
+      "commitText": "앞으로 30분간 스마트폰을 확인하지 않겠습니다",
+      "timer": "디지털 디톡스 타이머",
+      "timerRunning": "잘하고 있어요! 조금만 더...",
+      "timerComplete": "훌륭해요! 세타파 상태를 보호했습니다!"
+    },
+    "step2": {
+      "title": "의도 설정",
+      "subtitle": "의도 설정 및 확언",
+      "description": "커피를 마시거나 뉴스를 보기 전, 하루의 목적을 설정하세요. 확언은 잠재의식에 작용하여 뇌가 목표를 향해 행동하도록 돕습니다.",
+      "feelingLabel": "오늘 하루 나는 어떤 기분을 느낄 것인가?",
+      "feelingPlaceholder": "예: 차분하고 집중된",
+      "goalLabel": "오늘의 핵심 목표는 무엇인가?",
+      "goalPlaceholder": "예: 프로젝트 제안서 완성하기",
+      "affirmationLabel": "오늘의 확언",
+      "affirmationPlaceholder": "예: 나는 긍정적인 에너지와 기회를 끌어당긴다",
+      "suggestedAffirmations": "추천 확언",
+      "affirmations": {
+        "1": "나는 좋은 일이 생길 것이라 기대한다",
+        "2": "새로운 하루에 감사한다",
+        "3": "나는 변화를 만들어낼 힘이 있다",
+        "4": "오늘, 나는 행복을 선택한다",
+        "5": "나는 최고의 나 자신이 되어가고 있다"
+      }
+    },
+    "step3": {
+      "title": "빛과 감정",
+      "subtitle": "빛과 감정의 동기화",
+      "description": "햇빛은 세로토닌 생성을 돕고 멜라토닌을 조절합니다. 오늘의 자연광 노출 계획을 세워보세요.",
+      "weatherTitle": "오늘의 날씨",
+      "loadingWeather": "날씨 불러오는 중...",
+      "locationError": "위치를 가져올 수 없습니다",
+      "feelsLike": "체감 {temp}",
+      "humidity": "습도",
+      "uvIndex": "자외선 지수",
+      "sunlightPlan": "햇볕 쬐기 계획",
+      "sunlightPlaceholder": "예: 점심시간 20분 산책",
+      "suggestions": {
+        "sunny": "야외 활동하기 좋은 날이에요! 아침에 20-30분 햇볕을 쬐어보세요.",
+        "cloudy": "흐린 날에도 야외 빛은 도움이 됩니다. 산책을 고려해보세요.",
+        "rainy": "비 오는 날에는 실내 운동이나 광 치료가 도움이 될 수 있어요.",
+        "default": "오늘 창가나 야외에서 시간을 보내보세요."
+      }
+    },
+    "step4": {
+      "title": "내면 의식화",
+      "subtitle": "내면 의식화",
+      "description": "운세는 불확실한 시기에 통제감과 심리적 위안을 줍니다. 이를 저널링이나 명상과 연결해보세요.",
+      "keywordTitle": "오늘의 키워드",
+      "zodiacSelect": "나의 별자리 선택 (선택사항)",
+      "gratitudeTitle": "감사 일기",
+      "gratitudePlaceholder": "오늘 감사한 것은...",
+      "gratitudeAdd": "추가",
+      "journalTitle": "오늘의 한 줄",
+      "journalPlaceholder": "오늘 아침 떠오르는 생각을 자유롭게 적어보세요...",
+      "keywords": {
+        "challenge": "도전",
+        "growth": "성장",
+        "rest": "휴식",
+        "focus": "집중",
+        "creativity": "창의성",
+        "patience": "인내",
+        "communication": "소통",
+        "gratitude": "감사",
+        "courage": "용기",
+        "wisdom": "지혜",
+        "balance": "균형",
+        "passion": "열정"
+      },
+      "horoscopes": {
+        "1": "오늘은 새로운 도전을 시작하기 좋은 날입니다. 두려워하지 마세요.",
+        "2": "인내심을 가지고 기다리면 좋은 결과가 올 것입니다.",
+        "3": "주변 사람들과의 소통이 행운을 가져다 줄 수 있습니다.",
+        "4": "오늘 하루는 자기 자신에게 집중하는 시간을 가져보세요.",
+        "5": "예상치 못한 좋은 소식이 찾아올 수 있습니다.",
+        "6": "감사하는 마음으로 하루를 시작하면 더 많은 것이 찾아옵니다."
+      }
+    },
+    "step5": {
+      "title": "개인 과업",
+      "subtitle": "개인 과업 우선 처리",
+      "description": "시장이나 업무가 시작되기 전, 개인적인 과업을 먼저 해결하세요. 아침의 성취감은 하루 종일 긍정적인 영향을 줍니다.",
+      "defaultTasks": {
+        "stretch": "아침 스트레칭 5분",
+        "water": "물 한 잔 마시기",
+        "priority": "오늘의 중요 과업 1가지"
+      },
+      "addTask": "과업 추가",
+      "addTaskPlaceholder": "새 과업...",
+      "categories": {
+        "exercise": "운동",
+        "health": "건강",
+        "personal": "개인"
+      },
+      "allComplete": "모든 과업 완료!",
+      "progress": "{completed}/{total} 완료"
+    },
+    "step6": {
+      "title": "시장 확인",
+      "subtitle": "전략적 시장 확인",
+      "description": "루틴을 통해 감정적 안정을 확보한 뒤 마지막으로 뉴스와 시장을 확인하세요.",
+      "warningTitle": "확인 전 알림",
+      "warningText": "너무 잦은 포트폴리오 확인은 스트레스를 유발하고, 단기 변동성에 감정적으로 반응하게 하여 오히려 수익률을 떨어뜨릴 수 있습니다. 확인 빈도를 줄인 투자자들의 성과가 더 좋았다는 연구 결과가 있습니다.",
+      "principles": {
+        "title": "마음 챙김 원칙",
+        "1": "나는 관찰할 뿐, 감정적으로 반응하지 않는다",
+        "2": "단기 변동이 장기 성공을 결정하지 않는다",
+        "3": "루틴을 통해 감정적 안정을 확보했다"
+      },
+      "checkOptions": {
+        "title": "무엇을 확인하시겠습니까?",
+        "stocks": "주식 시장",
+        "crypto": "암호화폐",
+        "news": "뉴스 헤드라인",
+        "forex": "외환/환율",
+        "skip": "오늘은 건너뛰기"
+      },
+      "skipMessage": "시장 확인을 건너뛰면 불안을 줄이고 집중력을 높일 수 있습니다. 좋은 선택입니다!",
+      "completeRoutine": "루틴 완료하기"
+    }
+  },
+  "completion": {
+    "title": "골든 루틴 완료!",
+    "subtitle": "성공적인 하루를 위한 준비를 마쳤습니다",
+    "duration": "루틴 소요 시간",
+    "minutes": "분",
+    "summary": {
+      "title": "오늘의 요약",
+      "feeling": "오늘의 기분",
+      "goal": "오늘의 목표",
+      "affirmation": "오늘의 확언",
+      "gratitude": "감사 항목",
+      "tasksCompleted": "완료한 과업"
+    },
+    "quote": "아침을 어떻게 시작하느냐가 하루를 어떻게 살 것인지를 결정한다.",
+    "quoteAuthor": "로빈 샤르마",
+    "resetButton": "새 루틴 시작",
+    "shareButton": "진행 상황 공유"
+  },
+  "common": {
+    "next": "다음 단계로",
+    "skip": "건너뛰기",
+    "back": "뒤로",
+    "save": "저장",
+    "cancel": "취소",
+    "confirm": "확인",
+    "loading": "로딩 중...",
+    "error": "오류가 발생했습니다",
+    "retry": "다시 시도"
+  },
+  "zodiac": {
+    "aries": "양자리",
+    "taurus": "황소자리",
+    "gemini": "쌍둥이자리",
+    "cancer": "게자리",
+    "leo": "사자자리",
+    "virgo": "처녀자리",
+    "libra": "천칭자리",
+    "scorpio": "전갈자리",
+    "sagittarius": "궁수자리",
+    "capricorn": "염소자리",
+    "aquarius": "물병자리",
+    "pisces": "물고기자리"
+  }
+}

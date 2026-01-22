@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Sun, Cloud, CloudRain, Snowflake, MapPin, Clock } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface Step3Props {
   onComplete: () => void;
@@ -15,26 +16,20 @@ interface WeatherInfo {
   city: string;
 }
 
-const SUNLIGHT_PLANS = [
-  { time: "아침", plan: "출근 전 10분 베란다에서 햇볕 쬐기" },
-  { time: "점심", plan: "점심시간 20분 산책하기" },
-  { time: "오후", plan: "커피 마시며 창가에서 5분 휴식" },
-  { time: "저녁", plan: "퇴근 후 공원 한 바퀴 걷기" },
-];
-
 export function Step3Weather({ onComplete }: Step3Props) {
+  const t = useTranslations("steps.step3");
+  const tc = useTranslations("common");
   const [weather, setWeather] = useState<WeatherInfo | null>(null);
   const [loading, setLoading] = useState(true);
-  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   const [customPlan, setCustomPlan] = useState("");
 
   useEffect(() => {
     // Simulated weather data (in production, use OpenWeatherMap API)
     setTimeout(() => {
       const weathers: WeatherInfo[] = [
-        { temp: 18, description: "맑음", icon: "sun", city: "서울" },
-        { temp: 15, description: "구름 조금", icon: "cloud", city: "서울" },
-        { temp: 12, description: "흐림", icon: "cloud-rain", city: "서울" },
+        { temp: 18, description: "Clear", icon: "sun", city: "Your Location" },
+        { temp: 15, description: "Partly Cloudy", icon: "cloud", city: "Your Location" },
+        { temp: 12, description: "Cloudy", icon: "cloud-rain", city: "Your Location" },
       ];
       setWeather(weathers[Math.floor(Math.random() * weathers.length)]);
       setLoading(false);
@@ -59,23 +54,25 @@ export function Step3Weather({ onComplete }: Step3Props) {
   const getWeatherAdvice = () => {
     if (!weather) return "";
     if (weather.icon === "sun") {
-      return "오늘은 햇볕이 좋아요! 세로토닌 충전의 최적의 날입니다.";
+      return t("suggestions.sunny");
     } else if (weather.icon === "cloud") {
-      return "구름이 있지만 자연광은 충분해요. 산책을 계획해보세요.";
-    } else {
-      return "흐린 날이에요. 실내에서 창가 가까이, 또는 비타민 D 보충을 고려하세요.";
+      return t("suggestions.cloudy");
+    } else if (weather.icon === "cloud-rain") {
+      return t("suggestions.rainy");
     }
+    return t("suggestions.default");
   };
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-[70vh]">
+      <div className="flex flex-col items-center justify-center min-h-[70vh]">
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
         >
           <Sun className="w-12 h-12 text-golden-500" />
         </motion.div>
+        <p className="mt-4 text-gray-500">{t("loadingWeather")}</p>
       </div>
     );
   }
@@ -94,8 +91,8 @@ export function Step3Weather({ onComplete }: Step3Props) {
         >
           ☀️
         </motion.div>
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">빛과 감정의 동기화</h2>
-        <p className="text-gray-600">Syncing Light & Mood</p>
+        <h2 className="text-2xl font-bold text-gray-800 mb-2">{t("title")}</h2>
+        <p className="text-gray-600">{t("subtitle")}</p>
       </div>
 
       {weather && (
@@ -107,7 +104,7 @@ export function Step3Weather({ onComplete }: Step3Props) {
             </div>
             <div className="flex items-center gap-2 text-gray-600">
               <Clock className="w-4 h-4" />
-              <span>{new Date().toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit" })}</span>
+              <span>{new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</span>
             </div>
           </div>
 
@@ -133,37 +130,15 @@ export function Step3Weather({ onComplete }: Step3Props) {
       <div className="glass rounded-2xl p-6 max-w-md w-full mx-auto mb-6">
         <h3 className="font-semibold text-gray-800 mb-4 flex items-center gap-2">
           <Sun className="w-5 h-5 text-golden-500" />
-          자연광 노출 계획 세우기
+          {t("sunlightPlan")}
         </h3>
-
-        <div className="space-y-2 mb-4">
-          {SUNLIGHT_PLANS.map((plan) => (
-            <motion.button
-              key={plan.time}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => setSelectedPlan(plan.plan)}
-              className={`w-full p-3 rounded-xl text-left transition-all ${
-                selectedPlan === plan.plan
-                  ? "bg-golden-400 text-white"
-                  : "bg-white/50 text-gray-700 hover:bg-white"
-              }`}
-            >
-              <span className="text-xs font-medium opacity-70">{plan.time}</span>
-              <div className="text-sm">{plan.plan}</div>
-            </motion.button>
-          ))}
-        </div>
 
         <div className="relative">
           <input
             type="text"
             value={customPlan}
-            onChange={(e) => {
-              setCustomPlan(e.target.value);
-              setSelectedPlan(e.target.value);
-            }}
-            placeholder="나만의 계획 입력하기..."
+            onChange={(e) => setCustomPlan(e.target.value)}
+            placeholder={t("sunlightPlaceholder")}
             className="w-full p-3 rounded-xl bg-white/50 border-none focus:ring-2 focus:ring-golden-400 text-sm"
           />
         </div>
@@ -178,13 +153,13 @@ export function Step3Weather({ onComplete }: Step3Props) {
           onClick={onComplete}
           className="w-full py-4 rounded-full font-semibold shadow-lg bg-gradient-to-r from-sky-400 to-blue-500 text-white"
         >
-          다음 단계로 →
+          {tc("next")} →
         </motion.button>
         <button
           onClick={onComplete}
           className="w-full mt-3 text-gray-400 text-sm underline"
         >
-          건너뛰기
+          {tc("skip")}
         </button>
       </div>
     </motion.div>

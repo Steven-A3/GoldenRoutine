@@ -2,13 +2,16 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Moon, Shield, Brain, Timer } from "lucide-react";
+import { Shield, Brain, Timer } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface Step1Props {
   onComplete: () => void;
 }
 
 export function Step1DigitalDetox({ onComplete }: Step1Props) {
+  const t = useTranslations("steps.step1");
+  const tc = useTranslations("common");
   const [timerActive, setTimerActive] = useState(false);
   const [seconds, setSeconds] = useState(60);
   const [breathPhase, setBreathPhase] = useState<"inhale" | "hold" | "exhale">("inhale");
@@ -50,9 +53,9 @@ export function Step1DigitalDetox({ onComplete }: Step1Props) {
   };
 
   const breathText = {
-    inhale: "들이쉬세요...",
-    hold: "멈추세요...",
-    exhale: "내쉬세요...",
+    inhale: "Inhale...",
+    hold: "Hold...",
+    exhale: "Exhale...",
   };
 
   return (
@@ -69,23 +72,18 @@ export function Step1DigitalDetox({ onComplete }: Step1Props) {
         >
           🔇
         </motion.div>
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">세타파 보호</h2>
-        <p className="text-gray-600">Theta State Protection</p>
+        <h2 className="text-2xl font-bold text-gray-800 mb-2">{t("title")}</h2>
+        <p className="text-gray-600">{t("subtitle")}</p>
       </div>
 
       <div className="glass rounded-2xl p-6 max-w-md w-full mb-6">
         <div className="flex items-start gap-3 mb-4">
           <Brain className="w-5 h-5 text-purple-500 mt-1 flex-shrink-0" />
-          <p className="text-sm text-gray-700">
-            기상 직후 뇌는 창의적이고 잠재의식에 접근하기 쉬운 <strong>세타파</strong> 상태입니다.
-            스마트폰을 보면 즉시 스트레스 상태인 베타파로 전환됩니다.
-          </p>
+          <p className="text-sm text-gray-700">{t("description")}</p>
         </div>
         <div className="flex items-start gap-3">
           <Shield className="w-5 h-5 text-golden-500 mt-1 flex-shrink-0" />
-          <p className="text-sm text-gray-700">
-            1분간 디지털 디톡스로 하루의 주도권을 지키세요.
-          </p>
+          <p className="text-sm text-gray-700">{t("fact")}</p>
         </div>
       </div>
 
@@ -97,7 +95,7 @@ export function Step1DigitalDetox({ onComplete }: Step1Props) {
           className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-8 py-4 rounded-full font-semibold shadow-lg flex items-center gap-2"
         >
           <Timer className="w-5 h-5" />
-          1분 명상 시작
+          {t("timer")}
         </motion.button>
       ) : seconds > 0 ? (
         <div className="text-center">
@@ -113,9 +111,7 @@ export function Step1DigitalDetox({ onComplete }: Step1Props) {
               <div className="text-sm mt-1">{breathText[breathPhase]}</div>
             </div>
           </motion.div>
-          <p className="text-gray-600 text-sm">
-            눈을 감고 깊은 호흡을 하세요
-          </p>
+          <p className="text-gray-600 text-sm">{t("timerRunning")}</p>
         </div>
       ) : (
         <motion.div
@@ -124,26 +120,21 @@ export function Step1DigitalDetox({ onComplete }: Step1Props) {
           className="text-center"
         >
           <div className="text-6xl mb-4">✨</div>
-          <p className="text-xl font-semibold text-gray-800 mb-6">
-            세타파 보호 완료!
-          </p>
+          <p className="text-xl font-semibold text-gray-800 mb-6">{t("timerComplete")}</p>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={onComplete}
             className="bg-gradient-to-r from-golden-400 to-golden-500 text-white px-8 py-4 rounded-full font-semibold shadow-lg"
           >
-            다음 단계로 →
+            {tc("next")} →
           </motion.button>
         </motion.div>
       )}
 
       <div className="mt-8 text-center">
-        <button
-          onClick={onComplete}
-          className="text-gray-400 text-sm underline"
-        >
-          건너뛰기
+        <button onClick={onComplete} className="text-gray-400 text-sm underline">
+          {tc("skip")}
         </button>
       </div>
     </motion.div>
