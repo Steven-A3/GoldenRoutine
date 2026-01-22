@@ -154,7 +154,13 @@
         "skip": "Omitir por hoy"
       },
       "skipMessage": "Omitir la revisión del mercado puede reducir la ansiedad y mejorar el enfoque. ¡Gran elección!",
-      "completeRoutine": "Completar Rutina"
+      "completeRoutine": "Complete Routine",
+      "widgets": {
+        "majorIndices": "Major Indices",
+        "topCrypto": "Top Cryptocurrencies",
+        "exchangeRates": "Exchange Rates",
+        "latestNews": "Latest Headlines"
+      }
     }
   },
   "completion": {

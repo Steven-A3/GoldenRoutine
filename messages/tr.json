@@ -154,7 +154,13 @@
         "skip": "Skip for today"
       },
       "skipMessage": "Skipping market check can reduce anxiety and improve focus. Great choice!",
-      "completeRoutine": "Complete Routine"
+      "completeRoutine": "Complete Routine",
+      "widgets": {
+        "majorIndices": "Major Indices",
+        "topCrypto": "Top Cryptocurrencies",
+        "exchangeRates": "Exchange Rates",
+        "latestNews": "Latest Headlines"
+      }
     }
   },
   "completion": {
