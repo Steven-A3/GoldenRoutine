@@ -1,66 +1,86 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Sun, Cloud, CloudRain, Snowflake, MapPin, Clock } from "lucide-react";
+import {
+  Sun,
+  Moon,
+  Cloud,
+  CloudRain,
+  CloudSun,
+  CloudMoon,
+  CloudLightning,
+  CloudFog,
+  Snowflake,
+  MapPin,
+  Clock,
+  Droplets,
+  Thermometer,
+  RefreshCw,
+  Sunrise,
+  Sunset,
+} from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useWeather } from "@/hooks/useWeather";
 
 interface Step3Props {
   onComplete: () => void;
 }
 
-interface WeatherInfo {
-  temp: number;
-  description: string;
-  icon: string;
-  city: string;
-}
-
 export function Step3Weather({ onComplete }: Step3Props) {
   const t = useTranslations("steps.step3");
   const tc = useTranslations("common");
-  const [weather, setWeather] = useState<WeatherInfo | null>(null);
-  const [loading, setLoading] = useState(true);
+  const { weather, loading, error, refetch } = useWeather();
   const [customPlan, setCustomPlan] = useState("");
 
-  useEffect(() => {
-    // Simulated weather data (in production, use OpenWeatherMap API)
-    setTimeout(() => {
-      const weathers: WeatherInfo[] = [
-        { temp: 18, description: "Clear", icon: "sun", city: "Your Location" },
-        { temp: 15, description: "Partly Cloudy", icon: "cloud", city: "Your Location" },
-        { temp: 12, description: "Cloudy", icon: "cloud-rain", city: "Your Location" },
-      ];
-      setWeather(weathers[Math.floor(Math.random() * weathers.length)]);
-      setLoading(false);
-    }, 1000);
-  }, []);
-
   const getWeatherIcon = (icon: string) => {
+    const iconClass = "w-16 h-16";
     switch (icon) {
       case "sun":
-        return <Sun className="w-16 h-16 text-yellow-500" />;
+        return <Sun className={`${iconClass} text-yellow-500`} />;
+      case "moon":
+        return <Moon className={`${iconClass} text-indigo-400`} />;
+      case "cloud-sun":
+        return <CloudSun className={`${iconClass} text-yellow-400`} />;
+      case "cloud-moon":
+        return <CloudMoon className={`${iconClass} text-indigo-300`} />;
       case "cloud":
-        return <Cloud className="w-16 h-16 text-gray-400" />;
+      case "clouds":
+        return <Cloud className={`${iconClass} text-gray-400`} />;
       case "cloud-rain":
-        return <CloudRain className="w-16 h-16 text-blue-400" />;
-      case "snow":
-        return <Snowflake className="w-16 h-16 text-blue-300" />;
+      case "cloud-sun-rain":
+      case "cloud-moon-rain":
+        return <CloudRain className={`${iconClass} text-blue-400`} />;
+      case "cloud-lightning":
+        return <CloudLightning className={`${iconClass} text-yellow-600`} />;
+      case "snowflake":
+        return <Snowflake className={`${iconClass} text-blue-300`} />;
+      case "cloud-fog":
+        return <CloudFog className={`${iconClass} text-gray-400`} />;
       default:
-        return <Sun className="w-16 h-16 text-yellow-500" />;
+        return <Sun className={`${iconClass} text-yellow-500`} />;
     }
   };
 
   const getWeatherAdvice = () => {
-    if (!weather) return "";
-    if (weather.icon === "sun") {
+    if (!weather) return t("suggestions.default");
+
+    const icon = weather.icon;
+    if (icon === "sun" || icon === "cloud-sun") {
       return t("suggestions.sunny");
-    } else if (weather.icon === "cloud") {
+    } else if (icon.includes("cloud") && !icon.includes("rain")) {
       return t("suggestions.cloudy");
-    } else if (weather.icon === "cloud-rain") {
+    } else if (icon.includes("rain") || icon === "cloud-lightning") {
       return t("suggestions.rainy");
     }
     return t("suggestions.default");
+  };
+
+  const formatTime = (timestamp: number) => {
+    return new Date(timestamp * 1000).toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
   };
 
   if (loading) {
@@ -73,6 +93,9 @@ export function Step3Weather({ onComplete }: Step3Props) {
           <Sun className="w-12 h-12 text-golden-500" />
         </motion.div>
         <p className="mt-4 text-gray-500">{t("loadingWeather")}</p>
+        {error && (
+          <p className="mt-2 text-sm text-gray-400">{t("locationError")}</p>
+        )}
       </div>
     );
   }
@@ -83,7 +106,7 @@ export function Step3Weather({ onComplete }: Step3Props) {
       animate={{ opacity: 1, y: 0 }}
       className="flex flex-col min-h-[70vh] p-6"
     >
-      <div className="text-center mb-8">
+      <div className="text-center mb-6">
         <motion.div
           className="text-6xl mb-4"
           animate={{ rotate: [0, 15, -15, 0] }}
@@ -96,18 +119,37 @@ export function Step3Weather({ onComplete }: Step3Props) {
       </div>
 
       {weather && (
-        <div className="glass rounded-2xl p-6 max-w-md w-full mx-auto mb-6">
+        <div className="glass rounded-2xl p-6 max-w-md w-full mx-auto mb-4">
+          {/* Location and Time */}
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2 text-gray-600">
               <MapPin className="w-4 h-4" />
-              <span>{weather.city}</span>
+              <span className="font-medium">
+                {weather.city}
+                {weather.country && `, ${weather.country}`}
+              </span>
             </div>
-            <div className="flex items-center gap-2 text-gray-600">
-              <Clock className="w-4 h-4" />
-              <span>{new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</span>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={refetch}
+                className="p-1 rounded-full hover:bg-gray-100 transition-colors"
+                title="Refresh"
+              >
+                <RefreshCw className="w-4 h-4 text-gray-400" />
+              </button>
+              <div className="flex items-center gap-1 text-gray-500">
+                <Clock className="w-4 h-4" />
+                <span className="text-sm">
+                  {new Date().toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </span>
+              </div>
             </div>
           </div>
 
+          {/* Main Weather Display */}
           <div className="flex items-center justify-center gap-6 mb-4">
             <motion.div
               animate={{ y: [0, -5, 0] }}
@@ -116,31 +158,98 @@ export function Step3Weather({ onComplete }: Step3Props) {
               {getWeatherIcon(weather.icon)}
             </motion.div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-gray-800">{weather.temp}°C</div>
-              <div className="text-gray-600">{weather.description}</div>
+              <div className="text-5xl font-bold text-gray-800">
+                {weather.temp}°C
+              </div>
+              <div className="text-gray-600 capitalize">{weather.description}</div>
             </div>
           </div>
 
+          {/* Weather Details */}
+          <div className="grid grid-cols-2 gap-3 mb-4">
+            <div className="flex items-center gap-2 p-2 bg-white/50 rounded-lg">
+              <Thermometer className="w-4 h-4 text-orange-500" />
+              <div>
+                <div className="text-xs text-gray-500">{t("feelsLike", { temp: "" })}</div>
+                <div className="font-medium text-gray-700">{weather.feelsLike}°C</div>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 p-2 bg-white/50 rounded-lg">
+              <Droplets className="w-4 h-4 text-blue-500" />
+              <div>
+                <div className="text-xs text-gray-500">{t("humidity")}</div>
+                <div className="font-medium text-gray-700">{weather.humidity}%</div>
+              </div>
+            </div>
+            {weather.sunrise && (
+              <div className="flex items-center gap-2 p-2 bg-white/50 rounded-lg">
+                <Sunrise className="w-4 h-4 text-orange-400" />
+                <div>
+                  <div className="text-xs text-gray-500">Sunrise</div>
+                  <div className="font-medium text-gray-700">
+                    {formatTime(weather.sunrise)}
+                  </div>
+                </div>
+              </div>
+            )}
+            {weather.sunset && (
+              <div className="flex items-center gap-2 p-2 bg-white/50 rounded-lg">
+                <Sunset className="w-4 h-4 text-purple-400" />
+                <div>
+                  <div className="text-xs text-gray-500">Sunset</div>
+                  <div className="font-medium text-gray-700">
+                    {formatTime(weather.sunset)}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {weather.uvIndex !== undefined && (
+            <div className="flex items-center justify-center gap-2 p-2 bg-amber-50 rounded-lg mb-4">
+              <Sun className="w-4 h-4 text-amber-500" />
+              <span className="text-sm text-amber-700">
+                {t("uvIndex")}: <strong>{weather.uvIndex}</strong>
+                {weather.uvIndex >= 6 && " (High - Use sunscreen!)"}
+              </span>
+            </div>
+          )}
+
+          {/* Weather Advice */}
           <div className="bg-golden-50 rounded-xl p-4 text-sm text-golden-800">
             💡 {getWeatherAdvice()}
           </div>
         </div>
       )}
 
+      {/* Sunlight Plan */}
       <div className="glass rounded-2xl p-6 max-w-md w-full mx-auto mb-6">
         <h3 className="font-semibold text-gray-800 mb-4 flex items-center gap-2">
           <Sun className="w-5 h-5 text-golden-500" />
           {t("sunlightPlan")}
         </h3>
 
-        <div className="relative">
-          <input
-            type="text"
-            value={customPlan}
-            onChange={(e) => setCustomPlan(e.target.value)}
-            placeholder={t("sunlightPlaceholder")}
-            className="w-full p-3 rounded-xl bg-white/50 border-none focus:ring-2 focus:ring-golden-400 text-sm"
-          />
+        <textarea
+          value={customPlan}
+          onChange={(e) => setCustomPlan(e.target.value)}
+          placeholder={t("sunlightPlaceholder")}
+          className="w-full p-3 rounded-xl bg-white/50 border-none focus:ring-2 focus:ring-golden-400 text-sm resize-none"
+          rows={2}
+        />
+
+        {/* Quick suggestions */}
+        <div className="flex flex-wrap gap-2 mt-3">
+          {["10min walk", "Lunch outside", "Morning yoga", "Evening stroll"].map(
+            (suggestion) => (
+              <button
+                key={suggestion}
+                onClick={() => setCustomPlan(suggestion)}
+                className="text-xs px-3 py-1 rounded-full bg-sky-100 text-sky-700 hover:bg-sky-200 transition-colors"
+              >
+                {suggestion}
+              </button>
+            )
+          )}
         </div>
       </div>
 
