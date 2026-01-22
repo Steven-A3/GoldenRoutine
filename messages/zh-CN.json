@@ -42,6 +42,14 @@
       "feelingPlaceholder": "例如：平静而专注",
       "goalLabel": "今天的核心目标是什么？",
       "goalPlaceholder": "例如：完成项目提案",
+      "suggestedGoals": "推荐目标",
+      "goals": {
+        "1": "完成一项重要任务",
+        "2": "深度工作2小时",
+        "3": "进行一次有意义的对话",
+        "4": "学习新东西",
+        "5": "关注自己的健康"
+      },
       "affirmationLabel": "今日肯定语",
       "affirmationPlaceholder": "例如：我吸引着积极的能量和机会",
       "suggestedAffirmations": "推荐肯定语",

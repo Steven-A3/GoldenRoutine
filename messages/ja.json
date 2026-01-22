@@ -42,6 +42,14 @@
       "feelingPlaceholder": "例：穏やかで集中している",
       "goalLabel": "今日の核心目標は何ですか？",
       "goalPlaceholder": "例：プロジェクト提案書を完成させる",
+      "suggestedGoals": "おすすめの目標",
+      "goals": {
+        "1": "重要なタスクを1つ完了する",
+        "2": "2時間の集中作業をする",
+        "3": "意味のある会話をする",
+        "4": "新しいことを学ぶ",
+        "5": "健康に気を配る"
+      },
       "affirmationLabel": "今日のアファメーション",
       "affirmationPlaceholder": "例：私はポジティブなエネルギーと機会を引き寄せる",
       "suggestedAffirmations": "おすすめのアファメーション",
