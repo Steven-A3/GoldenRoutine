@@ -158,18 +158,40 @@ function LiveIndicator({ lastUpdated }: { lastUpdated: Date | null }) {
   );
 }
 
+function ErrorDisplay({ message, onRetry }: { message: string; onRetry?: () => void }) {
+  return (
+    <div className="flex flex-col items-center justify-center py-8 text-center">
+      <AlertTriangle className="w-8 h-8 text-amber-500 mb-2" />
+      <p className="text-sm text-gray-600 mb-3">{message}</p>
+      {onRetry && (
+        <button
+          onClick={onRetry}
+          className="flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-700 rounded-lg text-sm hover:bg-blue-200 transition-colors"
+        >
+          <RefreshCw className="w-4 h-4" />
+          Retry
+        </button>
+      )}
+    </div>
+  );
+}
+
 function StocksWidget({
   stocks,
   loading,
   lastUpdated,
   selectedStock,
-  onSelectStock
+  onSelectStock,
+  error,
+  onRetry
 }: {
   stocks: StockData[];
   loading: boolean;
   lastUpdated: Date | null;
   selectedStock: StockData | null;
   onSelectStock: (stock: StockData | null) => void;
+  error: string | null;
+  onRetry: () => void;
 }) {
   const t = useTranslations("steps.step6");
 
@@ -179,6 +201,10 @@ function StocksWidget({
         <RefreshCw className="w-6 h-6 text-blue-500 animate-spin" />
       </div>
     );
+  }
+
+  if (error && stocks.length === 0) {
+    return <ErrorDisplay message={error} onRetry={onRetry} />;
   }
 
   return (
@@ -257,13 +283,17 @@ function CryptoWidget({
   loading,
   lastUpdated,
   selectedCrypto,
-  onSelectCrypto
+  onSelectCrypto,
+  error,
+  onRetry
 }: {
   crypto: CryptoData[];
   loading: boolean;
   lastUpdated: Date | null;
   selectedCrypto: CryptoData | null;
   onSelectCrypto: (crypto: CryptoData | null) => void;
+  error: string | null;
+  onRetry: () => void;
 }) {
   const t = useTranslations("steps.step6");
 
@@ -273,6 +303,10 @@ function CryptoWidget({
         <RefreshCw className="w-6 h-6 text-orange-500 animate-spin" />
       </div>
     );
+  }
+
+  if (error && crypto.length === 0) {
+    return <ErrorDisplay message={error} onRetry={onRetry} />;
   }
 
   return (
@@ -375,13 +409,17 @@ function ForexWidget({
   loading,
   lastUpdated,
   selectedPair,
-  onSelectPair
+  onSelectPair,
+  error,
+  onRetry
 }: {
   forex: ForexData[];
   loading: boolean;
   lastUpdated: Date | null;
   selectedPair: ForexData | null;
   onSelectPair: (pair: ForexData | null) => void;
+  error: string | null;
+  onRetry: () => void;
 }) {
   const t = useTranslations("steps.step6");
 
@@ -391,6 +429,10 @@ function ForexWidget({
         <RefreshCw className="w-6 h-6 text-green-500 animate-spin" />
       </div>
     );
+  }
+
+  if (error && forex.length === 0) {
+    return <ErrorDisplay message={error} onRetry={onRetry} />;
   }
 
   return (
@@ -455,7 +497,7 @@ function ForexWidget({
   );
 }
 
-function NewsWidget({ news, loading }: { news: NewsItem[]; loading: boolean }) {
+function NewsWidget({ news, loading, error, onRetry }: { news: NewsItem[]; loading: boolean; error: string | null; onRetry: () => void }) {
   const t = useTranslations("steps.step6");
 
   if (loading && news.length === 0) {
@@ -464,6 +506,10 @@ function NewsWidget({ news, loading }: { news: NewsItem[]; loading: boolean }) {
         <RefreshCw className="w-6 h-6 text-purple-500 animate-spin" />
       </div>
     );
+  }
+
+  if (error && news.length === 0) {
+    return <ErrorDisplay message={error} onRetry={onRetry} />;
   }
 
   const getSentimentColor = (sentiment?: string) => {
@@ -526,6 +572,7 @@ export function Step6Market({ onComplete }: Step6Props) {
     stocks, crypto, forex, news,
     lastUpdated,
     loading,
+    error,
     fetchStocks, fetchCrypto, fetchForex, fetchNews,
     startAutoRefresh, stopAutoRefresh
   } = useMarket(15000); // Refresh every 15 seconds
@@ -594,6 +641,8 @@ export function Step6Market({ onComplete }: Step6Props) {
             lastUpdated={lastUpdated}
             selectedStock={selectedStock}
             onSelectStock={setSelectedStock}
+            error={error.stocks}
+            onRetry={fetchStocks}
           />
         );
       case "crypto":
@@ -604,6 +653,8 @@ export function Step6Market({ onComplete }: Step6Props) {
             lastUpdated={lastUpdated}
             selectedCrypto={selectedCrypto}
             onSelectCrypto={setSelectedCrypto}
+            error={error.crypto}
+            onRetry={fetchCrypto}
           />
         );
       case "forex":
@@ -614,10 +665,19 @@ export function Step6Market({ onComplete }: Step6Props) {
             lastUpdated={lastUpdated}
             selectedPair={selectedForex}
             onSelectPair={setSelectedForex}
+            error={error.forex}
+            onRetry={fetchForex}
           />
         );
       case "news":
-        return <NewsWidget news={news} loading={loading.news} />;
+        return (
+          <NewsWidget
+            news={news}
+            loading={loading.news}
+            error={error.news}
+            onRetry={fetchNews}
+          />
+        );
       default:
         return null;
     }

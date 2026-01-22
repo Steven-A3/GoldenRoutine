@@ -71,49 +71,26 @@ interface MarketState {
   };
 }
 
-// Generate realistic chart data centered around current price
-function generateChartData(currentPrice: number, points: number = 24, volatility: number = 0.015): ChartDataPoint[] {
+// Convert Yahoo Finance timestamps and prices to chart data
+function yahooToChartData(timestamps: number[], prices: (number | null)[], decimals: number = 2): ChartDataPoint[] {
   const data: ChartDataPoint[] = [];
-  const now = new Date();
 
-  // Work backwards from current price to create realistic historical data
-  // Generate a random trend direction (slightly biased by current change if known)
-  const trendBias = (Math.random() - 0.5) * 0.3; // Small random trend
-
-  // Calculate prices going backward from current
-  const prices: number[] = [currentPrice];
-  for (let i = 1; i <= points; i++) {
-    // Random walk with mean reversion tendency
-    const randomChange = (Math.random() - 0.5) * 2 * volatility * currentPrice;
-    const trendChange = trendBias * volatility * currentPrice * (i / points);
-    const prevPrice = prices[0];
-    // Going backward: subtract the change (so forward movement would add it)
-    const newPrice = prevPrice - randomChange - trendChange;
-    // Keep within reasonable bounds (±5% of current price)
-    const boundedPrice = Math.max(
-      currentPrice * 0.95,
-      Math.min(currentPrice * 1.05, newPrice)
-    );
-    prices.unshift(boundedPrice);
-  }
-
-  // Create chart data points with timestamps
-  for (let i = 0; i <= points; i++) {
-    const time = new Date(now.getTime() - (points - i) * 60 * 60 * 1000);
-    const decimals = currentPrice >= 100 ? 2 : currentPrice >= 1 ? 2 : 4;
-    data.push({
-      time: time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      value: Number(prices[i].toFixed(decimals))
-    });
+  for (let i = 0; i < timestamps.length; i++) {
+    if (prices[i] !== null && prices[i] !== undefined) {
+      data.push({
+        time: new Date(timestamps[i] * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        value: Number(prices[i]!.toFixed(decimals))
+      });
+    }
   }
 
   return data;
 }
 
-// Convert sparkline array to chart data with proper precision
-function sparklineToChartData(sparkline: number[], currentPrice?: number): ChartDataPoint[] {
+// Convert CoinGecko sparkline to chart data
+function sparklineToChartData(sparkline: number[], currentPrice: number): ChartDataPoint[] {
   const now = new Date();
-  const decimals = (currentPrice ?? sparkline[0]) >= 100 ? 2 : (currentPrice ?? sparkline[0]) >= 1 ? 2 : 6;
+  const decimals = currentPrice >= 100 ? 2 : currentPrice >= 1 ? 2 : 6;
 
   const data = sparkline.map((value, index) => ({
     time: new Date(now.getTime() - (sparkline.length - index) * 60 * 60 * 1000)
@@ -121,8 +98,8 @@ function sparklineToChartData(sparkline: number[], currentPrice?: number): Chart
     value: Number(value.toFixed(decimals))
   }));
 
-  // Ensure the last point matches current price if provided
-  if (currentPrice !== undefined && data.length > 0) {
+  // Ensure the last point matches current price
+  if (data.length > 0) {
     data[data.length - 1].value = Number(currentPrice.toFixed(decimals));
   }
 
@@ -153,6 +130,7 @@ export function useMarket(refreshInterval: number = 30000) {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const activeCategory = useRef<string | null>(null);
 
+  // Fetch real stock data from Yahoo Finance
   const fetchStocks = useCallback(async () => {
     setState((prev) => ({
       ...prev,
@@ -161,58 +139,50 @@ export function useMarket(refreshInterval: number = 30000) {
     }));
 
     try {
-      // Using Yahoo Finance unofficial API for real stock data
       const symbols = ['SPY', 'QQQ', 'DIA', 'IWM'];
       const stocksData: StockData[] = [];
 
-      for (const symbol of symbols) {
-        try {
-          const response = await fetch(
+      // Fetch all symbols in parallel
+      const responses = await Promise.allSettled(
+        symbols.map(symbol =>
+          fetch(
             `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?interval=5m&range=1d`,
             { cache: 'no-store' }
-          );
+          ).then(res => res.ok ? res.json() : null)
+        )
+      );
 
-          if (response.ok) {
-            const data = await response.json();
-            const result = data.chart?.result?.[0];
+      for (let i = 0; i < responses.length; i++) {
+        const response = responses[i];
+        if (response.status === 'fulfilled' && response.value) {
+          const data = response.value;
+          const result = data.chart?.result?.[0];
 
-            if (result) {
-              const quote = result.meta;
-              const prices = result.indicators?.quote?.[0]?.close || [];
-              const timestamps = result.timestamp || [];
+          if (result) {
+            const meta = result.meta;
+            const prices = result.indicators?.quote?.[0]?.close || [];
+            const timestamps = result.timestamp || [];
 
-              const chartData: ChartDataPoint[] = timestamps
-                .map((ts: number, i: number) => ({
-                  time: new Date(ts * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-                  value: prices[i] ? Number(prices[i].toFixed(2)) : null
-                }))
-                .filter((d: ChartDataPoint) => d.value !== null);
+            const chartData = yahooToChartData(timestamps, prices, 2);
 
+            if (chartData.length > 0) {
               stocksData.push({
-                symbol: quote.symbol,
-                name: getStockName(quote.symbol),
-                price: quote.regularMarketPrice,
-                change: quote.regularMarketPrice - quote.previousClose,
-                changePercent: ((quote.regularMarketPrice - quote.previousClose) / quote.previousClose) * 100,
-                high: quote.regularMarketDayHigh || quote.regularMarketPrice,
-                low: quote.regularMarketDayLow || quote.regularMarketPrice,
-                chartData: chartData.length > 0 ? chartData : generateChartData(quote.regularMarketPrice)
+                symbol: meta.symbol,
+                name: getStockName(meta.symbol),
+                price: meta.regularMarketPrice,
+                change: meta.regularMarketPrice - meta.previousClose,
+                changePercent: ((meta.regularMarketPrice - meta.previousClose) / meta.previousClose) * 100,
+                high: meta.regularMarketDayHigh || meta.regularMarketPrice,
+                low: meta.regularMarketDayLow || meta.regularMarketPrice,
+                chartData
               });
             }
           }
-        } catch (e) {
-          console.error(`Error fetching ${symbol}:`, e);
         }
       }
 
-      // If API fails, use fallback with realistic current prices
       if (stocksData.length === 0) {
-        stocksData.push(
-          { symbol: "SPY", name: "S&P 500 ETF", price: 605.23, change: 4.21, changePercent: 0.70, high: 607.50, low: 601.20, chartData: generateChartData(605.23) },
-          { symbol: "QQQ", name: "NASDAQ 100 ETF", price: 531.45, change: -2.15, changePercent: -0.40, high: 535.80, low: 528.30, chartData: generateChartData(531.45) },
-          { symbol: "DIA", name: "Dow Jones ETF", price: 443.67, change: 3.89, changePercent: 0.88, high: 445.20, low: 440.50, chartData: generateChartData(443.67) },
-          { symbol: "IWM", name: "Russell 2000 ETF", price: 225.34, change: -1.23, changePercent: -0.54, high: 228.10, low: 223.80, chartData: generateChartData(225.34) }
-        );
+        throw new Error("No stock data available");
       }
 
       setState((prev) => ({
@@ -226,11 +196,12 @@ export function useMarket(refreshInterval: number = 30000) {
       setState((prev) => ({
         ...prev,
         loading: { ...prev.loading, stocks: false },
-        error: { ...prev.error, stocks: "Failed to fetch stock data" },
+        error: { ...prev.error, stocks: "Failed to fetch real-time stock data" },
       }));
     }
   }, []);
 
+  // Fetch real crypto data from CoinGecko
   const fetchCrypto = useCallback(async () => {
     setState((prev) => ({
       ...prev,
@@ -244,9 +215,15 @@ export function useMarket(refreshInterval: number = 30000) {
         { cache: 'no-store' }
       );
 
-      if (!response.ok) throw new Error("Failed to fetch");
+      if (!response.ok) {
+        throw new Error(`CoinGecko API error: ${response.status}`);
+      }
 
       const data = await response.json();
+
+      if (!data || data.length === 0) {
+        throw new Error("No crypto data available");
+      }
 
       const crypto: CryptoData[] = data.map((coin: {
         id: string;
@@ -261,7 +238,9 @@ export function useMarket(refreshInterval: number = 30000) {
         image: string;
         sparkline_in_7d?: { price: number[] };
       }) => {
+        // Get last 24 hours of sparkline data (CoinGecko provides 7 days, ~168 points)
         const sparkline = coin.sparkline_in_7d?.price?.slice(-24) || [];
+
         return {
           id: coin.id,
           symbol: coin.symbol.toUpperCase(),
@@ -276,7 +255,7 @@ export function useMarket(refreshInterval: number = 30000) {
           sparkline,
           chartData: sparkline.length > 0
             ? sparklineToChartData(sparkline, coin.current_price)
-            : generateChartData(coin.current_price, 24, 0.025)
+            : []
         };
       });
 
@@ -288,24 +267,15 @@ export function useMarket(refreshInterval: number = 30000) {
       }));
     } catch (error) {
       console.error('Crypto fetch error:', error);
-      // Fallback data
-      const fallbackCrypto: CryptoData[] = [
-        { id: "bitcoin", symbol: "BTC", name: "Bitcoin", price: 104500, change24h: 2.34, high24h: 105200, low24h: 102800, volume: 28500000000, marketCap: 2050000000000, image: "", sparkline: [], chartData: generateChartData(104500, 24, 0.02) },
-        { id: "ethereum", symbol: "ETH", name: "Ethereum", price: 3350, change24h: -1.23, high24h: 3420, low24h: 3280, volume: 15200000000, marketCap: 403000000000, image: "", sparkline: [], chartData: generateChartData(3350, 24, 0.025) },
-        { id: "solana", symbol: "SOL", name: "Solana", price: 252, change24h: 5.67, high24h: 258, low24h: 238, volume: 3800000000, marketCap: 122000000000, image: "", sparkline: [], chartData: generateChartData(252, 24, 0.04) },
-        { id: "ripple", symbol: "XRP", name: "XRP", price: 3.12, change24h: -0.45, high24h: 3.25, low24h: 3.05, volume: 8500000000, marketCap: 180000000000, image: "", sparkline: [], chartData: generateChartData(3.12, 24, 0.03) },
-      ];
-
       setState((prev) => ({
         ...prev,
-        crypto: fallbackCrypto,
-        lastUpdated: new Date(),
         loading: { ...prev.loading, crypto: false },
-        error: { ...prev.error, crypto: null },
+        error: { ...prev.error, crypto: "Failed to fetch real-time crypto data" },
       }));
     }
   }, []);
 
+  // Fetch real forex data from Yahoo Finance
   const fetchForex = useCallback(async () => {
     setState((prev) => ({
       ...prev,
@@ -314,50 +284,66 @@ export function useMarket(refreshInterval: number = 30000) {
     }));
 
     try {
-      // Try multiple forex APIs
-      let forexData: ForexData[] = [];
+      // Yahoo Finance forex symbols
+      const forexPairs = [
+        { symbol: 'EURUSD=X', from: 'EUR', to: 'USD', displayPair: 'EUR/USD' },
+        { symbol: 'USDJPY=X', from: 'USD', to: 'JPY', displayPair: 'USD/JPY' },
+        { symbol: 'GBPUSD=X', from: 'GBP', to: 'USD', displayPair: 'GBP/USD' },
+        { symbol: 'USDKRW=X', from: 'USD', to: 'KRW', displayPair: 'USD/KRW' },
+        { symbol: 'USDCNY=X', from: 'USD', to: 'CNY', displayPair: 'USD/CNY' },
+      ];
 
-      try {
-        const response = await fetch(
-          "https://api.exchangerate.host/latest?base=USD&symbols=EUR,JPY,GBP,KRW,CNY,CHF",
-          { cache: 'no-store' }
-        );
+      const forexData: ForexData[] = [];
 
-        if (response.ok) {
-          const data = await response.json();
-          if (data.rates) {
-            const pairs = [
-              { from: 'USD', to: 'EUR', rate: data.rates.EUR },
-              { from: 'USD', to: 'JPY', rate: data.rates.JPY },
-              { from: 'USD', to: 'GBP', rate: data.rates.GBP },
-              { from: 'USD', to: 'KRW', rate: data.rates.KRW },
-              { from: 'USD', to: 'CNY', rate: data.rates.CNY },
-            ];
+      // Fetch all forex pairs in parallel
+      const responses = await Promise.allSettled(
+        forexPairs.map(pair =>
+          fetch(
+            `https://query1.finance.yahoo.com/v8/finance/chart/${pair.symbol}?interval=5m&range=1d`,
+            { cache: 'no-store' }
+          ).then(res => res.ok ? res.json() : null)
+        )
+      );
 
-            forexData = pairs.filter(p => p.rate).map(p => ({
-              pair: `${p.from}/${p.to}`,
-              from: p.from,
-              to: p.to,
-              rate: p.rate,
-              change: (Math.random() - 0.5) * 0.02 * p.rate,
-              changePercent: (Math.random() - 0.5) * 2,
-              chartData: generateChartData(p.rate, 24, 0.005)
-            }));
+      for (let i = 0; i < responses.length; i++) {
+        const response = responses[i];
+        const pairInfo = forexPairs[i];
+
+        if (response.status === 'fulfilled' && response.value) {
+          const data = response.value;
+          const result = data.chart?.result?.[0];
+
+          if (result) {
+            const meta = result.meta;
+            const prices = result.indicators?.quote?.[0]?.close || [];
+            const timestamps = result.timestamp || [];
+
+            // Determine decimal places based on currency
+            const decimals = pairInfo.to === 'JPY' || pairInfo.to === 'KRW' ? 2 : 4;
+            const chartData = yahooToChartData(timestamps, prices, decimals);
+
+            if (chartData.length > 0) {
+              const currentRate = meta.regularMarketPrice;
+              const previousClose = meta.previousClose || meta.chartPreviousClose;
+              const change = currentRate - previousClose;
+              const changePercent = (change / previousClose) * 100;
+
+              forexData.push({
+                pair: pairInfo.displayPair,
+                from: pairInfo.from,
+                to: pairInfo.to,
+                rate: currentRate,
+                change,
+                changePercent,
+                chartData
+              });
+            }
           }
         }
-      } catch (e) {
-        console.error('Exchange rate API error:', e);
       }
 
-      // Fallback data with realistic rates
       if (forexData.length === 0) {
-        forexData = [
-          { pair: "USD/EUR", from: "USD", to: "EUR", rate: 0.9235, change: 0.0012, changePercent: 0.13, chartData: generateChartData(0.9235, 24, 0.003) },
-          { pair: "USD/JPY", from: "USD", to: "JPY", rate: 155.42, change: -0.45, changePercent: -0.29, chartData: generateChartData(155.42, 24, 0.004) },
-          { pair: "USD/GBP", from: "USD", to: "GBP", rate: 0.7892, change: 0.0008, changePercent: 0.10, chartData: generateChartData(0.7892, 24, 0.003) },
-          { pair: "USD/KRW", from: "USD", to: "KRW", rate: 1438.50, change: 2.34, changePercent: 0.16, chartData: generateChartData(1438.50, 24, 0.005) },
-          { pair: "USD/CNY", from: "USD", to: "CNY", rate: 7.2456, change: -0.0123, changePercent: -0.17, chartData: generateChartData(7.2456, 24, 0.002) },
-        ];
+        throw new Error("No forex data available");
       }
 
       setState((prev) => ({
@@ -371,11 +357,12 @@ export function useMarket(refreshInterval: number = 30000) {
       setState((prev) => ({
         ...prev,
         loading: { ...prev.loading, forex: false },
-        error: { ...prev.error, forex: "Failed to fetch forex data" },
+        error: { ...prev.error, forex: "Failed to fetch real-time forex data" },
       }));
     }
   }, []);
 
+  // Fetch real market news from Google News RSS
   const fetchNews = useCallback(async () => {
     setState((prev) => ({
       ...prev,
@@ -384,48 +371,60 @@ export function useMarket(refreshInterval: number = 30000) {
     }));
 
     try {
-      // Financial news from various sources
-      const mockNews: NewsItem[] = [
-        {
-          title: "Fed Signals Patience on Rate Cuts as Inflation Remains Sticky",
-          source: "Reuters",
-          url: "https://reuters.com",
-          publishedAt: new Date(Date.now() - 30 * 60000).toISOString(),
-          sentiment: "neutral"
-        },
-        {
-          title: "S&P 500 Hits Record High Amid Strong Tech Earnings",
-          source: "Bloomberg",
-          url: "https://bloomberg.com",
-          publishedAt: new Date(Date.now() - 60 * 60000).toISOString(),
-          sentiment: "positive"
-        },
-        {
-          title: "Bitcoin Surges Past $100K as Institutional Demand Grows",
-          source: "CoinDesk",
-          url: "https://coindesk.com",
-          publishedAt: new Date(Date.now() - 90 * 60000).toISOString(),
-          sentiment: "positive"
-        },
-        {
-          title: "Asian Markets Mixed on Trade Policy Uncertainty",
-          source: "CNBC",
-          url: "https://cnbc.com",
-          publishedAt: new Date(Date.now() - 120 * 60000).toISOString(),
-          sentiment: "neutral"
-        },
-        {
-          title: "Oil Prices Drop on Global Demand Concerns",
-          source: "Financial Times",
-          url: "https://ft.com",
-          publishedAt: new Date(Date.now() - 150 * 60000).toISOString(),
-          sentiment: "negative"
-        },
-      ];
+      // Use a CORS proxy to fetch Google News RSS for financial news
+      const rssUrl = 'https://news.google.com/rss/search?q=stock+market+finance&hl=en-US&gl=US&ceid=US:en';
+
+      // Try fetching via a public RSS-to-JSON service
+      const response = await fetch(
+        `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&count=10`,
+        { cache: 'no-store' }
+      );
+
+      if (!response.ok) {
+        throw new Error('News API error');
+      }
+
+      const data = await response.json();
+
+      if (data.status !== 'ok' || !data.items || data.items.length === 0) {
+        throw new Error('No news available');
+      }
+
+      const news: NewsItem[] = data.items.slice(0, 5).map((item: {
+        title: string;
+        link: string;
+        pubDate: string;
+        source?: { title: string };
+      }) => {
+        // Extract source from title (Google News format: "Title - Source")
+        const titleParts = item.title.split(' - ');
+        const source = titleParts.length > 1 ? titleParts.pop() || 'News' : 'Google News';
+        const title = titleParts.join(' - ');
+
+        // Simple sentiment analysis based on keywords
+        const lowerTitle = title.toLowerCase();
+        let sentiment: "positive" | "negative" | "neutral" = "neutral";
+        if (lowerTitle.includes('surge') || lowerTitle.includes('gain') || lowerTitle.includes('rise') ||
+            lowerTitle.includes('high') || lowerTitle.includes('bull') || lowerTitle.includes('up')) {
+          sentiment = 'positive';
+        } else if (lowerTitle.includes('fall') || lowerTitle.includes('drop') || lowerTitle.includes('crash') ||
+                   lowerTitle.includes('low') || lowerTitle.includes('bear') || lowerTitle.includes('down') ||
+                   lowerTitle.includes('lose') || lowerTitle.includes('fear')) {
+          sentiment = 'negative';
+        }
+
+        return {
+          title,
+          source,
+          url: item.link,
+          publishedAt: new Date(item.pubDate).toISOString(),
+          sentiment
+        };
+      });
 
       setState((prev) => ({
         ...prev,
-        news: mockNews,
+        news,
         lastUpdated: new Date(),
         loading: { ...prev.loading, news: false },
       }));
@@ -434,7 +433,7 @@ export function useMarket(refreshInterval: number = 30000) {
       setState((prev) => ({
         ...prev,
         loading: { ...prev.loading, news: false },
-        error: { ...prev.error, news: "Failed to fetch news" },
+        error: { ...prev.error, news: "Failed to fetch market news" },
       }));
     }
   }, []);
