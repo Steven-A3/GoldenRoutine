@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 55, 65, 81;
+  --background-start-rgb: 255, 251, 235;
+  --background-end-rgb: 254, 243, 199;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      rgb(var(--background-start-rgb)),
+      rgb(var(--background-end-rgb))
+    );
+  min-height: 100vh;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(251, 191, 36, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(251, 191, 36, 0.5);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(251, 191, 36, 0.7);
+}
+
+/* Glass effect */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Golden glow effect */
+.golden-glow {
+  box-shadow: 0 0 30px rgba(251, 191, 36, 0.3),
+              0 0 60px rgba(251, 191, 36, 0.1);
+}
+
+/* Sunrise animation background */
+@keyframes sunrise {
+  0% {
+    background-position: 50% 100%;
+  }
+  100% {
+    background-position: 50% 0%;
+  }
+}
+
+.animate-sunrise {
+  background: linear-gradient(
+    to top,
+    #FEF3C7 0%,
+    #FDE68A 25%,
+    #FBBF24 50%,
+    #7DD3FC 75%,
+    #38BDF8 100%
+  );
+  background-size: 100% 200%;
+  animation: sunrise 10s ease-in-out infinite alternate;
+}
+
+/* Step indicator styles */
+.step-indicator {
+  @apply w-3 h-3 rounded-full transition-all duration-300;
+}
+
+.step-indicator.active {
+  @apply w-8 bg-golden-500;
+}
+
+.step-indicator.completed {
+  @apply bg-golden-400;
+}
+
+.step-indicator.pending {
+  @apply bg-golden-200;
+}
+
+/* Card hover effect */
+.card-hover {
+  @apply transition-all duration-300;
+}
+
+.card-hover:hover {
+  @apply transform -translate-y-1 shadow-lg;
+}
+
+/* Safe area for mobile */
+@supports (padding: max(0px)) {
+  .safe-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+  .safe-top {
+    padding-top: max(1rem, env(safe-area-inset-top));
+  }
+}
+
+/* PWA standalone mode adjustments */
+@media all and (display-mode: standalone) {
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
