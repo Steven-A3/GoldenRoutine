@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Star, PenLine, Heart } from "lucide-react";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import type { JournalEntry } from "@/types/routine";
 
 interface Step4Props {
@@ -16,8 +17,6 @@ const ZODIAC_KEYS = [
   "aries", "taurus", "gemini", "cancer", "leo", "virgo",
   "libra", "scorpio", "sagittarius", "capricorn", "aquarius", "pisces"
 ] as const;
-
-const ZODIAC_EMOJIS = ["♈", "♉", "♊", "♋", "♌", "♍", "♎", "♏", "♐", "♑", "♒", "♓"];
 
 const KEYWORD_KEYS = [
   "challenge", "growth", "rest", "focus", "creativity", "patience",
@@ -88,16 +87,24 @@ export function Step4Journaling({ journal, onUpdate, onComplete }: Step4Props) {
         {!selectedSign && (
           <div>
             <p className="text-xs text-gray-500 mb-2">{t("zodiacSelect")}</p>
-            <div className="grid grid-cols-4 gap-1">
-              {ZODIAC_KEYS.map((key, idx) => (
-                <button
+            <div className="grid grid-cols-4 gap-2">
+              {ZODIAC_KEYS.map((key) => (
+                <motion.button
                   key={key}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   onClick={() => setSelectedSign(key)}
-                  className="p-2 rounded-lg bg-white/50 hover:bg-golden-100 transition-colors text-center"
+                  className="p-2 rounded-xl bg-white/50 hover:bg-golden-100 transition-colors text-center"
                 >
-                  <div className="text-lg">{ZODIAC_EMOJIS[idx]}</div>
+                  <Image
+                    src={`/images/zodiac_${key}_512.png`}
+                    alt={tz(key)}
+                    width={48}
+                    height={48}
+                    className="mx-auto mb-1"
+                  />
                   <div className="text-xs text-gray-600">{tz(key)}</div>
-                </button>
+                </motion.button>
               ))}
             </div>
           </div>
@@ -105,15 +112,27 @@ export function Step4Journaling({ journal, onUpdate, onComplete }: Step4Props) {
 
         {selectedSign && (
           <div className="text-center">
-            <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-golden-100 text-golden-700 text-sm">
-              {ZODIAC_EMOJIS[ZODIAC_KEYS.indexOf(selectedSign as typeof ZODIAC_KEYS[number])]} {tz(selectedSign as typeof ZODIAC_KEYS[number])}
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className="inline-flex flex-col items-center gap-2 px-4 py-3 rounded-2xl bg-golden-100"
+            >
+              <Image
+                src={`/images/zodiac_${selectedSign}_512.png`}
+                alt={tz(selectedSign as typeof ZODIAC_KEYS[number])}
+                width={64}
+                height={64}
+              />
+              <span className="text-golden-700 font-medium">
+                {tz(selectedSign as typeof ZODIAC_KEYS[number])}
+              </span>
               <button
                 onClick={() => setSelectedSign(null)}
-                className="ml-1 text-golden-500 hover:text-golden-700"
+                className="text-xs text-golden-500 hover:text-golden-700 underline"
               >
-                ✕
+                {tc("cancel")}
               </button>
-            </span>
+            </motion.div>
           </div>
         )}
       </div>
