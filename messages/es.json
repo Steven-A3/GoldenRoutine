@@ -156,10 +156,10 @@
       "warningTitle": "Antes de Revisar",
       "warningText": "Revisar frecuentemente el portafolio puede causar estrés y reacciones emocionales a la volatilidad a corto plazo, potencialmente perjudicando los rendimientos. Los inversores que revisan con menos frecuencia suelen tener mejor desempeño.",
       "principles": {
-        "title": "Principios de Visualización Consciente",
         "1": "Observaré, no reaccionaré emocionalmente",
         "2": "Las fluctuaciones a corto plazo no definen el éxito a largo plazo",
-        "3": "He construido estabilidad emocional a través de mi rutina"
+        "3": "He construido estabilidad emocional a través de mi rutina",
+        "title": "Principios de Visualización Consciente"
       },
       "checkOptions": {
         "title": "¿Qué te gustaría revisar?",
@@ -195,7 +195,13 @@
     "quote": "La forma en que comienzas tu día determina qué tan bien lo vives.",
     "quoteAuthor": "Robin Sharma",
     "resetButton": "Iniciar Nueva Rutina",
-    "shareButton": "Compartir Progreso"
+    "shareButton": "Compartir Progreso",
+    "share": {
+      "scanQR": "Escanea el código QR para ver resultados",
+      "copyLink": "Copiar enlace",
+      "copied": "¡Copiado!",
+      "shareNative": "Compartir"
+    }
   },
   "common": {
     "next": "Siguiente Paso",
