@@ -71,6 +71,14 @@
       "feelsLike": "Feels like {temp}",
       "humidity": "Humidity",
       "uvIndex": "UV Index",
+      "sunrise": "Východ slunce",
+      "sunset": "Západ slunce",
+      "quickSuggestions": {
+        "walk": "10min procházka",
+        "lunchOutside": "Oběd venku",
+        "morningYoga": "Ranní jóga",
+        "eveningStroll": "Večerní procházka"
+      },
       "sunlightPlan": "Sunlight Exposure Plan",
       "sunlightPlaceholder": "e.g., 20-minute walk at lunch",
       "suggestions": {

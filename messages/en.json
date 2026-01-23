@@ -71,8 +71,16 @@
       "feelsLike": "Feels like {temp}",
       "humidity": "Humidity",
       "uvIndex": "UV Index",
+      "sunrise": "Sunrise",
+      "sunset": "Sunset",
       "sunlightPlan": "Sunlight Exposure Plan",
       "sunlightPlaceholder": "e.g., 20-minute walk at lunch",
+      "quickSuggestions": {
+        "walk": "10min walk",
+        "lunchOutside": "Lunch outside",
+        "morningYoga": "Morning yoga",
+        "eveningStroll": "Evening stroll"
+      },
       "suggestions": {
         "sunny": "Great day for outdoor activities! Try to get 20-30 minutes of morning sunlight.",
         "cloudy": "Even on cloudy days, outdoor light is beneficial. Consider a walk.",

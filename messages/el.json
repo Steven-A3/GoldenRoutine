@@ -71,6 +71,14 @@
       "feelsLike": "Feels like {temp}",
       "humidity": "Humidity",
       "uvIndex": "UV Index",
+      "sunrise": "Ανατολή",
+      "sunset": "Δύση",
+      "quickSuggestions": {
+        "walk": "Περπάτημα 10λ",
+        "lunchOutside": "Μεσημεριανό έξω",
+        "morningYoga": "Πρωινή γιόγκα",
+        "eveningStroll": "Βραδινή βόλτα"
+      },
       "sunlightPlan": "Sunlight Exposure Plan",
       "sunlightPlaceholder": "e.g., 20-minute walk at lunch",
       "suggestions": {

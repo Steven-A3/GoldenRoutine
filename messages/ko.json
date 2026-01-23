@@ -71,6 +71,14 @@
       "feelsLike": "체감 {temp}",
       "humidity": "습도",
       "uvIndex": "자외선 지수",
+      "sunrise": "일출",
+      "sunset": "일몰",
+      "quickSuggestions": {
+        "walk": "10분 산책",
+        "lunchOutside": "야외 점심",
+        "morningYoga": "아침 요가",
+        "eveningStroll": "저녁 산책"
+      },
       "sunlightPlan": "햇볕 쬐기 계획",
       "sunlightPlaceholder": "예: 점심시간 20분 산책",
       "suggestions": {

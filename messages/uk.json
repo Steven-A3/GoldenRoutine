@@ -71,6 +71,14 @@
       "feelsLike": "Feels like {temp}",
       "humidity": "Humidity",
       "uvIndex": "UV Index",
+      "sunrise": "Схід сонця",
+      "sunset": "Захід сонця",
+      "quickSuggestions": {
+        "walk": "Прогулянка 10хв",
+        "lunchOutside": "Обід на вулиці",
+        "morningYoga": "Ранкова йога",
+        "eveningStroll": "Вечірня прогулянка"
+      },
       "sunlightPlan": "Sunlight Exposure Plan",
       "sunlightPlaceholder": "e.g., 20-minute walk at lunch",
       "suggestions": {

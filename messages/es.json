@@ -71,6 +71,14 @@
       "feelsLike": "Sensación térmica {temp}",
       "humidity": "Humedad",
       "uvIndex": "Índice UV",
+      "sunrise": "Amanecer",
+      "sunset": "Atardecer",
+      "quickSuggestions": {
+        "walk": "Paseo de 10min",
+        "lunchOutside": "Almuerzo afuera",
+        "morningYoga": "Yoga matutino",
+        "eveningStroll": "Paseo nocturno"
+      },
       "sunlightPlan": "Plan de Exposición Solar",
       "sunlightPlaceholder": "Ej: Caminata de 20 minutos al mediodía",
       "suggestions": {

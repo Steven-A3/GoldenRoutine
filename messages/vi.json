@@ -71,6 +71,14 @@
       "feelsLike": "Feels like {temp}",
       "humidity": "Humidity",
       "uvIndex": "UV Index",
+      "sunrise": "Bình minh",
+      "sunset": "Hoàng hôn",
+      "quickSuggestions": {
+        "walk": "Đi bộ 10 phút",
+        "lunchOutside": "Ăn trưa ngoài trời",
+        "morningYoga": "Yoga buổi sáng",
+        "eveningStroll": "Đi dạo buổi tối"
+      },
       "sunlightPlan": "Sunlight Exposure Plan",
       "sunlightPlaceholder": "e.g., 20-minute walk at lunch",
       "suggestions": {

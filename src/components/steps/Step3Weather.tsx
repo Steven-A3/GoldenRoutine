@@ -185,7 +185,7 @@ export function Step3Weather({ onComplete }: Step3Props) {
               <div className="flex items-center gap-2 p-2 bg-white/50 rounded-lg">
                 <Sunrise className="w-4 h-4 text-orange-400" />
                 <div>
-                  <div className="text-xs text-gray-500">Sunrise</div>
+                  <div className="text-xs text-gray-500">{t("sunrise")}</div>
                   <div className="font-medium text-gray-700">
                     {formatTime(weather.sunrise)}
                   </div>
@@ -196,7 +196,7 @@ export function Step3Weather({ onComplete }: Step3Props) {
               <div className="flex items-center gap-2 p-2 bg-white/50 rounded-lg">
                 <Sunset className="w-4 h-4 text-purple-400" />
                 <div>
-                  <div className="text-xs text-gray-500">Sunset</div>
+                  <div className="text-xs text-gray-500">{t("sunset")}</div>
                   <div className="font-medium text-gray-700">
                     {formatTime(weather.sunset)}
                   </div>
@@ -239,14 +239,14 @@ export function Step3Weather({ onComplete }: Step3Props) {
 
         {/* Quick suggestions */}
         <div className="flex flex-wrap gap-2 mt-3">
-          {["10min walk", "Lunch outside", "Morning yoga", "Evening stroll"].map(
-            (suggestion) => (
+          {["walk", "lunchOutside", "morningYoga", "eveningStroll"].map(
+            (key) => (
               <button
-                key={suggestion}
-                onClick={() => setCustomPlan(suggestion)}
+                key={key}
+                onClick={() => setCustomPlan(t(`quickSuggestions.${key}`))}
                 className="text-xs px-3 py-1 rounded-full bg-sky-100 text-sky-700 hover:bg-sky-200 transition-colors"
               >
-                {suggestion}
+                {t(`quickSuggestions.${key}`)}
               </button>
             )
           )}

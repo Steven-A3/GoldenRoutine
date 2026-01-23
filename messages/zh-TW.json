@@ -71,6 +71,14 @@
       "feelsLike": "Feels like {temp}",
       "humidity": "Humidity",
       "uvIndex": "UV Index",
+      "sunrise": "日出",
+      "sunset": "日落",
+      "quickSuggestions": {
+        "walk": "10分鐘散步",
+        "lunchOutside": "戶外午餐",
+        "morningYoga": "晨間瑜伽",
+        "eveningStroll": "傍晚散步"
+      },
       "sunlightPlan": "Sunlight Exposure Plan",
       "sunlightPlaceholder": "e.g., 20-minute walk at lunch",
       "suggestions": {
