@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 
-// Primary Keywords: morning routine app, morning golden time, golden hour routine
-// Secondary Keywords: morning habit tracker, digital detox, mindfulness, affirmations, journaling, productivity
-// Long-tail Keywords: best morning routine app, mindful morning routine, morning wellness tracker
+// TARGET: Real search queries people actually use
+// High-volume: "morning routine app", "habit tracker app", "how to wake up early"
+// Medium-volume: "best morning routine", "daily routine planner", "morning journal app"
+// Long-tail: "5am morning routine", "productive morning routine", "miracle morning app"
 
 // SEO Constants
 export const SEO_CONSTANTS = {
@@ -16,59 +17,50 @@ export const SEO_CONSTANTS = {
 
 export const siteConfig = {
   name: "Morning Golden Time",
-  title: "Morning Golden Time - Best Morning Routine App for Mindful Productivity",
-  description: "Transform your morning with the #1 morning routine app. Features digital detox timer, guided affirmations, weather planning, journaling, habit tracking, and real-time market updates. Start your golden hour routine today.",
-  shortDescription: "The ultimate morning routine app for mindful productivity and wellness",
+  title: "Best Morning Routine App 2025 - Free Habit Tracker & Daily Planner",
+  description: "Start your perfect morning routine with our free app. 20-minute guided routine with habit tracking, journaling, affirmations & digital detox. Join 10,000+ people building better mornings.",
+  shortDescription: "Free morning routine app with habit tracking, journaling & affirmations",
   url: "https://goldenroutine.app",
   ogImage: "/images/og-image.png",
   creator: "Golden Routine",
   keywords: [
-    // Primary keywords
+    // HIGH VOLUME - What people actually search
     "morning routine app",
-    "morning golden time",
-    "golden hour routine",
-    "morning routine planner",
+    "habit tracker app free",
+    "best morning routine",
+    "how to wake up early",
+    "morning habits",
+    "daily routine planner",
 
-    // Secondary keywords
-    "morning habit tracker",
-    "digital detox app",
-    "morning mindfulness app",
-    "morning affirmations app",
-    "morning journaling app",
-    "morning productivity app",
-    "daily routine tracker",
-    "morning wellness app",
+    // MEDIUM VOLUME - Specific intent
+    "morning journal app",
+    "self care morning routine",
+    "5am morning routine",
+    "productive morning routine",
+    "healthy morning habits",
+    "morning motivation app",
+    "daily affirmations app",
+    "mindfulness morning app",
+    "miracle morning app",
 
-    // Long-tail keywords
-    "best morning routine app",
-    "free morning routine app",
-    "mindful morning routine app",
+    // LONG TAIL - High conversion
+    "best morning routine app free",
+    "how to start a morning routine",
     "morning routine for success",
-    "how to start morning routine",
-    "morning gratitude journal app",
-    "morning meditation routine",
-    "healthy morning habits app",
-    "morning self-care routine",
-    "morning exercise tracker",
-    "sunrise routine app",
-    "wake up routine app",
-    "morning ritual app",
-    "daily morning planner",
-    "morning intention setting app",
-
-    // Feature-specific keywords
-    "theta brain wave morning",
-    "morning weather planning",
-    "morning market check app",
-    "morning horoscope app",
-    "personal task morning app",
-
-    // Intent-based keywords
-    "improve morning routine",
-    "create morning routine",
     "morning routine ideas",
-    "perfect morning routine",
-    "productive morning routine"
+    "morning routine checklist app",
+    "wake up early app",
+    "morning habit tracker",
+    "daily habit tracker free",
+    "gratitude journal app",
+    "digital detox app",
+
+    // FEATURE BASED
+    "guided morning routine",
+    "morning routine timer",
+    "morning weather app",
+    "journaling app free",
+    "affirmation app daily",
   ],
   authors: [{ name: "Golden Routine Team" }],
   category: "Lifestyle & Productivity",
@@ -240,49 +232,49 @@ export const structuredData = {
   },
 };
 
-// FAQ Structured Data for Rich Snippets
+// FAQ Structured Data - Target real search questions people ask
 export const faqStructuredData = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   mainEntity: [
     {
       "@type": "Question",
-      name: "What is Morning Golden Time app?",
+      name: "What is the best morning routine app?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Morning Golden Time is a comprehensive morning routine app that helps you start your day with intention. It includes digital detox timer, affirmations, weather planning, journaling, task management, and market updates - all designed to protect your brain's creative theta state in the morning.",
+        text: "Morning Golden Time is a free morning routine app that guides you through a 20-minute routine with 6 steps: digital detox, intention setting, weather check, journaling, habit tracking, and optional market updates. It's designed to help you wake up with purpose and build healthy morning habits.",
       },
     },
     {
       "@type": "Question",
-      name: "Is Morning Golden Time app free?",
+      name: "How do I start a morning routine?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes, Morning Golden Time is completely free to use. It's a Progressive Web App (PWA) that works on any device with a web browser, and can be installed on your home screen for quick access.",
+        text: "Start by waking up just 20 minutes earlier and following a simple routine: 1) Avoid your phone for 5 minutes (digital detox), 2) Set your intention for the day, 3) Check the weather to plan your day, 4) Write in a journal, 5) Complete 2-3 morning tasks like drinking water or stretching. Morning Golden Time app guides you through each step.",
       },
     },
     {
       "@type": "Question",
-      name: "What is the Golden Hour morning routine?",
+      name: "Is this habit tracker app really free?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "The Golden Hour morning routine is based on protecting your brain's theta and alpha wave states that naturally occur after waking. By avoiding digital stimulation and following a structured routine (digital detox → intentions → weather check → journaling → tasks → market check), you preserve your creative and problem-solving abilities.",
+        text: "Yes, Morning Golden Time is 100% free with no hidden costs or premium subscriptions. It works in your browser and can be installed on your phone like a regular app. No account required - just open and start your morning routine.",
       },
     },
     {
       "@type": "Question",
-      name: "How many languages does Morning Golden Time support?",
+      name: "How can I wake up early and not feel tired?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Morning Golden Time supports 31 languages including English, Korean, Japanese, Chinese, Spanish, French, German, Portuguese, Italian, Russian, Arabic, Hindi, and many more. The app automatically detects your preferred language.",
+        text: "The key is having something meaningful to wake up for. Our app helps by giving you a structured 20-minute routine that energizes you: start with avoiding screens (protects your brain's natural wake-up state), set positive intentions, and complete small achievable tasks. This creates momentum that makes waking up easier over time.",
       },
     },
     {
       "@type": "Question",
-      name: "Does the app work offline?",
+      name: "What should I do first thing in the morning?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes! Morning Golden Time is a Progressive Web App (PWA) that can be installed on your device and works offline. Your routine progress, journal entries, and tasks are saved locally.",
+        text: "Research shows you should avoid checking your phone immediately. Instead: 1) Take a few deep breaths, 2) Think about how you want to feel today, 3) Drink water, 4) Do light movement or stretching. Our morning routine app guides you through the ideal first-thing-in-the-morning activities.",
       },
     },
   ],
@@ -300,12 +292,12 @@ export const breadcrumbStructuredData = (items: { name: string; url: string }[])
   })),
 });
 
-// HowTo Structured Data - For the 6-step morning routine
+// HowTo Structured Data - Target "how to" searches
 export const howToStructuredData = {
   "@context": "https://schema.org",
   "@type": "HowTo",
-  name: "How to Create the Perfect Morning Routine with Golden Hour Method",
-  description: "Follow this 6-step morning routine to protect your brain's creative theta state and start your day with intention and productivity.",
+  name: "How to Start a Morning Routine That Actually Works (6 Simple Steps)",
+  description: "Learn how to build a healthy morning routine in just 20 minutes. This step-by-step guide helps you wake up early, stay productive, and build better habits.",
   image: `${siteConfig.url}/images/og-image.png`,
   totalTime: "PT20M",
   estimatedCost: {
