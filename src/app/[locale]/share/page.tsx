@@ -41,77 +41,41 @@ function ShareContent() {
   // If no data, show regular welcome-like screen
   if (!data) {
     return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="flex flex-col items-center min-h-screen p-6"
-      >
+      <div className="flex flex-col items-center min-h-screen p-6">
         <div className="absolute top-4 right-4">
           <LanguageSelector />
         </div>
 
-        <motion.div
-          initial={{ scale: 0.5, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ type: "spring", delay: 0.2 }}
-          className="mt-12 mb-6"
-        >
+        <div className="mt-12 mb-6">
           <div className="relative">
-            <motion.div
-              className="w-32 h-32 rounded-full bg-gradient-to-br from-golden-300 to-golden-500 flex items-center justify-center golden-glow"
-              animate={{ boxShadow: ["0 0 30px rgba(251, 191, 36, 0.4)", "0 0 60px rgba(251, 191, 36, 0.6)", "0 0 30px rgba(251, 191, 36, 0.4)"] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
+            <div className="w-32 h-32 rounded-full bg-gradient-to-br from-golden-300 to-golden-500 flex items-center justify-center golden-glow">
               <Sun className="w-16 h-16 text-white" />
-            </motion.div>
+            </div>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.h1
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          className="text-3xl font-bold text-gray-800 text-center mb-2"
-        >
+        <h1 className="text-3xl font-bold text-gray-800 text-center mb-2">
           {t("app.name")}
-        </motion.h1>
+        </h1>
 
-        <motion.p
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="text-gray-600 text-center mb-8"
-        >
+        <p className="text-gray-600 text-center mb-8">
           {t("share.invalidLink")}
-        </motion.p>
+        </p>
 
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="w-full max-w-md"
-        >
+        <div className="w-full max-w-md">
           <Link href="/">
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full py-4 rounded-full font-bold text-lg shadow-lg bg-gradient-to-r from-golden-400 to-golden-500 text-white flex items-center justify-center gap-2"
-            >
+            <button className="w-full py-4 rounded-full font-bold text-lg shadow-lg bg-gradient-to-r from-golden-400 to-golden-500 text-white flex items-center justify-center gap-2">
               <Heart className="w-5 h-5" />
               {t("welcome.startButton")}
-            </motion.button>
+            </button>
           </Link>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     );
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="flex flex-col items-center min-h-screen p-6"
-    >
+    <div className="flex flex-col items-center min-h-screen p-6">
       <div className="absolute top-4 right-4">
         <LanguageSelector />
       </div>
@@ -238,11 +202,8 @@ function ShareContent() {
 
         <div className="space-y-2">
           {STEP_KEYS.map((stepKey, index) => (
-            <motion.div
+            <div
               key={stepKey}
-              initial={{ x: -20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.8 + index * 0.1 }}
               className="flex items-center gap-3 p-2 rounded-lg"
             >
               <span className="text-lg">{STEP_ICONS[index]}</span>
@@ -251,7 +212,7 @@ function ShareContent() {
                   {t(`steps.${stepKey}.title`)}
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </motion.div>
@@ -264,26 +225,17 @@ function ShareContent() {
         className="w-full max-w-md"
       >
         <Link href="/">
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="w-full py-4 rounded-full font-bold text-lg shadow-lg bg-gradient-to-r from-golden-400 to-golden-500 text-white flex items-center justify-center gap-2"
-          >
+          <button className="w-full py-4 rounded-full font-bold text-lg shadow-lg bg-gradient-to-r from-golden-400 to-golden-500 text-white flex items-center justify-center gap-2">
             <Heart className="w-5 h-5" />
             {t("share.startYourOwn")}
-          </motion.button>
+          </button>
         </Link>
       </motion.div>
 
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.6 }}
-        className="mt-6 text-xs text-gray-400 text-center"
-      >
+      <p className="mt-6 text-xs text-gray-400 text-center">
         {t("app.duration")} • {t("app.dailyRecommended")}
-      </motion.p>
-    </motion.div>
+      </p>
+    </div>
   );
 }
 
@@ -291,11 +243,7 @@ export default function SharePage() {
   return (
     <Suspense fallback={
       <div className="min-h-screen flex items-center justify-center">
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-          className="w-12 h-12 border-4 border-golden-400 border-t-transparent rounded-full"
-        />
+        <div className="w-12 h-12 border-4 border-golden-400 border-t-transparent rounded-full animate-spin" />
       </div>
     }>
       <ShareContent />
