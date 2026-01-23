@@ -7,7 +7,7 @@ import {
   Newspaper, Bitcoin, DollarSign, ArrowLeft, RefreshCw, ExternalLink,
   Activity, Wifi
 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { useMarket, StockData, CryptoData, ForexData, NewsItem, ChartDataPoint } from "@/hooks/useMarket";
 import { AreaChart, Area, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts";
 
@@ -564,6 +564,7 @@ function NewsWidget({ news, loading, error, onRetry }: { news: NewsItem[]; loadi
 export function Step6Market({ onComplete }: Step6Props) {
   const t = useTranslations("steps.step6");
   const tc = useTranslations("common");
+  const locale = useLocale();
   const [acknowledged, setAcknowledged] = useState(false);
   const [skipped, setSkipped] = useState(false);
   const [currentView, setCurrentView] = useState<MarketView>("menu");
@@ -609,7 +610,7 @@ export function Step6Market({ onComplete }: Step6Props) {
         startAutoRefresh('forex');
         break;
       case "news":
-        fetchNews();
+        fetchNews(locale);
         startAutoRefresh('news');
         break;
     }
@@ -711,7 +712,7 @@ export function Step6Market({ onComplete }: Step6Props) {
       case "stocks": fetchStocks(); break;
       case "crypto": fetchCrypto(); break;
       case "forex": fetchForex(); break;
-      case "news": fetchNews(); break;
+      case "news": fetchNews(locale); break;
     }
   };
 
