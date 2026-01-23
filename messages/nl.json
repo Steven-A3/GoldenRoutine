@@ -200,7 +200,9 @@
       "scanQR": "Scan QR-code om resultaten te bekijken",
       "copyLink": "Link kopiëren",
       "copied": "Gekopieerd!",
-      "shareNative": "Delen"
+      "shareNative": "Delen",
+      "saveQR": "QR opslaan",
+      "saved": "Opgeslagen!"
     }
   },
   "common": {

@@ -200,7 +200,9 @@
       "scanQR": "Sonuçları görmek için QR kodu tarayın",
       "copyLink": "Bağlantıyı kopyala",
       "copied": "Kopyalandı!",
-      "shareNative": "Paylaş"
+      "shareNative": "Paylaş",
+      "saveQR": "QR Kaydet",
+      "saved": "Kaydedildi!"
     }
   },
   "common": {

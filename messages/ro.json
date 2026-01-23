@@ -200,7 +200,9 @@
       "scanQR": "Scanați codul QR pentru a vedea rezultatele",
       "copyLink": "Copiază link",
       "copied": "Copiat!",
-      "shareNative": "Partajează"
+      "shareNative": "Partajează",
+      "saveQR": "Salvează QR",
+      "saved": "Salvat!"
     }
   },
   "common": {

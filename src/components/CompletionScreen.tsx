@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, RotateCcw, Share2, X, Copy, Check } from "lucide-react";
+import { Sparkles, RotateCcw, Share2, X, Copy, Check, Download } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
-import { QRCodeSVG } from "qrcode.react";
+import { QRCodeCanvas } from "qrcode.react";
 import type { DailyIntention, JournalEntry, PersonalTask } from "@/types/routine";
 
 interface CompletionScreenProps {
@@ -38,6 +38,8 @@ export function CompletionScreen({
   const locale = useLocale();
   const [showShareModal, setShowShareModal] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const qrRef = useRef<HTMLDivElement>(null);
   const completedTasks = tasks.filter((t) => t.completed).length;
 
   const getDurationMinutes = (): number => {
@@ -101,6 +103,71 @@ export function CompletionScreen({
       }
     }
   };
+
+  const handleSaveQR = useCallback(async () => {
+    const canvas = qrRef.current?.querySelector("canvas");
+    if (!canvas) return;
+
+    // Create a new canvas with padding and branding
+    const padding = 32;
+    const brandingHeight = 48;
+    const newCanvas = document.createElement("canvas");
+    newCanvas.width = canvas.width + padding * 2;
+    newCanvas.height = canvas.height + padding * 2 + brandingHeight;
+
+    const ctx = newCanvas.getContext("2d");
+    if (!ctx) return;
+
+    // White background
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, newCanvas.width, newCanvas.height);
+
+    // Draw QR code
+    ctx.drawImage(canvas, padding, padding);
+
+    // Add branding text
+    ctx.fillStyle = "#d4a843";
+    ctx.font = "bold 16px system-ui, sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText("Golden Routine", newCanvas.width / 2, canvas.height + padding + 32);
+
+    // Convert to blob
+    newCanvas.toBlob(async (blob) => {
+      if (!blob) return;
+
+      const fileName = `golden-routine-${new Date().toISOString().split("T")[0]}.png`;
+
+      // Try native share with file (works on mobile)
+      if (navigator.share && navigator.canShare) {
+        const file = new File([blob], fileName, { type: "image/png" });
+        const shareData = { files: [file] };
+
+        if (navigator.canShare(shareData)) {
+          try {
+            await navigator.share(shareData);
+            setSaved(true);
+            setTimeout(() => setSaved(false), 2000);
+            return;
+          } catch {
+            // Fall through to download
+          }
+        }
+      }
+
+      // Fallback: download the image
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+
+      setSaved(true);
+      setTimeout(() => setSaved(false), 2000);
+    }, "image/png");
+  }, []);
 
   return (
     <motion.div
@@ -285,8 +352,8 @@ export function CompletionScreen({
 
               {/* QR Code */}
               <div className="flex justify-center mb-4">
-                <div className="p-4 bg-white rounded-xl shadow-inner border border-gray-100">
-                  <QRCodeSVG
+                <div ref={qrRef} className="p-4 bg-white rounded-xl shadow-inner border border-gray-100">
+                  <QRCodeCanvas
                     value={generateShareUrl()}
                     size={180}
                     level="M"
@@ -300,23 +367,44 @@ export function CompletionScreen({
                 {t("share.scanQR")}
               </p>
 
-              {/* Copy Link Button */}
-              <button
-                onClick={handleCopyLink}
-                className="w-full py-3 rounded-xl font-medium bg-gray-100 text-gray-700 flex items-center justify-center gap-2 hover:bg-gray-200 transition-colors mb-2"
-              >
-                {copied ? (
-                  <>
-                    <Check className="w-4 h-4 text-green-500" />
-                    {t("share.copied")}
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-4 h-4" />
-                    {t("share.copyLink")}
-                  </>
-                )}
-              </button>
+              {/* Action Buttons */}
+              <div className="grid grid-cols-2 gap-2 mb-2">
+                {/* Copy Link Button */}
+                <button
+                  onClick={handleCopyLink}
+                  className="py-3 rounded-xl font-medium bg-gray-100 text-gray-700 flex items-center justify-center gap-2 hover:bg-gray-200 transition-colors"
+                >
+                  {copied ? (
+                    <>
+                      <Check className="w-4 h-4 text-green-500" />
+                      {t("share.copied")}
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-4 h-4" />
+                      {t("share.copyLink")}
+                    </>
+                  )}
+                </button>
+
+                {/* Save QR Button */}
+                <button
+                  onClick={handleSaveQR}
+                  className="py-3 rounded-xl font-medium bg-gray-100 text-gray-700 flex items-center justify-center gap-2 hover:bg-gray-200 transition-colors"
+                >
+                  {saved ? (
+                    <>
+                      <Check className="w-4 h-4 text-green-500" />
+                      {t("share.saved")}
+                    </>
+                  ) : (
+                    <>
+                      <Download className="w-4 h-4" />
+                      {t("share.saveQR")}
+                    </>
+                  )}
+                </button>
+              </div>
 
               {/* Native Share Button (mobile) */}
               {typeof navigator !== "undefined" && "share" in navigator && (

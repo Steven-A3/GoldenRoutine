@@ -156,10 +156,10 @@
       "warningTitle": "Before You Check",
       "warningText": "Frequent portfolio checking can cause stress and emotional reactions to short-term volatility, potentially hurting returns. Investors who check less frequently often perform better.",
       "principles": {
-        "title": "Mindful Viewing Principles",
         "1": "I will observe, not react emotionally",
         "2": "Short-term fluctuations don't define long-term success",
-        "3": "I've built emotional stability through my routine"
+        "3": "I've built emotional stability through my routine",
+        "title": "Mindful Viewing Principles"
       },
       "checkOptions": {
         "title": "What would you like to check?",
@@ -200,7 +200,9 @@
       "scanQR": "Scan QR code to view results",
       "copyLink": "Copy Link",
       "copied": "Copied!",
-      "shareNative": "Share"
+      "shareNative": "Share",
+      "saveQR": "Save QR",
+      "saved": "Saved!"
     }
   },
   "common": {

@@ -200,7 +200,9 @@
       "scanQR": "Imbas kod QR untuk melihat keputusan",
       "copyLink": "Salin pautan",
       "copied": "Disalin!",
-      "shareNative": "Kongsi"
+      "shareNative": "Kongsi",
+      "saveQR": "Simpan QR",
+      "saved": "Disimpan!"
     }
   },
   "common": {

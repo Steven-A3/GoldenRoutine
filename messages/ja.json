@@ -200,7 +200,9 @@
       "scanQR": "QRコードをスキャンして結果を見る",
       "copyLink": "リンクをコピー",
       "copied": "コピーしました!",
-      "shareNative": "共有"
+      "shareNative": "共有",
+      "saveQR": "QR保存",
+      "saved": "保存しました!"
     }
   },
   "common": {

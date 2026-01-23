@@ -200,7 +200,9 @@
       "scanQR": "Quét mã QR để xem kết quả",
       "copyLink": "Sao chép liên kết",
       "copied": "Đã sao chép!",
-      "shareNative": "Chia sẻ"
+      "shareNative": "Chia sẻ",
+      "saveQR": "Lưu QR",
+      "saved": "Đã lưu!"
     }
   },
   "common": {

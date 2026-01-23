@@ -200,7 +200,9 @@
       "scanQR": "Scan QR-kode for at se resultater",
       "copyLink": "Kopier link",
       "copied": "Kopieret!",
-      "shareNative": "Del"
+      "shareNative": "Del",
+      "saveQR": "Gem QR",
+      "saved": "Gemt!"
     }
   },
   "common": {
