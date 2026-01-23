@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Sun, Brain, Heart, Sparkles } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { Suspense } from "react";
+import { Suspense, useState, useEffect } from "react";
 import { LanguageSelector } from "@/components/LanguageSelector";
 
 interface SharedData {
@@ -36,7 +36,24 @@ function ShareContent() {
   const tStep2 = useTranslations("steps.step2");
   const tCompletion = useTranslations("completion");
 
-  const data = decodeShareData(searchParams.get("d"));
+  const [data, setData] = useState<SharedData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const encoded = searchParams.get("d");
+    const decoded = decodeShareData(encoded);
+    setData(decoded);
+    setIsLoading(false);
+  }, [searchParams]);
+
+  // Show loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="w-12 h-12 border-4 border-golden-400 border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
 
   // If no data, show regular welcome-like screen
   if (!data) {
