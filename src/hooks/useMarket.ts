@@ -90,6 +90,44 @@ function sparklineToChartData(sparkline: number[], currentPrice: number): ChartD
   return data;
 }
 
+// Map app locales to Google News hl/gl/ceid parameters
+function getGoogleNewsParams(locale: string): { hl: string; gl: string; ceid: string } {
+  const localeMap: Record<string, { hl: string; gl: string; ceid: string }> = {
+    'en': { hl: 'en-US', gl: 'US', ceid: 'US:en' },
+    'ko': { hl: 'ko', gl: 'KR', ceid: 'KR:ko' },
+    'ja': { hl: 'ja', gl: 'JP', ceid: 'JP:ja' },
+    'zh-CN': { hl: 'zh-CN', gl: 'CN', ceid: 'CN:zh-Hans' },
+    'zh-TW': { hl: 'zh-TW', gl: 'TW', ceid: 'TW:zh-Hant' },
+    'de': { hl: 'de', gl: 'DE', ceid: 'DE:de' },
+    'fr': { hl: 'fr', gl: 'FR', ceid: 'FR:fr' },
+    'es': { hl: 'es', gl: 'ES', ceid: 'ES:es' },
+    'it': { hl: 'it', gl: 'IT', ceid: 'IT:it' },
+    'pt': { hl: 'pt-PT', gl: 'PT', ceid: 'PT:pt-150' },
+    'pt-BR': { hl: 'pt-BR', gl: 'BR', ceid: 'BR:pt-419' },
+    'ru': { hl: 'ru', gl: 'RU', ceid: 'RU:ru' },
+    'ar': { hl: 'ar', gl: 'SA', ceid: 'SA:ar' },
+    'hi': { hl: 'hi', gl: 'IN', ceid: 'IN:hi' },
+    'th': { hl: 'th', gl: 'TH', ceid: 'TH:th' },
+    'vi': { hl: 'vi', gl: 'VN', ceid: 'VN:vi' },
+    'id': { hl: 'id', gl: 'ID', ceid: 'ID:id' },
+    'ms': { hl: 'ms', gl: 'MY', ceid: 'MY:ms' },
+    'tr': { hl: 'tr', gl: 'TR', ceid: 'TR:tr' },
+    'pl': { hl: 'pl', gl: 'PL', ceid: 'PL:pl' },
+    'nl': { hl: 'nl', gl: 'NL', ceid: 'NL:nl' },
+    'sv': { hl: 'sv', gl: 'SE', ceid: 'SE:sv' },
+    'da': { hl: 'da', gl: 'DK', ceid: 'DK:da' },
+    'no': { hl: 'no', gl: 'NO', ceid: 'NO:no' },
+    'fi': { hl: 'fi', gl: 'FI', ceid: 'FI:fi' },
+    'el': { hl: 'el', gl: 'GR', ceid: 'GR:el' },
+    'he': { hl: 'he', gl: 'IL', ceid: 'IL:he' },
+    'hu': { hl: 'hu', gl: 'HU', ceid: 'HU:hu' },
+    'cs': { hl: 'cs', gl: 'CZ', ceid: 'CZ:cs' },
+    'ro': { hl: 'ro', gl: 'RO', ceid: 'RO:ro' },
+    'uk': { hl: 'uk', gl: 'UA', ceid: 'UA:uk' },
+  };
+  return localeMap[locale] || localeMap['en'];
+}
+
 export function useMarket(refreshInterval: number = 30000) {
   const [state, setState] = useState<MarketState>({
     stocks: [],
@@ -262,8 +300,15 @@ export function useMarket(refreshInterval: number = 30000) {
     }
   }, []);
 
+  // Store current locale for news fetching
+  const currentLocale = useRef<string>('en');
+
   // Fetch market news from Google News RSS
-  const fetchNews = useCallback(async () => {
+  const fetchNews = useCallback(async (locale?: string) => {
+    if (locale) {
+      currentLocale.current = locale;
+    }
+
     setState((prev) => ({
       ...prev,
       loading: { ...prev.loading, news: true },
@@ -272,7 +317,8 @@ export function useMarket(refreshInterval: number = 30000) {
 
     try {
       // Use rss2json service to fetch Google News RSS for financial news
-      const rssUrl = 'https://news.google.com/rss/search?q=stock+market+finance&hl=en-US&gl=US&ceid=US:en';
+      const { hl, gl, ceid } = getGoogleNewsParams(currentLocale.current);
+      const rssUrl = `https://news.google.com/rss/search?q=stock+market+finance&hl=${hl}&gl=${gl}&ceid=${ceid}`;
 
       const response = await fetch(
         `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&count=10`,
