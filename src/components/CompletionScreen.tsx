@@ -23,6 +23,7 @@ export function CompletionScreen({
   onReset,
 }: CompletionScreenProps) {
   const t = useTranslations("completion");
+  const tStep2 = useTranslations("steps.step2");
   const completedTasks = tasks.filter((t) => t.completed).length;
 
   const getDuration = () => {
@@ -119,7 +120,7 @@ export function CompletionScreen({
               <span className="text-xl">💛</span>
               <div>
                 <div className="text-xs text-gray-500">{t("summary.feeling")}</div>
-                <div className="font-medium text-gray-800">{intention.feeling}</div>
+                <div className="font-medium text-gray-800">{tStep2(`feelings.${intention.feeling}`)}</div>
               </div>
             </div>
           )}
