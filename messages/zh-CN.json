@@ -38,6 +38,14 @@
       "title": "设定意图",
       "subtitle": "意图与肯定",
       "description": "在喝咖啡或看新闻之前，设定今天的目标。肯定语作用于潜意识，引导大脑朝目标行动。",
+      "feelings": {
+        "happy": "快乐",
+        "energetic": "充满活力",
+        "calm": "平静",
+        "passionate": "热情",
+        "focused": "专注",
+        "grateful": "感恩"
+      },
       "feelingLabel": "今天我想要什么样的感受？",
       "feelingPlaceholder": "例如：平静而专注",
       "goalLabel": "今天的核心目标是什么？",

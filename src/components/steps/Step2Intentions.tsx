@@ -82,7 +82,7 @@ export function Step2Intentions({ intention, onUpdate, onComplete }: Step2Props)
               }`}
             >
               <div className="text-2xl mb-1">{f.emoji}</div>
-              <div className="text-xs capitalize">{f.key}</div>
+              <div className="text-xs capitalize">{t(`feelings.${f.key}`)}</div>
             </motion.button>
           ))}
         </div>

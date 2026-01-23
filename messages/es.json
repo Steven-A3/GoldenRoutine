@@ -38,6 +38,14 @@
       "title": "Establecer Intenciones",
       "subtitle": "Intenciones y Afirmaciones",
       "description": "Antes del café o las noticias, establece tu propósito para el día. Las afirmaciones trabajan en tu subconsciente para guiar tu cerebro hacia tus metas.",
+      "feelings": {
+        "happy": "Feliz",
+        "energetic": "Energético",
+        "calm": "Tranquilo",
+        "passionate": "Apasionado",
+        "focused": "Enfocado",
+        "grateful": "Agradecido"
+      },
       "feelingLabel": "¿Cómo quiero sentirme hoy?",
       "feelingPlaceholder": "Ej: Tranquilo y enfocado",
       "goalLabel": "¿Cuál es mi objetivo principal para hoy?",
