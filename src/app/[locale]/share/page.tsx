@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Sun, Brain, Heart, Sparkles } from "lucide-react";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 import { LanguageSelector } from "@/components/LanguageSelector";
 
 interface SharedData {
@@ -33,7 +33,6 @@ export default function SharePage() {
   const t = useTranslations();
   const tStep2 = useTranslations("steps.step2");
   const tCompletion = useTranslations("completion");
-  const router = useRouter();
 
   const [data, setData] = useState<SharedData | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -46,17 +45,6 @@ export default function SharePage() {
     setData(decoded);
     setIsLoaded(true);
   }, []);
-
-  // Clear saved routine data and start fresh
-  const startNewRoutine = () => {
-    // Clear all routine-related localStorage items
-    localStorage.removeItem("morning_golden_time_progress");
-    localStorage.removeItem("morning_golden_time_intention");
-    localStorage.removeItem("morning_golden_time_journal");
-    localStorage.removeItem("morning_golden_time_tasks");
-    // Navigate to home page
-    router.push("/");
-  };
 
   // Show loading state
   if (!isLoaded) {
@@ -92,13 +80,12 @@ export default function SharePage() {
         </p>
 
         <div className="w-full max-w-md">
-          <button
-            onClick={startNewRoutine}
-            className="w-full py-4 rounded-full font-bold text-lg shadow-lg bg-gradient-to-r from-golden-400 to-golden-500 text-white flex items-center justify-center gap-2"
-          >
-            <Heart className="w-5 h-5" />
-            {t("welcome.startButton")}
-          </button>
+          <Link href="/">
+            <button className="w-full py-4 rounded-full font-bold text-lg shadow-lg bg-gradient-to-r from-golden-400 to-golden-500 text-white flex items-center justify-center gap-2">
+              <Heart className="w-5 h-5" />
+              {t("welcome.startButton")}
+            </button>
+          </Link>
         </div>
       </div>
     );
@@ -254,13 +241,12 @@ export default function SharePage() {
         transition={{ delay: 1.4 }}
         className="w-full max-w-md"
       >
-        <button
-          onClick={startNewRoutine}
-          className="w-full py-4 rounded-full font-bold text-lg shadow-lg bg-gradient-to-r from-golden-400 to-golden-500 text-white flex items-center justify-center gap-2"
-        >
-          <Heart className="w-5 h-5" />
-          {t("share.startYourOwn")}
-        </button>
+        <Link href="/">
+          <button className="w-full py-4 rounded-full font-bold text-lg shadow-lg bg-gradient-to-r from-golden-400 to-golden-500 text-white flex items-center justify-center gap-2">
+            <Heart className="w-5 h-5" />
+            {t("share.startYourOwn")}
+          </button>
+        </Link>
       </motion.div>
 
       <p className="mt-6 text-xs text-gray-400 text-center">
