@@ -71,6 +71,14 @@
       "feelsLike": "体感 {temp}",
       "humidity": "湿度",
       "uvIndex": "UV指数",
+      "sunrise": "日の出",
+      "sunset": "日の入り",
+      "quickSuggestions": {
+        "walk": "10分ウォーキング",
+        "lunchOutside": "外でランチ",
+        "morningYoga": "朝ヨガ",
+        "eveningStroll": "夕方の散歩"
+      },
       "sunlightPlan": "日光浴の計画",
       "sunlightPlaceholder": "例：昼休みに20分散歩",
       "suggestions": {

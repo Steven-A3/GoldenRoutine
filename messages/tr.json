@@ -71,6 +71,14 @@
       "feelsLike": "Feels like {temp}",
       "humidity": "Humidity",
       "uvIndex": "UV Index",
+      "sunrise": "Gün doğumu",
+      "sunset": "Gün batımı",
+      "quickSuggestions": {
+        "walk": "10dk yürüyüş",
+        "lunchOutside": "Dışarıda öğle yemeği",
+        "morningYoga": "Sabah yogası",
+        "eveningStroll": "Akşam yürüyüşü"
+      },
       "sunlightPlan": "Sunlight Exposure Plan",
       "sunlightPlaceholder": "e.g., 20-minute walk at lunch",
       "suggestions": {

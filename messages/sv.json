@@ -71,6 +71,14 @@
       "feelsLike": "Feels like {temp}",
       "humidity": "Humidity",
       "uvIndex": "UV Index",
+      "sunrise": "Soluppgång",
+      "sunset": "Solnedgång",
+      "quickSuggestions": {
+        "walk": "10min promenad",
+        "lunchOutside": "Lunch utomhus",
+        "morningYoga": "Morgonyoga",
+        "eveningStroll": "Kvällspromenad"
+      },
       "sunlightPlan": "Sunlight Exposure Plan",
       "sunlightPlaceholder": "e.g., 20-minute walk at lunch",
       "suggestions": {

@@ -71,6 +71,14 @@
       "feelsLike": "Feels like {temp}",
       "humidity": "Humidity",
       "uvIndex": "UV Index",
+      "sunrise": "זריחה",
+      "sunset": "שקיעה",
+      "quickSuggestions": {
+        "walk": "הליכה של 10 דק'",
+        "lunchOutside": "ארוחת צהריים בחוץ",
+        "morningYoga": "יוגה בוקר",
+        "eveningStroll": "טיול ערב"
+      },
       "sunlightPlan": "Sunlight Exposure Plan",
       "sunlightPlaceholder": "e.g., 20-minute walk at lunch",
       "suggestions": {

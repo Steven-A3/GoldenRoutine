@@ -71,6 +71,14 @@
       "feelsLike": "Feels like {temp}",
       "humidity": "Humidity",
       "uvIndex": "UV Index",
+      "sunrise": "Alba",
+      "sunset": "Tramonto",
+      "quickSuggestions": {
+        "walk": "Passeggiata 10min",
+        "lunchOutside": "Pranzo all'aperto",
+        "morningYoga": "Yoga mattutino",
+        "eveningStroll": "Passeggiata serale"
+      },
       "sunlightPlan": "Sunlight Exposure Plan",
       "sunlightPlaceholder": "e.g., 20-minute walk at lunch",
       "suggestions": {

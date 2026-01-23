@@ -71,6 +71,14 @@
       "feelsLike": "Feels like {temp}",
       "humidity": "Humidity",
       "uvIndex": "UV Index",
+      "sunrise": "Matahari terbit",
+      "sunset": "Matahari terbenam",
+      "quickSuggestions": {
+        "walk": "Jalan 10 menit",
+        "lunchOutside": "Makan siang di luar",
+        "morningYoga": "Yoga pagi",
+        "eveningStroll": "Jalan sore"
+      },
       "sunlightPlan": "Sunlight Exposure Plan",
       "sunlightPlaceholder": "e.g., 20-minute walk at lunch",
       "suggestions": {

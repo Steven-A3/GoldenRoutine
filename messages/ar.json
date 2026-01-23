@@ -71,6 +71,14 @@
       "feelsLike": "Feels like {temp}",
       "humidity": "Humidity",
       "uvIndex": "UV Index",
+      "sunrise": "شروق الشمس",
+      "sunset": "غروب الشمس",
+      "quickSuggestions": {
+        "walk": "مشي 10 دقائق",
+        "lunchOutside": "غداء في الخارج",
+        "morningYoga": "يوغا صباحية",
+        "eveningStroll": "نزهة مسائية"
+      },
       "sunlightPlan": "Sunlight Exposure Plan",
       "sunlightPlaceholder": "e.g., 20-minute walk at lunch",
       "suggestions": {

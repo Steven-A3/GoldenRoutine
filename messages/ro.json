@@ -71,6 +71,14 @@
       "feelsLike": "Feels like {temp}",
       "humidity": "Humidity",
       "uvIndex": "UV Index",
+      "sunrise": "Răsărit",
+      "sunset": "Apus",
+      "quickSuggestions": {
+        "walk": "Plimbare 10min",
+        "lunchOutside": "Prânz afară",
+        "morningYoga": "Yoga dimineața",
+        "eveningStroll": "Plimbare seara"
+      },
       "sunlightPlan": "Sunlight Exposure Plan",
       "sunlightPlaceholder": "e.g., 20-minute walk at lunch",
       "suggestions": {

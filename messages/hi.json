@@ -71,6 +71,14 @@
       "feelsLike": "Feels like {temp}",
       "humidity": "Humidity",
       "uvIndex": "UV Index",
+      "sunrise": "सूर्योदय",
+      "sunset": "सूर्यास्त",
+      "quickSuggestions": {
+        "walk": "10 मिनट की सैर",
+        "lunchOutside": "बाहर दोपहर का खाना",
+        "morningYoga": "सुबह का योग",
+        "eveningStroll": "शाम की सैर"
+      },
       "sunlightPlan": "Sunlight Exposure Plan",
       "sunlightPlaceholder": "e.g., 20-minute walk at lunch",
       "suggestions": {
