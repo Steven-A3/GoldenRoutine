@@ -120,7 +120,7 @@ export function WelcomeScreen({ onStart }: WelcomeScreenProps) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.3 }}
-        className="w-full max-w-md mb-6"
+        className="glass rounded-2xl p-4 w-full max-w-md mb-6"
       >
         <p className="text-center text-gray-500 italic text-sm">
           &quot;{tCompletion("quote")}&quot;
@@ -147,19 +147,6 @@ export function WelcomeScreen({ onStart }: WelcomeScreenProps) {
         </motion.button>
       </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="mt-6 w-full max-w-md"
-      >
-        <p className="text-center text-gray-500 italic text-sm">
-          &quot;{tCompletion("quote")}&quot;
-        </p>
-        <p className="text-center text-xs text-gray-400 mt-1">
-          - {tCompletion("quoteAuthor")}
-        </p>
-      </motion.div>
 
       <motion.p
         initial={{ opacity: 0 }}

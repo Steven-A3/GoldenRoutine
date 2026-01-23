@@ -239,7 +239,7 @@ export default function SharePage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
-        className="w-full max-w-md mb-6"
+        className="glass rounded-2xl p-4 w-full max-w-md mb-6"
       >
         <p className="text-center text-gray-500 italic text-sm">
           &quot;{tCompletion("quote")}&quot;
