@@ -209,17 +209,28 @@
     "retry": "Retry"
   },
   "zodiac": {
-    "aries": "Aries",
-    "taurus": "Taurus",
-    "gemini": "Gemini",
-    "cancer": "Cancer",
-    "leo": "Leo",
-    "virgo": "Virgo",
-    "libra": "Libra",
-    "scorpio": "Scorpio",
-    "sagittarius": "Sagittarius",
-    "capricorn": "Capricorn",
-    "aquarius": "Aquarius",
-    "pisces": "Pisces"
+    "aries": "Væren",
+    "taurus": "Tyren",
+    "gemini": "Tvillingene",
+    "cancer": "Krepsen",
+    "leo": "Løven",
+    "virgo": "Jomfruen",
+    "libra": "Vekten",
+    "scorpio": "Skorpionen",
+    "sagittarius": "Skytten",
+    "capricorn": "Steinbukken",
+    "aquarius": "Vannmannen",
+    "pisces": "Fiskene"
+  },
+  "fortune": {
+    "luckyNumbers": "Heldige tall",
+    "luckyColor": "Heldig farge",
+    "compatibility": "Beste match",
+    "mood": "Dagens humør",
+    "todayScores": "Dagens energi",
+    "love": "Kjærlighet",
+    "career": "Karriere",
+    "health": "Helse",
+    "overall": "Samlet"
   }
 }

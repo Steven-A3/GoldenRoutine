@@ -209,17 +209,28 @@
     "retry": "Retry"
   },
   "zodiac": {
-    "aries": "Aries",
-    "taurus": "Taurus",
-    "gemini": "Gemini",
-    "cancer": "Cancer",
-    "leo": "Leo",
-    "virgo": "Virgo",
+    "aries": "Áries",
+    "taurus": "Touro",
+    "gemini": "Gêmeos",
+    "cancer": "Câncer",
+    "leo": "Leão",
+    "virgo": "Virgem",
     "libra": "Libra",
-    "scorpio": "Scorpio",
-    "sagittarius": "Sagittarius",
-    "capricorn": "Capricorn",
-    "aquarius": "Aquarius",
-    "pisces": "Pisces"
+    "scorpio": "Escorpião",
+    "sagittarius": "Sagitário",
+    "capricorn": "Capricórnio",
+    "aquarius": "Aquário",
+    "pisces": "Peixes"
+  },
+  "fortune": {
+    "luckyNumbers": "Números da sorte",
+    "luckyColor": "Cor da sorte",
+    "compatibility": "Melhor combinação",
+    "mood": "Humor de hoje",
+    "todayScores": "Energia de hoje",
+    "love": "Amor",
+    "career": "Carreira",
+    "health": "Saúde",
+    "overall": "Geral"
   }
 }

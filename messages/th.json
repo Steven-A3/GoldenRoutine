@@ -209,17 +209,28 @@
     "retry": "Retry"
   },
   "zodiac": {
-    "aries": "Aries",
-    "taurus": "Taurus",
-    "gemini": "Gemini",
-    "cancer": "Cancer",
-    "leo": "Leo",
-    "virgo": "Virgo",
-    "libra": "Libra",
-    "scorpio": "Scorpio",
-    "sagittarius": "Sagittarius",
-    "capricorn": "Capricorn",
-    "aquarius": "Aquarius",
-    "pisces": "Pisces"
+    "aries": "ราศีเมษ",
+    "taurus": "ราศีพฤษภ",
+    "gemini": "ราศีเมถุน",
+    "cancer": "ราศีกรกฎ",
+    "leo": "ราศีสิงห์",
+    "virgo": "ราศีกันย์",
+    "libra": "ราศีตุลย์",
+    "scorpio": "ราศีพิจิก",
+    "sagittarius": "ราศีธนู",
+    "capricorn": "ราศีมังกร",
+    "aquarius": "ราศีกุมภ์",
+    "pisces": "ราศีมีน"
+  },
+  "fortune": {
+    "luckyNumbers": "เลขนำโชค",
+    "luckyColor": "สีนำโชค",
+    "compatibility": "คู่ที่เข้ากันดี",
+    "mood": "อารมณ์วันนี้",
+    "todayScores": "พลังงานวันนี้",
+    "love": "ความรัก",
+    "career": "การงาน",
+    "health": "สุขภาพ",
+    "overall": "ภาพรวม"
   }
 }

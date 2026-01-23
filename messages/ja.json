@@ -221,5 +221,16 @@
     "capricorn": "山羊座",
     "aquarius": "水瓶座",
     "pisces": "魚座"
+  },
+  "fortune": {
+    "luckyNumbers": "ラッキーナンバー",
+    "luckyColor": "ラッキーカラー",
+    "compatibility": "相性最高",
+    "mood": "今日の気分",
+    "todayScores": "今日のエネルギー",
+    "love": "恋愛",
+    "career": "仕事",
+    "health": "健康",
+    "overall": "総合"
   }
 }

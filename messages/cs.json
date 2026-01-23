@@ -209,17 +209,28 @@
     "retry": "Retry"
   },
   "zodiac": {
-    "aries": "Aries",
-    "taurus": "Taurus",
-    "gemini": "Gemini",
-    "cancer": "Cancer",
-    "leo": "Leo",
-    "virgo": "Virgo",
-    "libra": "Libra",
-    "scorpio": "Scorpio",
-    "sagittarius": "Sagittarius",
-    "capricorn": "Capricorn",
-    "aquarius": "Aquarius",
-    "pisces": "Pisces"
+    "aries": "Beran",
+    "taurus": "Býk",
+    "gemini": "Blíženci",
+    "cancer": "Rak",
+    "leo": "Lev",
+    "virgo": "Panna",
+    "libra": "Váhy",
+    "scorpio": "Štír",
+    "sagittarius": "Střelec",
+    "capricorn": "Kozoroh",
+    "aquarius": "Vodnář",
+    "pisces": "Ryby"
+  },
+  "fortune": {
+    "luckyNumbers": "Šťastná čísla",
+    "luckyColor": "Šťastná barva",
+    "compatibility": "Nejlepší shoda",
+    "mood": "Dnešní nálada",
+    "todayScores": "Dnešní energie",
+    "love": "Láska",
+    "career": "Kariéra",
+    "health": "Zdraví",
+    "overall": "Celkově"
   }
 }

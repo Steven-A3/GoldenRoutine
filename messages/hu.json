@@ -209,17 +209,28 @@
     "retry": "Retry"
   },
   "zodiac": {
-    "aries": "Aries",
-    "taurus": "Taurus",
-    "gemini": "Gemini",
-    "cancer": "Cancer",
-    "leo": "Leo",
-    "virgo": "Virgo",
-    "libra": "Libra",
-    "scorpio": "Scorpio",
-    "sagittarius": "Sagittarius",
-    "capricorn": "Capricorn",
-    "aquarius": "Aquarius",
-    "pisces": "Pisces"
+    "aries": "Kos",
+    "taurus": "Bika",
+    "gemini": "Ikrek",
+    "cancer": "Rák",
+    "leo": "Oroszlán",
+    "virgo": "Szűz",
+    "libra": "Mérleg",
+    "scorpio": "Skorpió",
+    "sagittarius": "Nyilas",
+    "capricorn": "Bak",
+    "aquarius": "Vízöntő",
+    "pisces": "Halak"
+  },
+  "fortune": {
+    "luckyNumbers": "Szerencseszámok",
+    "luckyColor": "Szerencseszín",
+    "compatibility": "Legjobb párosítás",
+    "mood": "Mai hangulat",
+    "todayScores": "Mai energia",
+    "love": "Szerelem",
+    "career": "Karrier",
+    "health": "Egészség",
+    "overall": "Összesítve"
   }
 }

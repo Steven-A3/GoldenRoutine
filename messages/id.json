@@ -221,5 +221,16 @@
     "capricorn": "Capricorn",
     "aquarius": "Aquarius",
     "pisces": "Pisces"
+  },
+  "fortune": {
+    "luckyNumbers": "Angka Keberuntungan",
+    "luckyColor": "Warna Keberuntungan",
+    "compatibility": "Kecocokan Terbaik",
+    "mood": "Suasana Hati Hari Ini",
+    "todayScores": "Energi Hari Ini",
+    "love": "Cinta",
+    "career": "Karier",
+    "health": "Kesehatan",
+    "overall": "Keseluruhan"
   }
 }

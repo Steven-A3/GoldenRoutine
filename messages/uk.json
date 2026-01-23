@@ -209,17 +209,28 @@
     "retry": "Retry"
   },
   "zodiac": {
-    "aries": "Aries",
-    "taurus": "Taurus",
-    "gemini": "Gemini",
-    "cancer": "Cancer",
-    "leo": "Leo",
-    "virgo": "Virgo",
-    "libra": "Libra",
-    "scorpio": "Scorpio",
-    "sagittarius": "Sagittarius",
-    "capricorn": "Capricorn",
-    "aquarius": "Aquarius",
-    "pisces": "Pisces"
+    "aries": "Овен",
+    "taurus": "Телець",
+    "gemini": "Близнюки",
+    "cancer": "Рак",
+    "leo": "Лев",
+    "virgo": "Діва",
+    "libra": "Терези",
+    "scorpio": "Скорпіон",
+    "sagittarius": "Стрілець",
+    "capricorn": "Козеріг",
+    "aquarius": "Водолій",
+    "pisces": "Риби"
+  },
+  "fortune": {
+    "luckyNumbers": "Щасливі числа",
+    "luckyColor": "Щасливий колір",
+    "compatibility": "Найкраща сумісність",
+    "mood": "Настрій сьогодні",
+    "todayScores": "Енергія сьогодні",
+    "love": "Кохання",
+    "career": "Кар'єра",
+    "health": "Здоров'я",
+    "overall": "Загалом"
   }
 }
