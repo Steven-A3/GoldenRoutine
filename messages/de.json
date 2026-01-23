@@ -230,6 +230,14 @@
     "aquarius": "Wassermann",
     "pisces": "Fische"
   },
+  "share": {
+    "invalidLink": "Ungültiger Freigabelink",
+    "someoneCompleted": "Jemand hat seine Goldene Routine abgeschlossen!",
+    "theirResults": "Ihre Ergebnisse",
+    "tryYourself": "Probieren Sie es selbst!",
+    "sixSteps": "Absolvieren Sie diese 6 Morgenschritte, um Ihre goldene Stunde zu optimieren",
+    "startYourOwn": "Starten Sie Ihre Goldene Routine"
+  },
   "fortune": {
     "luckyNumbers": "Glückszahlen",
     "luckyColor": "Glücksfarbe",

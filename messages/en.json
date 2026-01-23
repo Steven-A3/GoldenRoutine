@@ -230,6 +230,14 @@
     "aquarius": "Aquarius",
     "pisces": "Pisces"
   },
+  "share": {
+    "invalidLink": "Invalid share link",
+    "someoneCompleted": "Someone completed their Golden Routine!",
+    "theirResults": "Their Results",
+    "tryYourself": "Try it yourself!",
+    "sixSteps": "Complete these 6 morning steps to optimize your golden hour",
+    "startYourOwn": "Start Your Golden Routine"
+  },
   "fortune": {
     "luckyNumbers": "Lucky Numbers",
     "luckyColor": "Lucky Color",

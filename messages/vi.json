@@ -230,6 +230,14 @@
     "aquarius": "Bảo Bình",
     "pisces": "Song Ngư"
   },
+  "share": {
+    "invalidLink": "Liên kết chia sẻ không hợp lệ",
+    "someoneCompleted": "Ai đó đã hoàn thành Routine Vàng!",
+    "theirResults": "Kết quả của họ",
+    "tryYourself": "Thử ngay!",
+    "sixSteps": "Hoàn thành 6 bước buổi sáng để tối ưu hóa giờ vàng của bạn",
+    "startYourOwn": "Bắt đầu Routine Vàng của bạn"
+  },
   "fortune": {
     "luckyNumbers": "Số may mắn",
     "luckyColor": "Màu may mắn",

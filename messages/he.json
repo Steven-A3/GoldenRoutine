@@ -230,6 +230,14 @@
     "aquarius": "דלי",
     "pisces": "דגים"
   },
+  "share": {
+    "invalidLink": "קישור שיתוף לא תקין",
+    "someoneCompleted": "מישהו השלים את השגרה הזהובה שלו!",
+    "theirResults": "התוצאות שלהם",
+    "tryYourself": "נסה בעצמך!",
+    "sixSteps": "השלם את 6 הצעדים הבוקריים האלה כדי לייעל את השעה הזהובה שלך",
+    "startYourOwn": "התחל את השגרה הזהובה שלך"
+  },
   "fortune": {
     "luckyNumbers": "מספרי מזל",
     "luckyColor": "צבע מזל",

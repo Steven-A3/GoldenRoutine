@@ -230,6 +230,14 @@
     "aquarius": "Vízöntő",
     "pisces": "Halak"
   },
+  "share": {
+    "invalidLink": "Érvénytelen megosztási link",
+    "someoneCompleted": "Valaki befejezte az Arany Rutinját!",
+    "theirResults": "Az eredményeik",
+    "tryYourself": "Próbáld ki te is!",
+    "sixSteps": "Teljesítsd ezt a 6 reggeli lépést az arany órád optimalizálásához",
+    "startYourOwn": "Kezdd el saját Arany Rutinod"
+  },
   "fortune": {
     "luckyNumbers": "Szerencseszámok",
     "luckyColor": "Szerencseszín",

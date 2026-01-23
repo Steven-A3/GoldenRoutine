@@ -230,6 +230,14 @@
     "aquarius": "الدلو",
     "pisces": "الحوت"
   },
+  "share": {
+    "invalidLink": "رابط مشاركة غير صالح",
+    "someoneCompleted": "أكمل شخص ما روتينه الذهبي!",
+    "theirResults": "نتائجهم",
+    "tryYourself": "جربها بنفسك!",
+    "sixSteps": "أكمل هذه الخطوات الصباحية الست لتحسين ساعتك الذهبية",
+    "startYourOwn": "ابدأ روتينك الذهبي"
+  },
   "fortune": {
     "luckyNumbers": "الأرقام المحظوظة",
     "luckyColor": "اللون المحظوظ",

@@ -230,6 +230,14 @@
     "aquarius": "ราศีกุมภ์",
     "pisces": "ราศีมีน"
   },
+  "share": {
+    "invalidLink": "ลิงก์แชร์ไม่ถูกต้อง",
+    "someoneCompleted": "มีคนทำ Golden Routine สำเร็จแล้ว!",
+    "theirResults": "ผลลัพธ์ของพวกเขา",
+    "tryYourself": "ลองด้วยตัวเอง!",
+    "sixSteps": "ทำ 6 ขั้นตอนตอนเช้าเพื่อเพิ่มประสิทธิภาพชั่วโมงทองของคุณ",
+    "startYourOwn": "เริ่ม Golden Routine ของคุณ"
+  },
   "fortune": {
     "luckyNumbers": "เลขนำโชค",
     "luckyColor": "สีนำโชค",

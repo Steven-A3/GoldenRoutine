@@ -230,6 +230,14 @@
     "aquarius": "Verseau",
     "pisces": "Poissons"
   },
+  "share": {
+    "invalidLink": "Lien de partage invalide",
+    "someoneCompleted": "Quelqu'un a terminé sa Routine Dorée !",
+    "theirResults": "Leurs Résultats",
+    "tryYourself": "Essayez vous-même !",
+    "sixSteps": "Complétez ces 6 étapes matinales pour optimiser votre heure dorée",
+    "startYourOwn": "Commencez Votre Routine Dorée"
+  },
   "fortune": {
     "luckyNumbers": "Numéros chanceux",
     "luckyColor": "Couleur porte-bonheur",

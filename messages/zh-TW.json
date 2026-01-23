@@ -230,6 +230,14 @@
     "aquarius": "水瓶座",
     "pisces": "雙魚座"
   },
+  "share": {
+    "invalidLink": "無效的分享連結",
+    "someoneCompleted": "有人完成了黃金習慣！",
+    "theirResults": "他們的結果",
+    "tryYourself": "試試看吧！",
+    "sixSteps": "完成這6個晨間步驟，優化您的黃金時段",
+    "startYourOwn": "開始您的黃金習慣"
+  },
   "fortune": {
     "luckyNumbers": "幸運數字",
     "luckyColor": "幸運顏色",

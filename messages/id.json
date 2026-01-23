@@ -230,6 +230,14 @@
     "aquarius": "Aquarius",
     "pisces": "Pisces"
   },
+  "share": {
+    "invalidLink": "Tautan berbagi tidak valid",
+    "someoneCompleted": "Seseorang menyelesaikan Rutinitas Emas mereka!",
+    "theirResults": "Hasil Mereka",
+    "tryYourself": "Coba sendiri!",
+    "sixSteps": "Selesaikan 6 langkah pagi ini untuk mengoptimalkan jam emas Anda",
+    "startYourOwn": "Mulai Rutinitas Emas Anda"
+  },
   "fortune": {
     "luckyNumbers": "Angka Keberuntungan",
     "luckyColor": "Warna Keberuntungan",

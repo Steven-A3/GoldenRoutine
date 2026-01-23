@@ -230,6 +230,14 @@
     "aquarius": "कुंभ",
     "pisces": "मीन"
   },
+  "share": {
+    "invalidLink": "अमान्य शेयर लिंक",
+    "someoneCompleted": "किसी ने अपनी गोल्डन रूटीन पूरी की!",
+    "theirResults": "उनके परिणाम",
+    "tryYourself": "खुद आज़माएं!",
+    "sixSteps": "अपने स्वर्णिम समय को अनुकूलित करने के लिए इन 6 सुबह के चरणों को पूरा करें",
+    "startYourOwn": "अपनी गोल्डन रूटीन शुरू करें"
+  },
   "fortune": {
     "luckyNumbers": "भाग्यशाली अंक",
     "luckyColor": "भाग्यशाली रंग",

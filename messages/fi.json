@@ -230,6 +230,14 @@
     "aquarius": "Vesimies",
     "pisces": "Kalat"
   },
+  "share": {
+    "invalidLink": "Virheellinen jakolinkki",
+    "someoneCompleted": "Joku suoritti Kultaisen Rutiininsa!",
+    "theirResults": "Heidän tuloksensa",
+    "tryYourself": "Kokeile itse!",
+    "sixSteps": "Suorita nämä 6 aamuaskelta optimoidaksesi kultaisen tuntisi",
+    "startYourOwn": "Aloita oma Kultainen Rutiinisi"
+  },
   "fortune": {
     "luckyNumbers": "Onnennumerot",
     "luckyColor": "Onnenväri",

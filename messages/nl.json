@@ -230,6 +230,14 @@
     "aquarius": "Waterman",
     "pisces": "Vissen"
   },
+  "share": {
+    "invalidLink": "Ongeldige deellink",
+    "someoneCompleted": "Iemand heeft zijn Gouden Routine voltooid!",
+    "theirResults": "Hun resultaten",
+    "tryYourself": "Probeer het zelf!",
+    "sixSteps": "Voltooi deze 6 ochtendstappen om je gouden uur te optimaliseren",
+    "startYourOwn": "Start je Gouden Routine"
+  },
   "fortune": {
     "luckyNumbers": "Geluksnummers",
     "luckyColor": "Gelukskleur",

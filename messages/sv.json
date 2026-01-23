@@ -230,6 +230,14 @@
     "aquarius": "Vattumannen",
     "pisces": "Fiskarna"
   },
+  "share": {
+    "invalidLink": "Ogiltig delningslänk",
+    "someoneCompleted": "Någon har slutfört sin Gyllene Rutin!",
+    "theirResults": "Deras resultat",
+    "tryYourself": "Prova själv!",
+    "sixSteps": "Genomför dessa 6 morgonsteg för att optimera din gyllene timme",
+    "startYourOwn": "Starta din Gyllene Rutin"
+  },
   "fortune": {
     "luckyNumbers": "Lyckosiffror",
     "luckyColor": "Lyckofärg",

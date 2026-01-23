@@ -2,7 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
-import { Sparkles, Home } from "lucide-react";
+import { Sparkles, Play } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -30,7 +30,7 @@ function ResultContent() {
   const searchParams = useSearchParams();
   const t = useTranslations("completion");
   const tStep2 = useTranslations("steps.step2");
-  const tApp = useTranslations("app");
+  const tWelcome = useTranslations("welcome");
 
   const data = decodeShareData(searchParams.get("d"));
 
@@ -40,7 +40,7 @@ function ResultContent() {
         <div className="text-6xl mb-4">🤔</div>
         <h1 className="text-xl font-bold text-gray-800 mb-4">Invalid share link</h1>
         <Link href="/" className="text-golden-600 underline">
-          Start your own Golden Routine
+          {tWelcome("startButton")}
         </Link>
       </div>
     );
@@ -52,34 +52,27 @@ function ResultContent() {
       animate={{ opacity: 1 }}
       className="flex flex-col items-center min-h-screen p-6"
     >
-      {/* Header */}
-      <div className="w-full max-w-md mb-6">
-        <div className="flex items-center justify-between">
-          <h1 className="text-lg font-bold text-golden-600">{tApp("name")}</h1>
-        </div>
-      </div>
-
       {/* Star Animation */}
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ type: "spring", delay: 0.2 }}
-        className="mb-6"
+        className="mt-12 mb-8"
       >
         <div className="relative">
           <motion.div
-            className="text-7xl"
+            className="text-8xl"
             animate={{ rotate: [0, 10, -10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
           >
             🌟
           </motion.div>
           <motion.div
-            className="absolute -top-3 -right-3"
+            className="absolute -top-4 -right-4"
             animate={{ scale: [1, 1.2, 1] }}
             transition={{ duration: 1, repeat: Infinity }}
           >
-            <Sparkles className="w-6 h-6 text-golden-400" />
+            <Sparkles className="w-8 h-8 text-golden-400" />
           </motion.div>
         </div>
       </motion.div>
@@ -88,8 +81,8 @@ function ResultContent() {
       <motion.h1
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.3 }}
-        className="text-2xl font-bold text-gray-800 text-center mb-2"
+        transition={{ delay: 0.4 }}
+        className="text-3xl font-bold text-gray-800 text-center mb-2"
       >
         {t("title")}
       </motion.h1>
@@ -97,8 +90,8 @@ function ResultContent() {
       <motion.p
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.4 }}
-        className="text-gray-600 text-center mb-6"
+        transition={{ delay: 0.5 }}
+        className="text-gray-600 text-center mb-8"
       >
         {t("subtitle")}
       </motion.p>
@@ -107,7 +100,7 @@ function ResultContent() {
       <motion.div
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.5 }}
+        transition={{ delay: 0.6 }}
         className="glass rounded-2xl p-6 w-full max-w-md mb-6"
       >
         <h2 className="font-semibold text-gray-800 mb-4">{t("summary.title")}</h2>
@@ -165,7 +158,7 @@ function ResultContent() {
       <motion.div
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.6 }}
+        transition={{ delay: 0.7 }}
         className="glass rounded-2xl p-4 w-full max-w-md mb-6"
       >
         <p className="text-center text-gray-600 italic">
@@ -174,17 +167,17 @@ function ResultContent() {
         <p className="text-center text-sm text-gray-400 mt-1">- {t("quoteAuthor")}</p>
       </motion.div>
 
-      {/* CTA */}
+      {/* CTA Button */}
       <motion.div
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.7 }}
+        transition={{ delay: 0.8 }}
         className="w-full max-w-md"
       >
         <Link href="/">
           <button className="w-full py-4 rounded-full font-semibold shadow-lg bg-gradient-to-r from-golden-400 to-golden-500 text-white flex items-center justify-center gap-2">
-            <Home className="w-5 h-5" />
-            Start Your Golden Routine
+            <Play className="w-5 h-5" />
+            {tWelcome("startButton")}
           </button>
         </Link>
       </motion.div>
