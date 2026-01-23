@@ -97,7 +97,7 @@ export function Step4Journaling({ journal, onUpdate, onComplete }: Step4Props) {
                   className="p-2 rounded-xl bg-white/50 hover:bg-golden-100 transition-colors text-center"
                 >
                   <Image
-                    src={`/images/zodiac_${key}_512.png`}
+                    src={`/images/zodiac_${key}.png`}
                     alt={tz(key)}
                     width={48}
                     height={48}
@@ -118,7 +118,7 @@ export function Step4Journaling({ journal, onUpdate, onComplete }: Step4Props) {
               className="inline-flex flex-col items-center gap-2 px-4 py-3 rounded-2xl bg-golden-100"
             >
               <Image
-                src={`/images/zodiac_${selectedSign}_512.png`}
+                src={`/images/zodiac_${selectedSign}.png`}
                 alt={tz(selectedSign as typeof ZODIAC_KEYS[number])}
                 width={64}
                 height={64}
