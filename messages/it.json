@@ -230,6 +230,14 @@
     "aquarius": "Acquario",
     "pisces": "Pesci"
   },
+  "share": {
+    "invalidLink": "Link di condivisione non valido",
+    "someoneCompleted": "Qualcuno ha completato la sua Routine Dorata!",
+    "theirResults": "I Loro Risultati",
+    "tryYourself": "Provalo tu stesso!",
+    "sixSteps": "Completa questi 6 passaggi mattutini per ottimizzare la tua ora dorata",
+    "startYourOwn": "Inizia la Tua Routine Dorata"
+  },
   "fortune": {
     "luckyNumbers": "Numeri fortunati",
     "luckyColor": "Colore fortunato",

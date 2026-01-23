@@ -230,6 +230,14 @@
     "aquarius": "Vărsător",
     "pisces": "Pești"
   },
+  "share": {
+    "invalidLink": "Link de partajare invalid",
+    "someoneCompleted": "Cineva a finalizat Rutina Aurie!",
+    "theirResults": "Rezultatele lor",
+    "tryYourself": "Încearcă și tu!",
+    "sixSteps": "Completează acești 6 pași de dimineață pentru a optimiza ora ta de aur",
+    "startYourOwn": "Începe-ți Rutina Aurie"
+  },
   "fortune": {
     "luckyNumbers": "Numere norocoase",
     "luckyColor": "Culoare norocoasă",

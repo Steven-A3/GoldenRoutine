@@ -230,6 +230,14 @@
     "aquarius": "Vodnář",
     "pisces": "Ryby"
   },
+  "share": {
+    "invalidLink": "Neplatný odkaz ke sdílení",
+    "someoneCompleted": "Někdo dokončil svou Zlatou rutinu!",
+    "theirResults": "Jejich výsledky",
+    "tryYourself": "Vyzkoušejte to sami!",
+    "sixSteps": "Dokončete těchto 6 ranních kroků a optimalizujte svou zlatou hodinu",
+    "startYourOwn": "Začněte svou Zlatou rutinu"
+  },
   "fortune": {
     "luckyNumbers": "Šťastná čísla",
     "luckyColor": "Šťastná barva",

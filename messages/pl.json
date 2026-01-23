@@ -230,6 +230,14 @@
     "aquarius": "Wodnik",
     "pisces": "Ryby"
   },
+  "share": {
+    "invalidLink": "Nieprawidłowy link udostępniania",
+    "someoneCompleted": "Ktoś ukończył swoją Złotą Rutynę!",
+    "theirResults": "Ich wyniki",
+    "tryYourself": "Wypróbuj sam!",
+    "sixSteps": "Wykonaj te 6 porannych kroków, aby zoptymalizować swoją złotą godzinę",
+    "startYourOwn": "Rozpocznij swoją Złotą Rutynę"
+  },
   "fortune": {
     "luckyNumbers": "Szczęśliwe Liczby",
     "luckyColor": "Szczęśliwy Kolor",

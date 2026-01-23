@@ -230,6 +230,14 @@
     "aquarius": "水瓶座",
     "pisces": "魚座"
   },
+  "share": {
+    "invalidLink": "無効な共有リンクです",
+    "someoneCompleted": "誰かがゴールデンルーティンを完了しました！",
+    "theirResults": "彼らの結果",
+    "tryYourself": "あなたも試してみませんか？",
+    "sixSteps": "6つの朝のステップでゴールデンアワーを最適化しましょう",
+    "startYourOwn": "あなたのゴールデンルーティンを始める"
+  },
   "fortune": {
     "luckyNumbers": "ラッキーナンバー",
     "luckyColor": "ラッキーカラー",

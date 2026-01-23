@@ -230,6 +230,14 @@
     "aquarius": "Kova",
     "pisces": "Balık"
   },
+  "share": {
+    "invalidLink": "Geçersiz paylaşım bağlantısı",
+    "someoneCompleted": "Birisi Altın Rutinini tamamladı!",
+    "theirResults": "Onların sonuçları",
+    "tryYourself": "Kendin dene!",
+    "sixSteps": "Altın saatinizi optimize etmek için bu 6 sabah adımını tamamlayın",
+    "startYourOwn": "Altın Rutininizi Başlatın"
+  },
   "fortune": {
     "luckyNumbers": "Şanslı Sayılar",
     "luckyColor": "Şanslı Renk",

@@ -230,6 +230,14 @@
     "aquarius": "물병자리",
     "pisces": "물고기자리"
   },
+  "share": {
+    "invalidLink": "유효하지 않은 공유 링크입니다",
+    "someoneCompleted": "누군가 골든 루틴을 완료했습니다!",
+    "theirResults": "그들의 결과",
+    "tryYourself": "직접 해보세요!",
+    "sixSteps": "6단계 아침 습관으로 황금 시간을 최적화하세요",
+    "startYourOwn": "나만의 골든 루틴 시작하기"
+  },
   "fortune": {
     "luckyNumbers": "행운의 숫자",
     "luckyColor": "행운의 색상",

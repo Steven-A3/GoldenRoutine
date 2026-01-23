@@ -68,7 +68,7 @@ export function CompletionScreen({
 
     const encoded = btoa(JSON.stringify(shareData));
     const baseUrl = typeof window !== "undefined" ? window.location.origin : "https://goldenroutine.app";
-    return `${baseUrl}/${locale}/result?d=${encoded}`;
+    return `${baseUrl}/${locale}/share?d=${encoded}`;
   };
 
   const handleShare = () => {

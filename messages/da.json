@@ -230,6 +230,14 @@
     "aquarius": "Vandmanden",
     "pisces": "Fiskene"
   },
+  "share": {
+    "invalidLink": "Ugyldigt delelink",
+    "someoneCompleted": "Nogen har gennemført deres Gyldne Rutine!",
+    "theirResults": "Deres resultater",
+    "tryYourself": "Prøv det selv!",
+    "sixSteps": "Gennemfør disse 6 morgentrin for at optimere din gyldne time",
+    "startYourOwn": "Start din Gyldne Rutine"
+  },
   "fortune": {
     "luckyNumbers": "Heldige Tal",
     "luckyColor": "Heldig Farve",
