@@ -71,22 +71,6 @@ interface MarketState {
   };
 }
 
-// Convert Yahoo Finance timestamps and prices to chart data
-function yahooToChartData(timestamps: number[], prices: (number | null)[], decimals: number = 2): ChartDataPoint[] {
-  const data: ChartDataPoint[] = [];
-
-  for (let i = 0; i < timestamps.length; i++) {
-    if (prices[i] !== null && prices[i] !== undefined) {
-      data.push({
-        time: new Date(timestamps[i] * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        value: Number(prices[i]!.toFixed(decimals))
-      });
-    }
-  }
-
-  return data;
-}
-
 // Convert CoinGecko sparkline to chart data
 function sparklineToChartData(sparkline: number[], currentPrice: number): ChartDataPoint[] {
   const now = new Date();
@@ -130,7 +114,7 @@ export function useMarket(refreshInterval: number = 30000) {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const activeCategory = useRef<string | null>(null);
 
-  // Fetch real stock data from Yahoo Finance
+  // Fetch stock data via our API route (avoids CORS)
   const fetchStocks = useCallback(async () => {
     setState((prev) => ({
       ...prev,
@@ -139,55 +123,21 @@ export function useMarket(refreshInterval: number = 30000) {
     }));
 
     try {
-      const symbols = ['SPY', 'QQQ', 'DIA', 'IWM'];
-      const stocksData: StockData[] = [];
+      const response = await fetch('/api/market/stocks', { cache: 'no-store' });
 
-      // Fetch all symbols in parallel
-      const responses = await Promise.allSettled(
-        symbols.map(symbol =>
-          fetch(
-            `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?interval=5m&range=1d`,
-            { cache: 'no-store' }
-          ).then(res => res.ok ? res.json() : null)
-        )
-      );
-
-      for (let i = 0; i < responses.length; i++) {
-        const response = responses[i];
-        if (response.status === 'fulfilled' && response.value) {
-          const data = response.value;
-          const result = data.chart?.result?.[0];
-
-          if (result) {
-            const meta = result.meta;
-            const prices = result.indicators?.quote?.[0]?.close || [];
-            const timestamps = result.timestamp || [];
-
-            const chartData = yahooToChartData(timestamps, prices, 2);
-
-            if (chartData.length > 0) {
-              stocksData.push({
-                symbol: meta.symbol,
-                name: getStockName(meta.symbol),
-                price: meta.regularMarketPrice,
-                change: meta.regularMarketPrice - meta.previousClose,
-                changePercent: ((meta.regularMarketPrice - meta.previousClose) / meta.previousClose) * 100,
-                high: meta.regularMarketDayHigh || meta.regularMarketPrice,
-                low: meta.regularMarketDayLow || meta.regularMarketPrice,
-                chartData
-              });
-            }
-          }
-        }
+      if (!response.ok) {
+        throw new Error('Failed to fetch stock data');
       }
 
-      if (stocksData.length === 0) {
-        throw new Error("No stock data available");
+      const data = await response.json();
+
+      if (data.error || !data.stocks || data.stocks.length === 0) {
+        throw new Error(data.error || 'No stock data available');
       }
 
       setState((prev) => ({
         ...prev,
-        stocks: stocksData,
+        stocks: data.stocks,
         lastUpdated: new Date(),
         loading: { ...prev.loading, stocks: false },
       }));
@@ -201,7 +151,7 @@ export function useMarket(refreshInterval: number = 30000) {
     }
   }, []);
 
-  // Fetch real crypto data from CoinGecko
+  // Fetch crypto data from CoinGecko (supports CORS)
   const fetchCrypto = useCallback(async () => {
     setState((prev) => ({
       ...prev,
@@ -275,7 +225,7 @@ export function useMarket(refreshInterval: number = 30000) {
     }
   }, []);
 
-  // Fetch real forex data from Yahoo Finance
+  // Fetch forex data via our API route (avoids CORS)
   const fetchForex = useCallback(async () => {
     setState((prev) => ({
       ...prev,
@@ -284,71 +234,21 @@ export function useMarket(refreshInterval: number = 30000) {
     }));
 
     try {
-      // Yahoo Finance forex symbols
-      const forexPairs = [
-        { symbol: 'EURUSD=X', from: 'EUR', to: 'USD', displayPair: 'EUR/USD' },
-        { symbol: 'USDJPY=X', from: 'USD', to: 'JPY', displayPair: 'USD/JPY' },
-        { symbol: 'GBPUSD=X', from: 'GBP', to: 'USD', displayPair: 'GBP/USD' },
-        { symbol: 'USDKRW=X', from: 'USD', to: 'KRW', displayPair: 'USD/KRW' },
-        { symbol: 'USDCNY=X', from: 'USD', to: 'CNY', displayPair: 'USD/CNY' },
-      ];
+      const response = await fetch('/api/market/forex', { cache: 'no-store' });
 
-      const forexData: ForexData[] = [];
-
-      // Fetch all forex pairs in parallel
-      const responses = await Promise.allSettled(
-        forexPairs.map(pair =>
-          fetch(
-            `https://query1.finance.yahoo.com/v8/finance/chart/${pair.symbol}?interval=5m&range=1d`,
-            { cache: 'no-store' }
-          ).then(res => res.ok ? res.json() : null)
-        )
-      );
-
-      for (let i = 0; i < responses.length; i++) {
-        const response = responses[i];
-        const pairInfo = forexPairs[i];
-
-        if (response.status === 'fulfilled' && response.value) {
-          const data = response.value;
-          const result = data.chart?.result?.[0];
-
-          if (result) {
-            const meta = result.meta;
-            const prices = result.indicators?.quote?.[0]?.close || [];
-            const timestamps = result.timestamp || [];
-
-            // Determine decimal places based on currency
-            const decimals = pairInfo.to === 'JPY' || pairInfo.to === 'KRW' ? 2 : 4;
-            const chartData = yahooToChartData(timestamps, prices, decimals);
-
-            if (chartData.length > 0) {
-              const currentRate = meta.regularMarketPrice;
-              const previousClose = meta.previousClose || meta.chartPreviousClose;
-              const change = currentRate - previousClose;
-              const changePercent = (change / previousClose) * 100;
-
-              forexData.push({
-                pair: pairInfo.displayPair,
-                from: pairInfo.from,
-                to: pairInfo.to,
-                rate: currentRate,
-                change,
-                changePercent,
-                chartData
-              });
-            }
-          }
-        }
+      if (!response.ok) {
+        throw new Error('Failed to fetch forex data');
       }
 
-      if (forexData.length === 0) {
-        throw new Error("No forex data available");
+      const data = await response.json();
+
+      if (data.error || !data.forex || data.forex.length === 0) {
+        throw new Error(data.error || 'No forex data available');
       }
 
       setState((prev) => ({
         ...prev,
-        forex: forexData,
+        forex: data.forex,
         lastUpdated: new Date(),
         loading: { ...prev.loading, forex: false },
       }));
@@ -362,7 +262,7 @@ export function useMarket(refreshInterval: number = 30000) {
     }
   }, []);
 
-  // Fetch real market news from Google News RSS
+  // Fetch market news from Google News RSS
   const fetchNews = useCallback(async () => {
     setState((prev) => ({
       ...prev,
@@ -371,10 +271,9 @@ export function useMarket(refreshInterval: number = 30000) {
     }));
 
     try {
-      // Use a CORS proxy to fetch Google News RSS for financial news
+      // Use rss2json service to fetch Google News RSS for financial news
       const rssUrl = 'https://news.google.com/rss/search?q=stock+market+finance&hl=en-US&gl=US&ceid=US:en';
 
-      // Try fetching via a public RSS-to-JSON service
       const response = await fetch(
         `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&count=10`,
         { cache: 'no-store' }
@@ -491,19 +390,4 @@ export function useMarket(refreshInterval: number = 30000) {
     startAutoRefresh,
     stopAutoRefresh,
   };
-}
-
-function getStockName(symbol: string): string {
-  const names: Record<string, string> = {
-    SPY: 'S&P 500 ETF',
-    QQQ: 'NASDAQ 100 ETF',
-    DIA: 'Dow Jones ETF',
-    IWM: 'Russell 2000 ETF',
-    AAPL: 'Apple Inc.',
-    MSFT: 'Microsoft Corp.',
-    GOOGL: 'Alphabet Inc.',
-    AMZN: 'Amazon.com Inc.',
-    TSLA: 'Tesla Inc.',
-  };
-  return names[symbol] || symbol;
 }
