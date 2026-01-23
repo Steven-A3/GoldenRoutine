@@ -71,7 +71,19 @@ export function useRoutine({ defaultTasks }: UseRoutineOptions) {
     setProgress(getStorageItem(STORAGE_KEYS.PROGRESS, progress));
     setIntention(getStorageItem(STORAGE_KEYS.INTENTION, intention));
     setJournal(getStorageItem(STORAGE_KEYS.JOURNAL, journal));
-    setTasks(getStorageItem(STORAGE_KEYS.TASKS, tasks));
+
+    // Load tasks and restore translationKeys for default tasks
+    const storedTasks = getStorageItem(STORAGE_KEYS.TASKS, tasks);
+    const tasksWithKeys = storedTasks.map((task: PersonalTask) => {
+      // Match default tasks by ID and restore their translationKey
+      const defaultTask = defaultTasks.find(dt => dt.id === task.id);
+      if (defaultTask?.translationKey) {
+        return { ...task, translationKey: defaultTask.translationKey };
+      }
+      return task;
+    });
+    setTasks(tasksWithKeys);
+
     setIsLoaded(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

@@ -23,9 +23,9 @@ export default function Home() {
   const t = useTranslations();
 
   const defaultTasks: PersonalTask[] = useMemo(() => [
-    { id: "1", title: t("steps.step5.defaultTasks.stretch"), completed: false, category: "exercise" },
-    { id: "2", title: t("steps.step5.defaultTasks.water"), completed: false, category: "health" },
-    { id: "3", title: t("steps.step5.defaultTasks.priority"), completed: false, category: "personal" },
+    { id: "1", title: t("steps.step5.defaultTasks.stretch"), completed: false, category: "exercise", translationKey: "stretch" },
+    { id: "2", title: t("steps.step5.defaultTasks.water"), completed: false, category: "health", translationKey: "water" },
+    { id: "3", title: t("steps.step5.defaultTasks.priority"), completed: false, category: "personal", translationKey: "priority" },
   ], [t]);
 
   const {

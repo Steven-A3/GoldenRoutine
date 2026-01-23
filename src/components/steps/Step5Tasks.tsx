@@ -25,6 +25,14 @@ export function Step5Tasks({ tasks, onToggle, onAdd, onComplete }: Step5Props) {
   const [newTask, setNewTask] = useState("");
   const [newCategory, setNewCategory] = useState<PersonalTask["category"]>("personal");
 
+  // Get translated title for a task (uses translationKey if available, otherwise stored title)
+  const getTaskTitle = (task: PersonalTask): string => {
+    if (task.translationKey) {
+      return t(`defaultTasks.${task.translationKey}`);
+    }
+    return task.title;
+  };
+
   const completedCount = tasks.filter((t) => t.completed).length;
   const progress = tasks.length > 0 ? (completedCount / tasks.length) * 100 : 0;
 
@@ -106,7 +114,7 @@ export function Step5Tasks({ tasks, onToggle, onAdd, onComplete }: Step5Props) {
                   </div>
 
                   <span className={`flex-1 text-sm ${task.completed ? "text-gray-400 line-through" : "text-gray-700"}`}>
-                    {task.title}
+                    {getTaskTitle(task)}
                   </span>
                 </motion.div>
               );

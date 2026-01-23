@@ -34,6 +34,7 @@ export interface PersonalTask {
   title: string;
   completed: boolean;
   category: "exercise" | "personal" | "health";
+  translationKey?: "stretch" | "water" | "priority"; // For default tasks that need translation
 }
 
 export interface MarketData {
