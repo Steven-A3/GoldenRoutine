@@ -156,10 +156,10 @@
       "warningTitle": "Before You Check",
       "warningText": "Frequent portfolio checking can cause stress and emotional reactions to short-term volatility, potentially hurting returns. Investors who check less frequently often perform better.",
       "principles": {
-        "title": "Mindful Viewing Principles",
         "1": "I will observe, not react emotionally",
         "2": "Short-term fluctuations don't define long-term success",
-        "3": "I've built emotional stability through my routine"
+        "3": "I've built emotional stability through my routine",
+        "title": "Mindful Viewing Principles"
       },
       "checkOptions": {
         "title": "What would you like to check?",
@@ -195,7 +195,13 @@
     "quote": "The way you start your day determines how well you live your day.",
     "quoteAuthor": "Robin Sharma",
     "resetButton": "Start New Routine",
-    "shareButton": "Share Progress"
+    "shareButton": "Share Progress",
+    "share": {
+      "scanQR": "Naskenujte QR kód pro zobrazení výsledků",
+      "copyLink": "Kopírovat odkaz",
+      "copied": "Zkopírováno!",
+      "shareNative": "Sdílet"
+    }
   },
   "common": {
     "next": "Next Step",

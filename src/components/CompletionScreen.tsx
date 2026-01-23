@@ -1,8 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Sparkles, RotateCcw, Share2 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Sparkles, RotateCcw, Share2, X, Copy, Check } from "lucide-react";
+import { useTranslations, useLocale } from "next-intl";
+import { QRCodeSVG } from "qrcode.react";
 import type { DailyIntention, JournalEntry, PersonalTask } from "@/types/routine";
 
 interface CompletionScreenProps {
@@ -12,6 +14,15 @@ interface CompletionScreenProps {
   startedAt: string | null;
   completedAt: string | null;
   onReset: () => void;
+}
+
+interface ShareData {
+  feeling?: string;
+  goal?: string;
+  affirmation?: string;
+  tasksCompleted: number;
+  totalTasks: number;
+  duration: number;
 }
 
 export function CompletionScreen({
@@ -24,22 +35,57 @@ export function CompletionScreen({
 }: CompletionScreenProps) {
   const t = useTranslations("completion");
   const tStep2 = useTranslations("steps.step2");
+  const locale = useLocale();
+  const [showShareModal, setShowShareModal] = useState(false);
+  const [copied, setCopied] = useState(false);
   const completedTasks = tasks.filter((t) => t.completed).length;
 
-  const getDuration = () => {
-    if (!startedAt || !completedAt) return "N/A";
+  const getDurationMinutes = (): number => {
+    if (!startedAt || !completedAt) return 0;
     const start = new Date(startedAt);
     const end = new Date(completedAt);
     const diffMs = end.getTime() - start.getTime();
-    const diffMins = Math.round(diffMs / 60000);
-    return `${diffMins} ${t("minutes")}`;
+    return Math.round(diffMs / 60000);
   };
 
-  const handleShare = async () => {
+  const getDuration = () => {
+    const mins = getDurationMinutes();
+    if (mins === 0) return "N/A";
+    return `${mins} ${t("minutes")}`;
+  };
+
+  const generateShareUrl = (): string => {
+    const shareData: ShareData = {
+      feeling: intention.feeling || undefined,
+      goal: intention.goal || undefined,
+      affirmation: intention.affirmation || undefined,
+      tasksCompleted: completedTasks,
+      totalTasks: tasks.length,
+      duration: getDurationMinutes(),
+    };
+
+    const encoded = btoa(JSON.stringify(shareData));
+    const baseUrl = typeof window !== "undefined" ? window.location.origin : "https://goldenroutine.app";
+    return `${baseUrl}/${locale}/result?d=${encoded}`;
+  };
+
+  const handleShare = () => {
+    setShowShareModal(true);
+  };
+
+  const handleCopyLink = async () => {
+    const url = generateShareUrl();
+    await navigator.clipboard.writeText(url);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleNativeShare = async () => {
+    const url = generateShareUrl();
     const text = `
 🌅 Morning Golden Time Complete!
 
-✨ Feeling: ${intention.feeling || "Not set"}
+✨ Feeling: ${intention.feeling ? tStep2(`feelings.${intention.feeling}`) : "Not set"}
 🎯 Goal: ${intention.goal || "Not set"}
 💪 Tasks: ${completedTasks}/${tasks.length}
 ⏱️ Duration: ${getDuration()}
@@ -49,12 +95,10 @@ export function CompletionScreen({
 
     if (navigator.share) {
       try {
-        await navigator.share({ text });
-      } catch (e) {
+        await navigator.share({ text, url });
+      } catch {
         // User cancelled or error
       }
-    } else {
-      navigator.clipboard.writeText(text);
     }
   };
 
@@ -211,6 +255,83 @@ export function CompletionScreen({
           {t("resetButton")}
         </button>
       </motion.div>
+
+      {/* Share Modal */}
+      <AnimatePresence>
+        {showShareModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+            onClick={() => setShowShareModal(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white rounded-2xl p-6 w-full max-w-sm shadow-xl"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold text-gray-800">{t("shareButton")}</h3>
+                <button
+                  onClick={() => setShowShareModal(false)}
+                  className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+                >
+                  <X className="w-5 h-5 text-gray-500" />
+                </button>
+              </div>
+
+              {/* QR Code */}
+              <div className="flex justify-center mb-4">
+                <div className="p-4 bg-white rounded-xl shadow-inner border border-gray-100">
+                  <QRCodeSVG
+                    value={generateShareUrl()}
+                    size={180}
+                    level="M"
+                    includeMargin={false}
+                    fgColor="#1f2937"
+                  />
+                </div>
+              </div>
+
+              <p className="text-center text-sm text-gray-500 mb-4">
+                {t("share.scanQR")}
+              </p>
+
+              {/* Copy Link Button */}
+              <button
+                onClick={handleCopyLink}
+                className="w-full py-3 rounded-xl font-medium bg-gray-100 text-gray-700 flex items-center justify-center gap-2 hover:bg-gray-200 transition-colors mb-2"
+              >
+                {copied ? (
+                  <>
+                    <Check className="w-4 h-4 text-green-500" />
+                    {t("share.copied")}
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-4 h-4" />
+                    {t("share.copyLink")}
+                  </>
+                )}
+              </button>
+
+              {/* Native Share Button (mobile) */}
+              {typeof navigator !== "undefined" && "share" in navigator && (
+                <button
+                  onClick={handleNativeShare}
+                  className="w-full py-3 rounded-xl font-medium bg-gradient-to-r from-golden-400 to-golden-500 text-white flex items-center justify-center gap-2"
+                >
+                  <Share2 className="w-4 h-4" />
+                  {t("share.shareNative")}
+                </button>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }
