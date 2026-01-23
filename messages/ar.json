@@ -209,17 +209,28 @@
     "retry": "Retry"
   },
   "zodiac": {
-    "aries": "Aries",
-    "taurus": "Taurus",
-    "gemini": "Gemini",
-    "cancer": "Cancer",
-    "leo": "Leo",
-    "virgo": "Virgo",
-    "libra": "Libra",
-    "scorpio": "Scorpio",
-    "sagittarius": "Sagittarius",
-    "capricorn": "Capricorn",
-    "aquarius": "Aquarius",
-    "pisces": "Pisces"
+    "aries": "الحمل",
+    "taurus": "الثور",
+    "gemini": "الجوزاء",
+    "cancer": "السرطان",
+    "leo": "الأسد",
+    "virgo": "العذراء",
+    "libra": "الميزان",
+    "scorpio": "العقرب",
+    "sagittarius": "القوس",
+    "capricorn": "الجدي",
+    "aquarius": "الدلو",
+    "pisces": "الحوت"
+  },
+  "fortune": {
+    "luckyNumbers": "الأرقام المحظوظة",
+    "luckyColor": "اللون المحظوظ",
+    "compatibility": "أفضل توافق",
+    "mood": "مزاج اليوم",
+    "todayScores": "طاقة اليوم",
+    "love": "الحب",
+    "career": "الوظيفة",
+    "health": "الصحة",
+    "overall": "الإجمالي"
   }
 }

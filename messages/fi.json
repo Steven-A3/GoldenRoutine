@@ -209,17 +209,28 @@
     "retry": "Retry"
   },
   "zodiac": {
-    "aries": "Aries",
-    "taurus": "Taurus",
-    "gemini": "Gemini",
-    "cancer": "Cancer",
-    "leo": "Leo",
-    "virgo": "Virgo",
-    "libra": "Libra",
-    "scorpio": "Scorpio",
-    "sagittarius": "Sagittarius",
-    "capricorn": "Capricorn",
-    "aquarius": "Aquarius",
-    "pisces": "Pisces"
+    "aries": "Oinas",
+    "taurus": "Härkä",
+    "gemini": "Kaksoset",
+    "cancer": "Rapu",
+    "leo": "Leijona",
+    "virgo": "Neitsyt",
+    "libra": "Vaaka",
+    "scorpio": "Skorpioni",
+    "sagittarius": "Jousimies",
+    "capricorn": "Kauris",
+    "aquarius": "Vesimies",
+    "pisces": "Kalat"
+  },
+  "fortune": {
+    "luckyNumbers": "Onnennumerot",
+    "luckyColor": "Onnenväri",
+    "compatibility": "Paras yhteensopivuus",
+    "mood": "Tämän päivän mieliala",
+    "todayScores": "Tämän päivän energia",
+    "love": "Rakkaus",
+    "career": "Ura",
+    "health": "Terveys",
+    "overall": "Kokonaisuus"
   }
 }

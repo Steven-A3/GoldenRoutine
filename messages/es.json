@@ -221,5 +221,16 @@
     "capricorn": "Capricornio",
     "aquarius": "Acuario",
     "pisces": "Piscis"
+  },
+  "fortune": {
+    "luckyNumbers": "Números de la suerte",
+    "luckyColor": "Color de la suerte",
+    "compatibility": "Mejor compatibilidad",
+    "mood": "Estado de ánimo",
+    "todayScores": "Energía de hoy",
+    "love": "Amor",
+    "career": "Carrera",
+    "health": "Salud",
+    "overall": "General"
   }
 }

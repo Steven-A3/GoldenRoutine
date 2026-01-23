@@ -209,17 +209,28 @@
     "retry": "Retry"
   },
   "zodiac": {
-    "aries": "Aries",
-    "taurus": "Taurus",
-    "gemini": "Gemini",
-    "cancer": "Cancer",
-    "leo": "Leo",
-    "virgo": "Virgo",
-    "libra": "Libra",
-    "scorpio": "Scorpio",
-    "sagittarius": "Sagittarius",
-    "capricorn": "Capricorn",
-    "aquarius": "Aquarius",
-    "pisces": "Pisces"
+    "aries": "Bạch Dương",
+    "taurus": "Kim Ngưu",
+    "gemini": "Song Tử",
+    "cancer": "Cự Giải",
+    "leo": "Sư Tử",
+    "virgo": "Xử Nữ",
+    "libra": "Thiên Bình",
+    "scorpio": "Bọ Cạp",
+    "sagittarius": "Nhân Mã",
+    "capricorn": "Ma Kết",
+    "aquarius": "Bảo Bình",
+    "pisces": "Song Ngư"
+  },
+  "fortune": {
+    "luckyNumbers": "Số may mắn",
+    "luckyColor": "Màu may mắn",
+    "compatibility": "Cung hợp nhất",
+    "mood": "Tâm trạng hôm nay",
+    "todayScores": "Năng lượng hôm nay",
+    "love": "Tình yêu",
+    "career": "Sự nghiệp",
+    "health": "Sức khỏe",
+    "overall": "Tổng thể"
   }
 }

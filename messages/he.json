@@ -209,17 +209,28 @@
     "retry": "Retry"
   },
   "zodiac": {
-    "aries": "Aries",
-    "taurus": "Taurus",
-    "gemini": "Gemini",
-    "cancer": "Cancer",
-    "leo": "Leo",
-    "virgo": "Virgo",
-    "libra": "Libra",
-    "scorpio": "Scorpio",
-    "sagittarius": "Sagittarius",
-    "capricorn": "Capricorn",
-    "aquarius": "Aquarius",
-    "pisces": "Pisces"
+    "aries": "טלה",
+    "taurus": "שור",
+    "gemini": "תאומים",
+    "cancer": "סרטן",
+    "leo": "אריה",
+    "virgo": "בתולה",
+    "libra": "מאזניים",
+    "scorpio": "עקרב",
+    "sagittarius": "קשת",
+    "capricorn": "גדי",
+    "aquarius": "דלי",
+    "pisces": "דגים"
+  },
+  "fortune": {
+    "luckyNumbers": "מספרי מזל",
+    "luckyColor": "צבע מזל",
+    "compatibility": "התאמה מושלמת",
+    "mood": "מצב רוח היום",
+    "todayScores": "אנרגיה היום",
+    "love": "אהבה",
+    "career": "קריירה",
+    "health": "בריאות",
+    "overall": "כללי"
   }
 }

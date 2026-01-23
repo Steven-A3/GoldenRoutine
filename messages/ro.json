@@ -209,17 +209,28 @@
     "retry": "Retry"
   },
   "zodiac": {
-    "aries": "Aries",
-    "taurus": "Taurus",
-    "gemini": "Gemini",
-    "cancer": "Cancer",
-    "leo": "Leo",
-    "virgo": "Virgo",
-    "libra": "Libra",
-    "scorpio": "Scorpio",
-    "sagittarius": "Sagittarius",
+    "aries": "Berbec",
+    "taurus": "Taur",
+    "gemini": "Gemeni",
+    "cancer": "Rac",
+    "leo": "Leu",
+    "virgo": "Fecioară",
+    "libra": "Balanță",
+    "scorpio": "Scorpion",
+    "sagittarius": "Săgetător",
     "capricorn": "Capricorn",
-    "aquarius": "Aquarius",
-    "pisces": "Pisces"
+    "aquarius": "Vărsător",
+    "pisces": "Pești"
+  },
+  "fortune": {
+    "luckyNumbers": "Numere norocoase",
+    "luckyColor": "Culoare norocoasă",
+    "compatibility": "Cea mai bună potrivire",
+    "mood": "Dispoziția de azi",
+    "todayScores": "Energia de azi",
+    "love": "Dragoste",
+    "career": "Carieră",
+    "health": "Sănătate",
+    "overall": "General"
   }
 }

@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
-import { Star, PenLine, Heart } from "lucide-react";
+import { Star, PenLine, Heart, Sparkles, TrendingUp, Palette, Users, Smile } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import type { JournalEntry } from "@/types/routine";
+import { generateDailyFortune, getZodiacDateRange, type ZodiacSign, type ZodiacFortune } from "@/lib/zodiacFortunes";
 
 interface Step4Props {
   journal: JournalEntry;
@@ -27,10 +28,17 @@ export function Step4Journaling({ journal, onUpdate, onComplete }: Step4Props) {
   const t = useTranslations("steps.step4");
   const tc = useTranslations("common");
   const tz = useTranslations("zodiac");
-  const [selectedSign, setSelectedSign] = useState<string | null>(null);
+  const tf = useTranslations("fortune");
+  const [selectedSign, setSelectedSign] = useState<ZodiacSign | null>(null);
   const [todayKeyword, setTodayKeyword] = useState("");
   const [horoscopeMessage, setHoroscopeMessage] = useState("");
   const [gratitudeInput, setGratitudeInput] = useState("");
+
+  // Generate fortune when sign is selected
+  const fortune: ZodiacFortune | null = useMemo(() => {
+    if (!selectedSign) return null;
+    return generateDailyFortune(selectedSign);
+  }, [selectedSign]);
 
   useEffect(() => {
     const today = new Date().getDate();
@@ -38,6 +46,17 @@ export function Step4Journaling({ journal, onUpdate, onComplete }: Step4Props) {
     setTodayKeyword(t(`keywords.${keywordKey}`));
     setHoroscopeMessage(t(`horoscopes.${(today % 6) + 1}`));
   }, [t]);
+
+  const renderScoreBar = (score: number, color: string) => (
+    <div className="w-full bg-gray-200 rounded-full h-2">
+      <motion.div
+        initial={{ width: 0 }}
+        animate={{ width: `${score}%` }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className={`h-2 rounded-full ${color}`}
+      />
+    </div>
+  );
 
   const addGratitude = () => {
     if (gratitudeInput.trim()) {
@@ -110,30 +129,150 @@ export function Step4Journaling({ journal, onUpdate, onComplete }: Step4Props) {
           </div>
         )}
 
-        {selectedSign && (
-          <div className="text-center">
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              className="inline-flex flex-col items-center gap-2 px-4 py-3 rounded-2xl bg-golden-100"
-            >
-              <Image
-                src={`/images/zodiac_${selectedSign}.png`}
-                alt={tz(selectedSign as typeof ZODIAC_KEYS[number])}
-                width={64}
-                height={64}
-              />
-              <span className="text-golden-700 font-medium">
-                {tz(selectedSign as typeof ZODIAC_KEYS[number])}
-              </span>
+        {selectedSign && fortune && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="space-y-4"
+          >
+            {/* Sign Header */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <Image
+                  src={`/images/zodiac_${selectedSign}.png`}
+                  alt={tz(selectedSign)}
+                  width={48}
+                  height={48}
+                />
+                <div>
+                  <div className="font-semibold text-golden-700">{tz(selectedSign)}</div>
+                  <div className="text-xs text-gray-500">{getZodiacDateRange(selectedSign)}</div>
+                </div>
+              </div>
               <button
                 onClick={() => setSelectedSign(null)}
                 className="text-xs text-golden-500 hover:text-golden-700 underline"
               >
                 {tc("cancel")}
               </button>
+            </div>
+
+            {/* Daily Fortune Message */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-4"
+            >
+              <div className="flex items-start gap-2">
+                <Sparkles className="w-5 h-5 text-purple-500 flex-shrink-0 mt-0.5" />
+                <p className="text-sm text-gray-700 leading-relaxed">{fortune.dailyFortune}</p>
+              </div>
             </motion.div>
-          </div>
+
+            {/* Lucky Elements Grid */}
+            <div className="grid grid-cols-2 gap-2">
+              {/* Lucky Numbers */}
+              <div className="bg-white/60 rounded-lg p-3">
+                <div className="flex items-center gap-1.5 text-xs text-gray-500 mb-1">
+                  <Star className="w-3.5 h-3.5" />
+                  {tf("luckyNumbers")}
+                </div>
+                <div className="flex gap-1.5">
+                  {fortune.luckyNumbers.map((num) => (
+                    <span
+                      key={num}
+                      className="w-7 h-7 rounded-full bg-golden-100 text-golden-700 text-sm font-medium flex items-center justify-center"
+                    >
+                      {num}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Lucky Color */}
+              <div className="bg-white/60 rounded-lg p-3">
+                <div className="flex items-center gap-1.5 text-xs text-gray-500 mb-1">
+                  <Palette className="w-3.5 h-3.5" />
+                  {tf("luckyColor")}
+                </div>
+                <div className="flex items-center gap-2">
+                  <div
+                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm"
+                    style={{ backgroundColor: fortune.luckyColorHex }}
+                  />
+                  <span className="text-sm font-medium text-gray-700">{fortune.luckyColor}</span>
+                </div>
+              </div>
+
+              {/* Compatibility */}
+              <div className="bg-white/60 rounded-lg p-3">
+                <div className="flex items-center gap-1.5 text-xs text-gray-500 mb-1">
+                  <Users className="w-3.5 h-3.5" />
+                  {tf("compatibility")}
+                </div>
+                <div className="flex items-center gap-2">
+                  <Image
+                    src={`/images/zodiac_${fortune.compatibility}.png`}
+                    alt={tz(fortune.compatibility)}
+                    width={24}
+                    height={24}
+                  />
+                  <span className="text-sm font-medium text-gray-700">{tz(fortune.compatibility)}</span>
+                </div>
+              </div>
+
+              {/* Mood */}
+              <div className="bg-white/60 rounded-lg p-3">
+                <div className="flex items-center gap-1.5 text-xs text-gray-500 mb-1">
+                  <Smile className="w-3.5 h-3.5" />
+                  {tf("mood")}
+                </div>
+                <span className="text-sm font-medium text-gray-700">{fortune.mood}</span>
+              </div>
+            </div>
+
+            {/* Scores */}
+            <div className="bg-white/60 rounded-lg p-3 space-y-2.5">
+              <div className="flex items-center gap-1.5 text-xs text-gray-500 mb-2">
+                <TrendingUp className="w-3.5 h-3.5" />
+                {tf("todayScores")}
+              </div>
+
+              <div className="space-y-2">
+                <div>
+                  <div className="flex justify-between text-xs mb-1">
+                    <span className="text-gray-600">{tf("love")}</span>
+                    <span className="text-pink-600 font-medium">{fortune.loveScore}%</span>
+                  </div>
+                  {renderScoreBar(fortune.loveScore, "bg-gradient-to-r from-pink-400 to-rose-400")}
+                </div>
+
+                <div>
+                  <div className="flex justify-between text-xs mb-1">
+                    <span className="text-gray-600">{tf("career")}</span>
+                    <span className="text-blue-600 font-medium">{fortune.careerScore}%</span>
+                  </div>
+                  {renderScoreBar(fortune.careerScore, "bg-gradient-to-r from-blue-400 to-indigo-400")}
+                </div>
+
+                <div>
+                  <div className="flex justify-between text-xs mb-1">
+                    <span className="text-gray-600">{tf("health")}</span>
+                    <span className="text-green-600 font-medium">{fortune.healthScore}%</span>
+                  </div>
+                  {renderScoreBar(fortune.healthScore, "bg-gradient-to-r from-green-400 to-emerald-400")}
+                </div>
+              </div>
+
+              <div className="pt-2 border-t border-gray-200">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm font-medium text-gray-700">{tf("overall")}</span>
+                  <span className="text-lg font-bold text-golden-600">{fortune.overallScore}%</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         )}
       </div>
 

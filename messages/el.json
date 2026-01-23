@@ -209,17 +209,28 @@
     "retry": "Retry"
   },
   "zodiac": {
-    "aries": "Aries",
-    "taurus": "Taurus",
-    "gemini": "Gemini",
-    "cancer": "Cancer",
-    "leo": "Leo",
-    "virgo": "Virgo",
-    "libra": "Libra",
-    "scorpio": "Scorpio",
-    "sagittarius": "Sagittarius",
-    "capricorn": "Capricorn",
-    "aquarius": "Aquarius",
-    "pisces": "Pisces"
+    "aries": "Κριός",
+    "taurus": "Ταύρος",
+    "gemini": "Δίδυμοι",
+    "cancer": "Καρκίνος",
+    "leo": "Λέων",
+    "virgo": "Παρθένος",
+    "libra": "Ζυγός",
+    "scorpio": "Σκορπιός",
+    "sagittarius": "Τοξότης",
+    "capricorn": "Αιγόκερως",
+    "aquarius": "Υδροχόος",
+    "pisces": "Ιχθύες"
+  },
+  "fortune": {
+    "luckyNumbers": "Τυχεροί αριθμοί",
+    "luckyColor": "Τυχερό χρώμα",
+    "compatibility": "Καλύτερη συμβατότητα",
+    "mood": "Διάθεση σήμερα",
+    "todayScores": "Ενέργεια σήμερα",
+    "love": "Αγάπη",
+    "career": "Καριέρα",
+    "health": "Υγεία",
+    "overall": "Συνολικά"
   }
 }

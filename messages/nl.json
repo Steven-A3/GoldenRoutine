@@ -209,17 +209,28 @@
     "retry": "Retry"
   },
   "zodiac": {
-    "aries": "Aries",
-    "taurus": "Taurus",
-    "gemini": "Gemini",
-    "cancer": "Cancer",
-    "leo": "Leo",
-    "virgo": "Virgo",
-    "libra": "Libra",
-    "scorpio": "Scorpio",
-    "sagittarius": "Sagittarius",
-    "capricorn": "Capricorn",
-    "aquarius": "Aquarius",
-    "pisces": "Pisces"
+    "aries": "Ram",
+    "taurus": "Stier",
+    "gemini": "Tweelingen",
+    "cancer": "Kreeft",
+    "leo": "Leeuw",
+    "virgo": "Maagd",
+    "libra": "Weegschaal",
+    "scorpio": "Schorpioen",
+    "sagittarius": "Boogschutter",
+    "capricorn": "Steenbok",
+    "aquarius": "Waterman",
+    "pisces": "Vissen"
+  },
+  "fortune": {
+    "luckyNumbers": "Geluksnummers",
+    "luckyColor": "Gelukskleur",
+    "compatibility": "Beste Match",
+    "mood": "Stemming Vandaag",
+    "todayScores": "Energie Vandaag",
+    "love": "Liefde",
+    "career": "Carrière",
+    "health": "Gezondheid",
+    "overall": "Algemeen"
   }
 }

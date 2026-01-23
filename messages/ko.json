@@ -221,5 +221,16 @@
     "capricorn": "염소자리",
     "aquarius": "물병자리",
     "pisces": "물고기자리"
+  },
+  "fortune": {
+    "luckyNumbers": "행운의 숫자",
+    "luckyColor": "행운의 색상",
+    "compatibility": "최고의 궁합",
+    "mood": "오늘의 기분",
+    "todayScores": "오늘의 에너지",
+    "love": "사랑",
+    "career": "직업",
+    "health": "건강",
+    "overall": "종합"
   }
 }

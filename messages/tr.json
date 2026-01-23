@@ -209,17 +209,28 @@
     "retry": "Retry"
   },
   "zodiac": {
-    "aries": "Aries",
-    "taurus": "Taurus",
-    "gemini": "Gemini",
-    "cancer": "Cancer",
-    "leo": "Leo",
-    "virgo": "Virgo",
-    "libra": "Libra",
-    "scorpio": "Scorpio",
-    "sagittarius": "Sagittarius",
-    "capricorn": "Capricorn",
-    "aquarius": "Aquarius",
-    "pisces": "Pisces"
+    "aries": "Koç",
+    "taurus": "Boğa",
+    "gemini": "İkizler",
+    "cancer": "Yengeç",
+    "leo": "Aslan",
+    "virgo": "Başak",
+    "libra": "Terazi",
+    "scorpio": "Akrep",
+    "sagittarius": "Yay",
+    "capricorn": "Oğlak",
+    "aquarius": "Kova",
+    "pisces": "Balık"
+  },
+  "fortune": {
+    "luckyNumbers": "Şanslı Sayılar",
+    "luckyColor": "Şanslı Renk",
+    "compatibility": "En İyi Uyum",
+    "mood": "Bugünün Ruh Hali",
+    "todayScores": "Bugünün Enerjisi",
+    "love": "Aşk",
+    "career": "Kariyer",
+    "health": "Sağlık",
+    "overall": "Genel"
   }
 }
