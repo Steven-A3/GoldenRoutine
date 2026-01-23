@@ -531,12 +531,15 @@ function NewsWidget({ news, loading, error, onRetry }: { news: NewsItem[]; loadi
     <div className="space-y-3">
       <h4 className="font-medium text-gray-700">{t("widgets.latestNews")}</h4>
       {news.map((item, idx) => (
-        <motion.div
+        <motion.a
           key={idx}
+          href={item.url}
+          target="_blank"
+          rel="noopener noreferrer"
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: idx * 0.05 }}
-          className="p-3 bg-white/50 rounded-xl"
+          className="block p-3 bg-white/50 rounded-xl hover:bg-white/80 transition-all cursor-pointer"
         >
           <div className="flex items-start justify-between gap-2">
             <div className="flex-1">
@@ -552,7 +555,7 @@ function NewsWidget({ news, loading, error, onRetry }: { news: NewsItem[]; loadi
             </div>
             <ExternalLink className="w-4 h-4 text-gray-400 flex-shrink-0 mt-1" />
           </div>
-        </motion.div>
+        </motion.a>
       ))}
     </div>
   );
