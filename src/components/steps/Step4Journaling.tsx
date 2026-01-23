@@ -166,7 +166,7 @@ export function Step4Journaling({ journal, onUpdate, onComplete }: Step4Props) {
             >
               <div className="flex items-start gap-2">
                 <Sparkles className="w-5 h-5 text-purple-500 flex-shrink-0 mt-0.5" />
-                <p className="text-sm text-gray-700 leading-relaxed">{fortune.dailyFortune}</p>
+                <p className="text-sm text-gray-700 leading-relaxed">{tf(`fortunes.${fortune.fortuneKey}`)}</p>
               </div>
             </motion.div>
 
@@ -201,7 +201,7 @@ export function Step4Journaling({ journal, onUpdate, onComplete }: Step4Props) {
                     className="w-6 h-6 rounded-full border-2 border-white shadow-sm"
                     style={{ backgroundColor: fortune.luckyColorHex }}
                   />
-                  <span className="text-sm font-medium text-gray-700">{fortune.luckyColor}</span>
+                  <span className="text-sm font-medium text-gray-700">{tf(`colors.${fortune.luckyColorKey}`)}</span>
                 </div>
               </div>
 
@@ -228,7 +228,7 @@ export function Step4Journaling({ journal, onUpdate, onComplete }: Step4Props) {
                   <Smile className="w-3.5 h-3.5" />
                   {tf("mood")}
                 </div>
-                <span className="text-sm font-medium text-gray-700">{fortune.mood}</span>
+                <span className="text-sm font-medium text-gray-700">{tf(`moods.${fortune.moodKey}`)}</span>
               </div>
             </div>
 
