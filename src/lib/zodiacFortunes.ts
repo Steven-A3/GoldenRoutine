@@ -8,14 +8,41 @@ export type ZodiacSign =
   | "leo" | "virgo" | "libra" | "scorpio"
   | "sagittarius" | "capricorn" | "aquarius" | "pisces";
 
+export type ColorKey =
+  | "red" | "scarlet" | "coral" | "orange" | "green" | "pink" | "turquoise"
+  | "earthBrown" | "yellow" | "lightBlue" | "silver" | "lavender" | "white"
+  | "seaGreen" | "pearl" | "gold" | "royalPurple" | "sunnyYellow" | "navyBlue"
+  | "gray" | "tan" | "forestGreen" | "peach" | "deepRed" | "black" | "maroon"
+  | "purple" | "royalBlue" | "brown" | "darkGreen" | "charcoal" | "electricBlue"
+  | "violet" | "aquamarine" | "lightPurple";
+
+export type MoodKey =
+  | "energetic" | "calm" | "inspired" | "reflective" | "adventurous"
+  | "romantic" | "focused" | "creative" | "peaceful" | "determined"
+  | "optimistic" | "balanced" | "passionate" | "intuitive" | "grounded";
+
+export type FortuneKey =
+  | "aries1" | "aries2" | "aries3" | "aries4" | "aries5" | "aries6" | "aries7" | "aries8"
+  | "taurus1" | "taurus2" | "taurus3" | "taurus4" | "taurus5" | "taurus6" | "taurus7" | "taurus8"
+  | "gemini1" | "gemini2" | "gemini3" | "gemini4" | "gemini5" | "gemini6" | "gemini7" | "gemini8"
+  | "cancer1" | "cancer2" | "cancer3" | "cancer4" | "cancer5" | "cancer6" | "cancer7" | "cancer8"
+  | "leo1" | "leo2" | "leo3" | "leo4" | "leo5" | "leo6" | "leo7" | "leo8"
+  | "virgo1" | "virgo2" | "virgo3" | "virgo4" | "virgo5" | "virgo6" | "virgo7" | "virgo8"
+  | "libra1" | "libra2" | "libra3" | "libra4" | "libra5" | "libra6" | "libra7" | "libra8"
+  | "scorpio1" | "scorpio2" | "scorpio3" | "scorpio4" | "scorpio5" | "scorpio6" | "scorpio7" | "scorpio8"
+  | "sagittarius1" | "sagittarius2" | "sagittarius3" | "sagittarius4" | "sagittarius5" | "sagittarius6" | "sagittarius7" | "sagittarius8"
+  | "capricorn1" | "capricorn2" | "capricorn3" | "capricorn4" | "capricorn5" | "capricorn6" | "capricorn7" | "capricorn8"
+  | "aquarius1" | "aquarius2" | "aquarius3" | "aquarius4" | "aquarius5" | "aquarius6" | "aquarius7" | "aquarius8"
+  | "pisces1" | "pisces2" | "pisces3" | "pisces4" | "pisces5" | "pisces6" | "pisces7" | "pisces8";
+
 export interface ZodiacFortune {
   sign: ZodiacSign;
-  dailyFortune: string;
+  fortuneKey: FortuneKey;
   luckyNumbers: number[];
-  luckyColor: string;
+  luckyColorKey: ColorKey;
   luckyColorHex: string;
   compatibility: ZodiacSign;
-  mood: string;
+  moodKey: MoodKey;
   loveScore: number;
   careerScore: number;
   healthScore: number;
@@ -160,79 +187,79 @@ const FORTUNE_TEMPLATES: Record<ZodiacSign, string[]> = {
   ]
 };
 
-// Lucky colors for each sign
-const LUCKY_COLORS: Record<ZodiacSign, Array<{ name: string; hex: string }>> = {
+// Lucky colors for each sign (using translation keys)
+const LUCKY_COLORS: Record<ZodiacSign, Array<{ key: ColorKey; hex: string }>> = {
   aries: [
-    { name: "Red", hex: "#DC2626" },
-    { name: "Scarlet", hex: "#FF2400" },
-    { name: "Coral", hex: "#FF7F50" },
-    { name: "Orange", hex: "#F97316" }
+    { key: "red", hex: "#DC2626" },
+    { key: "scarlet", hex: "#FF2400" },
+    { key: "coral", hex: "#FF7F50" },
+    { key: "orange", hex: "#F97316" }
   ],
   taurus: [
-    { name: "Green", hex: "#16A34A" },
-    { name: "Pink", hex: "#EC4899" },
-    { name: "Turquoise", hex: "#40E0D0" },
-    { name: "Earth Brown", hex: "#8B4513" }
+    { key: "green", hex: "#16A34A" },
+    { key: "pink", hex: "#EC4899" },
+    { key: "turquoise", hex: "#40E0D0" },
+    { key: "earthBrown", hex: "#8B4513" }
   ],
   gemini: [
-    { name: "Yellow", hex: "#EAB308" },
-    { name: "Light Blue", hex: "#60A5FA" },
-    { name: "Silver", hex: "#C0C0C0" },
-    { name: "Lavender", hex: "#E6E6FA" }
+    { key: "yellow", hex: "#EAB308" },
+    { key: "lightBlue", hex: "#60A5FA" },
+    { key: "silver", hex: "#C0C0C0" },
+    { key: "lavender", hex: "#E6E6FA" }
   ],
   cancer: [
-    { name: "Silver", hex: "#C0C0C0" },
-    { name: "White", hex: "#FFFFFF" },
-    { name: "Sea Green", hex: "#2E8B57" },
-    { name: "Pearl", hex: "#FDEEF4" }
+    { key: "silver", hex: "#C0C0C0" },
+    { key: "white", hex: "#FFFFFF" },
+    { key: "seaGreen", hex: "#2E8B57" },
+    { key: "pearl", hex: "#FDEEF4" }
   ],
   leo: [
-    { name: "Gold", hex: "#FFD700" },
-    { name: "Orange", hex: "#F97316" },
-    { name: "Royal Purple", hex: "#7851A9" },
-    { name: "Sunny Yellow", hex: "#FFE135" }
+    { key: "gold", hex: "#FFD700" },
+    { key: "orange", hex: "#F97316" },
+    { key: "royalPurple", hex: "#7851A9" },
+    { key: "sunnyYellow", hex: "#FFE135" }
   ],
   virgo: [
-    { name: "Navy Blue", hex: "#1E3A5F" },
-    { name: "Gray", hex: "#6B7280" },
-    { name: "Tan", hex: "#D2B48C" },
-    { name: "Forest Green", hex: "#228B22" }
+    { key: "navyBlue", hex: "#1E3A5F" },
+    { key: "gray", hex: "#6B7280" },
+    { key: "tan", hex: "#D2B48C" },
+    { key: "forestGreen", hex: "#228B22" }
   ],
   libra: [
-    { name: "Pink", hex: "#EC4899" },
-    { name: "Light Blue", hex: "#60A5FA" },
-    { name: "Lavender", hex: "#E6E6FA" },
-    { name: "Peach", hex: "#FFCBA4" }
+    { key: "pink", hex: "#EC4899" },
+    { key: "lightBlue", hex: "#60A5FA" },
+    { key: "lavender", hex: "#E6E6FA" },
+    { key: "peach", hex: "#FFCBA4" }
   ],
   scorpio: [
-    { name: "Deep Red", hex: "#8B0000" },
-    { name: "Black", hex: "#1F2937" },
-    { name: "Maroon", hex: "#800000" },
-    { name: "Purple", hex: "#9333EA" }
+    { key: "deepRed", hex: "#8B0000" },
+    { key: "black", hex: "#1F2937" },
+    { key: "maroon", hex: "#800000" },
+    { key: "purple", hex: "#9333EA" }
   ],
   sagittarius: [
-    { name: "Purple", hex: "#9333EA" },
-    { name: "Turquoise", hex: "#40E0D0" },
-    { name: "Royal Blue", hex: "#4169E1" },
-    { name: "Orange", hex: "#F97316" }
+    { key: "purple", hex: "#9333EA" },
+    { key: "turquoise", hex: "#40E0D0" },
+    { key: "royalBlue", hex: "#4169E1" },
+    { key: "orange", hex: "#F97316" }
   ],
   capricorn: [
-    { name: "Brown", hex: "#92400E" },
-    { name: "Black", hex: "#1F2937" },
-    { name: "Dark Green", hex: "#14532D" },
-    { name: "Charcoal", hex: "#36454F" }
+    { key: "brown", hex: "#92400E" },
+    { key: "black", hex: "#1F2937" },
+    { key: "darkGreen", hex: "#14532D" },
+    { key: "charcoal", hex: "#36454F" }
   ],
   aquarius: [
-    { name: "Electric Blue", hex: "#7DF9FF" },
-    { name: "Turquoise", hex: "#40E0D0" },
-    { name: "Violet", hex: "#8B5CF6" },
-    { name: "Silver", hex: "#C0C0C0" }
+    { key: "electricBlue", hex: "#7DF9FF" },
+    { key: "turquoise", hex: "#40E0D0" },
+    { key: "violet", hex: "#8B5CF6" },
+    { key: "silver", hex: "#C0C0C0" }
   ],
   pisces: [
-    { name: "Sea Green", hex: "#2E8B57" },
-    { name: "Lavender", hex: "#E6E6FA" },
-    { name: "Aquamarine", hex: "#7FFFD4" },
-    { name: "Light Purple", hex: "#A855F7" }
+    { key: "seaGreen", hex: "#2E8B57" },
+    { key: "lavender", hex: "#E6E6FA" },
+    { key: "aquamarine", hex: "#7FFFD4" },
+    { key: "lightPurple", hex: "#A855F7" }
   ]
 };
 
@@ -252,12 +279,28 @@ const COMPATIBILITY: Record<ZodiacSign, ZodiacSign[]> = {
   pisces: ["cancer", "scorpio", "taurus", "capricorn"]
 };
 
-// Moods
-const MOODS = [
-  "Energetic", "Calm", "Inspired", "Reflective", "Adventurous",
-  "Romantic", "Focused", "Creative", "Peaceful", "Determined",
-  "Optimistic", "Balanced", "Passionate", "Intuitive", "Grounded"
+// Moods (using translation keys)
+const MOOD_KEYS: MoodKey[] = [
+  "energetic", "calm", "inspired", "reflective", "adventurous",
+  "romantic", "focused", "creative", "peaceful", "determined",
+  "optimistic", "balanced", "passionate", "intuitive", "grounded"
 ];
+
+// Fortune template keys for each sign
+const FORTUNE_KEYS: Record<ZodiacSign, FortuneKey[]> = {
+  aries: ["aries1", "aries2", "aries3", "aries4", "aries5", "aries6", "aries7", "aries8"],
+  taurus: ["taurus1", "taurus2", "taurus3", "taurus4", "taurus5", "taurus6", "taurus7", "taurus8"],
+  gemini: ["gemini1", "gemini2", "gemini3", "gemini4", "gemini5", "gemini6", "gemini7", "gemini8"],
+  cancer: ["cancer1", "cancer2", "cancer3", "cancer4", "cancer5", "cancer6", "cancer7", "cancer8"],
+  leo: ["leo1", "leo2", "leo3", "leo4", "leo5", "leo6", "leo7", "leo8"],
+  virgo: ["virgo1", "virgo2", "virgo3", "virgo4", "virgo5", "virgo6", "virgo7", "virgo8"],
+  libra: ["libra1", "libra2", "libra3", "libra4", "libra5", "libra6", "libra7", "libra8"],
+  scorpio: ["scorpio1", "scorpio2", "scorpio3", "scorpio4", "scorpio5", "scorpio6", "scorpio7", "scorpio8"],
+  sagittarius: ["sagittarius1", "sagittarius2", "sagittarius3", "sagittarius4", "sagittarius5", "sagittarius6", "sagittarius7", "sagittarius8"],
+  capricorn: ["capricorn1", "capricorn2", "capricorn3", "capricorn4", "capricorn5", "capricorn6", "capricorn7", "capricorn8"],
+  aquarius: ["aquarius1", "aquarius2", "aquarius3", "aquarius4", "aquarius5", "aquarius6", "aquarius7", "aquarius8"],
+  pisces: ["pisces1", "pisces2", "pisces3", "pisces4", "pisces5", "pisces6", "pisces7", "pisces8"]
+};
 
 /**
  * Generate a daily fortune for a specific zodiac sign
@@ -267,10 +310,10 @@ export function generateDailyFortune(sign: ZodiacSign): ZodiacFortune {
   const signSeed = seed + sign.charCodeAt(0) * 1000;
   const random = seededRandom(signSeed);
 
-  // Select fortune message
-  const fortunes = FORTUNE_TEMPLATES[sign];
-  const fortuneIndex = Math.floor(random() * fortunes.length);
-  const dailyFortune = fortunes[fortuneIndex];
+  // Select fortune key
+  const fortuneKeys = FORTUNE_KEYS[sign];
+  const fortuneIndex = Math.floor(random() * fortuneKeys.length);
+  const fortuneKey = fortuneKeys[fortuneIndex];
 
   // Generate lucky numbers (3 unique numbers between 1-49)
   const luckyNumbers: number[] = [];
@@ -285,7 +328,7 @@ export function generateDailyFortune(sign: ZodiacSign): ZodiacFortune {
   // Select lucky color
   const colors = LUCKY_COLORS[sign];
   const colorIndex = Math.floor(random() * colors.length);
-  const luckyColor = colors[colorIndex].name;
+  const luckyColorKey = colors[colorIndex].key;
   const luckyColorHex = colors[colorIndex].hex;
 
   // Select compatibility
@@ -294,8 +337,8 @@ export function generateDailyFortune(sign: ZodiacSign): ZodiacFortune {
   const compatibility = compatibleSigns[compatIndex];
 
   // Select mood
-  const moodIndex = Math.floor(random() * MOODS.length);
-  const mood = MOODS[moodIndex];
+  const moodIndex = Math.floor(random() * MOOD_KEYS.length);
+  const moodKey = MOOD_KEYS[moodIndex];
 
   // Generate scores (between 60-100 for positive outlook)
   const loveScore = Math.floor(random() * 41) + 60;
@@ -305,12 +348,12 @@ export function generateDailyFortune(sign: ZodiacSign): ZodiacFortune {
 
   return {
     sign,
-    dailyFortune,
+    fortuneKey,
     luckyNumbers,
-    luckyColor,
+    luckyColorKey,
     luckyColorHex,
     compatibility,
-    mood,
+    moodKey,
     loveScore,
     careerScore,
     healthScore,
