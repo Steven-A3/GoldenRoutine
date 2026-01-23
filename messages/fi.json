@@ -200,7 +200,9 @@
       "scanQR": "Skannaa QR-koodi nähdäksesi tulokset",
       "copyLink": "Kopioi linkki",
       "copied": "Kopioitu!",
-      "shareNative": "Jaa"
+      "shareNative": "Jaa",
+      "saveQR": "Tallenna QR",
+      "saved": "Tallennettu!"
     }
   },
   "common": {

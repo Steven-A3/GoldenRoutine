@@ -200,7 +200,9 @@
       "scanQR": "Szkennelje be a QR-kódot az eredmények megtekintéséhez",
       "copyLink": "Link másolása",
       "copied": "Másolva!",
-      "shareNative": "Megosztás"
+      "shareNative": "Megosztás",
+      "saveQR": "QR mentése",
+      "saved": "Mentve!"
     }
   },
   "common": {

@@ -200,7 +200,9 @@
       "scanQR": "סרוק את קוד ה-QR כדי לראות תוצאות",
       "copyLink": "העתק קישור",
       "copied": "הועתק!",
-      "shareNative": "שתף"
+      "shareNative": "שתף",
+      "saveQR": "שמור QR",
+      "saved": "נשמר!"
     }
   },
   "common": {

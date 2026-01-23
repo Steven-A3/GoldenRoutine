@@ -200,7 +200,9 @@
       "scanQR": "扫描二维码查看结果",
       "copyLink": "复制链接",
       "copied": "已复制!",
-      "shareNative": "分享"
+      "shareNative": "分享",
+      "saveQR": "保存二维码",
+      "saved": "已保存!"
     }
   },
   "common": {

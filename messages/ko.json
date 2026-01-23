@@ -200,7 +200,9 @@
       "scanQR": "QR 코드를 스캔하여 결과 보기",
       "copyLink": "링크 복사",
       "copied": "복사됨!",
-      "shareNative": "공유"
+      "shareNative": "공유",
+      "saveQR": "QR 저장",
+      "saved": "저장됨!"
     }
   },
   "common": {

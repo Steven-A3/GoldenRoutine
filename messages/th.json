@@ -200,7 +200,9 @@
       "scanQR": "สแกน QR โค้ดเพื่อดูผลลัพธ์",
       "copyLink": "คัดลอกลิงก์",
       "copied": "คัดลอกแล้ว!",
-      "shareNative": "แชร์"
+      "shareNative": "แชร์",
+      "saveQR": "บันทึก QR",
+      "saved": "บันทึกแล้ว!"
     }
   },
   "common": {

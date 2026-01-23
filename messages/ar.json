@@ -200,7 +200,9 @@
       "scanQR": "امسح رمز QR لعرض النتائج",
       "copyLink": "نسخ الرابط",
       "copied": "تم النسخ!",
-      "shareNative": "مشاركة"
+      "shareNative": "مشاركة",
+      "saveQR": "حفظ QR",
+      "saved": "تم الحفظ!"
     }
   },
   "common": {

@@ -200,7 +200,9 @@
       "scanQR": "Escaneie o código QR para ver resultados",
       "copyLink": "Copiar link",
       "copied": "Copiado!",
-      "shareNative": "Compartilhar"
+      "shareNative": "Compartilhar",
+      "saveQR": "Salvar QR",
+      "saved": "Salvo!"
     }
   },
   "common": {

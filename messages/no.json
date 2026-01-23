@@ -200,7 +200,9 @@
       "scanQR": "Skann QR-kode for å se resultater",
       "copyLink": "Kopier lenke",
       "copied": "Kopiert!",
-      "shareNative": "Del"
+      "shareNative": "Del",
+      "saveQR": "Lagre QR",
+      "saved": "Lagret!"
     }
   },
   "common": {

@@ -200,7 +200,9 @@
       "scanQR": "Skanna QR-koden för att se resultat",
       "copyLink": "Kopiera länk",
       "copied": "Kopierad!",
-      "shareNative": "Dela"
+      "shareNative": "Dela",
+      "saveQR": "Spara QR",
+      "saved": "Sparad!"
     }
   },
   "common": {

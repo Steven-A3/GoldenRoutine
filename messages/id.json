@@ -200,7 +200,9 @@
       "scanQR": "Pindai kode QR untuk melihat hasil",
       "copyLink": "Salin tautan",
       "copied": "Disalin!",
-      "shareNative": "Bagikan"
+      "shareNative": "Bagikan",
+      "saveQR": "Simpan QR",
+      "saved": "Disimpan!"
     }
   },
   "common": {

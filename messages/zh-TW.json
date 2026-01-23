@@ -200,7 +200,9 @@
       "scanQR": "掃描 QR 碼查看結果",
       "copyLink": "複製連結",
       "copied": "已複製!",
-      "shareNative": "分享"
+      "shareNative": "分享",
+      "saveQR": "儲存 QR",
+      "saved": "已儲存!"
     }
   },
   "common": {

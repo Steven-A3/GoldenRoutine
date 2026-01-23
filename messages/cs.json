@@ -200,7 +200,9 @@
       "scanQR": "Naskenujte QR kód pro zobrazení výsledků",
       "copyLink": "Kopírovat odkaz",
       "copied": "Zkopírováno!",
-      "shareNative": "Sdílet"
+      "shareNative": "Sdílet",
+      "saveQR": "Uložit QR",
+      "saved": "Uloženo!"
     }
   },
   "common": {
