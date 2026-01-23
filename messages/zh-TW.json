@@ -135,9 +135,9 @@
       "subtitle": "Personal Tasks First",
       "description": "Complete personal tasks before work begins. Morning accomplishments create positive momentum for the entire day.",
       "defaultTasks": {
-        "stretch": "5-minute morning stretch",
-        "water": "Drink a glass of water",
-        "priority": "Identify one important task"
+        "stretch": "5分鐘晨間伸展",
+        "water": "喝一杯水",
+        "priority": "確定一項重要任務"
       },
       "addTask": "Add Task",
       "addTaskPlaceholder": "New task...",

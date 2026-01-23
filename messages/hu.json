@@ -135,9 +135,9 @@
       "subtitle": "Personal Tasks First",
       "description": "Complete personal tasks before work begins. Morning accomplishments create positive momentum for the entire day.",
       "defaultTasks": {
-        "stretch": "5-minute morning stretch",
-        "water": "Drink a glass of water",
-        "priority": "Identify one important task"
+        "stretch": "5 perces reggeli nyújtás",
+        "water": "Igyál meg egy pohár vizet",
+        "priority": "Határozz meg egy fontos feladatot"
       },
       "addTask": "Add Task",
       "addTaskPlaceholder": "New task...",
