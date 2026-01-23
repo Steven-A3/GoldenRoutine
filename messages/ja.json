@@ -38,6 +38,14 @@
       "title": "意図の設定",
       "subtitle": "意図とアファメーション",
       "description": "コーヒーやニュースの前に、今日の目的を設定しましょう。アファメーションは潜在意識に働きかけ、目標に向かって行動するよう導きます。",
+      "feelings": {
+        "happy": "幸せ",
+        "energetic": "元気",
+        "calm": "穏やか",
+        "passionate": "情熱的",
+        "focused": "集中",
+        "grateful": "感謝"
+      },
       "feelingLabel": "今日どんな気分で過ごしたいですか？",
       "feelingPlaceholder": "例：穏やかで集中している",
       "goalLabel": "今日の核心目標は何ですか？",

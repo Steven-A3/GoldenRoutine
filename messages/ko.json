@@ -38,6 +38,14 @@
       "title": "의도 설정",
       "subtitle": "의도 설정 및 확언",
       "description": "커피를 마시거나 뉴스를 보기 전, 하루의 목적을 설정하세요. 확언은 잠재의식에 작용하여 뇌가 목표를 향해 행동하도록 돕습니다.",
+      "feelings": {
+        "happy": "행복한",
+        "energetic": "활기찬",
+        "calm": "평온한",
+        "passionate": "열정적인",
+        "focused": "집중된",
+        "grateful": "감사하는"
+      },
       "feelingLabel": "오늘 하루 나는 어떤 기분을 느낄 것인가?",
       "feelingPlaceholder": "예: 차분하고 집중된",
       "goalLabel": "오늘의 핵심 목표는 무엇인가?",

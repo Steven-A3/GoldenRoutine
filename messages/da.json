@@ -38,6 +38,14 @@
       "title": "Set Intentions",
       "subtitle": "Setting Intentions & Affirmations",
       "description": "Before coffee or news, set your purpose for the day. Affirmations work on your subconscious to guide your brain toward your goals.",
+      "feelings": {
+        "happy": "Glad",
+        "energetic": "Energisk",
+        "calm": "Rolig",
+        "passionate": "Passioneret",
+        "focused": "Fokuseret",
+        "grateful": "Taknemmelig"
+      },
       "feelingLabel": "How do I want to feel today?",
       "feelingPlaceholder": "e.g., Calm and focused",
       "goalLabel": "What is my core goal for today?",
